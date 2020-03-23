@@ -1,0 +1,119 @@
+---
+title: A Language for Survey Programming
+author: Ben Ewing
+date: '2020-01-05'
+slug: a-language-for-survey-programming
+categories: [technical]
+tags: [r, xlsform, survey design]
+---
+
+## What's wrong with XLSForms?
+
+[XLSForm](https://xlsform.org/en/) defines a very accessible (other than reliance on Excel) standard for programming surveys compatible with [OpenDataKit](https://opendatakit.org/), [SurveyCTO](https://www.surveycto.com/), and a myriad of other data collection tools used in low/no connectivity environments. XLSForm's are dead easy to program, but can produce very complex surveys. However, in my ~5 years of programming XLSForm surveys I've encountered a few problems caused by the reliance on Excel for programming:
+
+* __Collaboration__: While it is easy to share Excel files, there is no easy way for multiple authors to work on the same survey at once. A typical workflow (at least in my experience) involves passing a survey around via email or Dropbox, and hoping that no conflicts occur, no one works on the wrong version of the survey, or other such nonsense. 
+* __Version Control__: Excel can track changes and Dropbox has some good file management tools, but I wouldn't consider either of these to be true version control, when compared to something like Git. Unfortunately Git is not ideal for binary files like Excel workbooks. It's not uncommon (again, in my experience) for a survey to end up with a name like "household_survey_2019_11_08_ewing_farrell-v5-FINAL_UPDATE.xlsx."
+* __Excel__: While easy to use, Excel is not free software, nor is it available on all platforms. While alternatives do exist, I think it is advantageous to move away from closed software/formats altogether.
+
+To address these issues, I've tried building a domain specific language (DSL) embedded in [R](https://www.r-project.org/) that can generate XLSForms. This takes the form of the [XLSFormTools](https://github.com/ben-e/XLSFormTools) R package. My first iteration used a tidyverse-style API, but I've found the [embedded DSL](http://adv-r.had.co.nz/dsl.html) approach to be a little more flexible and easier to use for the end user. This solution solves all of the problems I outlined by allowing users can use Git (or any text/diff based version control system) for collaboration and version control. Users do not need Excel (or any alternative) to program their surveys.
+
+## Why embed in R?
+
+I chose to use R for a number of reasons:
+
+* I am most comfortable working in R.
+* R's [nonstandard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html) provides a myriad of useful tools for building an embedded DSL.
+* XLSForms are just tabular data, and R is great at manipulating data.
+* Embedding in R allows users to make use of the entire R ecosystem.
+* This package can work anywhere R works.
+
+## The Language
+
+I tried to keep the language as close to the [XLSForm standard](https://xlsform.org/en/ref-table/) as possible; if the user thinks something should work, it hopefully should.
+
+Surveys are defined inside the `to_survey` environment. Within this environment all R syntax and functions apply (though I've gone back and forth on importing the global environment; using a closed environment would allow for more specialized syntax).
+
+```{r, message=FALSE, results='hide'}
+library(XLSFormTools)
+
+to_survey({
+  # This is a survey, note that this is an R-style comment!
+})
+```
+
+This function returns a list with three [tibbles](https://tibble.tidyverse.org/) which represent the `survey`, `choices`, and `settings` sheets of an XLSForm.
+
+Settings and choices are easily defined:
+
+```{r, message=FALSE, warning=FALSE, results='hide'}
+to_survey({
+  # Settings, this syntax could be improved
+  setting(form_title, "example_form")
+  setting(version, "1")
+  
+  # Choices
+  choice(list_name = "yn", "0" = "No", "1" = "Yes")
+  choice(list_name = "state", "1" = "CA", "2" = "NC")
+})
+```
+
+All meta and regular question types work as expected:
+
+```{r, message=FALSE, warning=FALSE, results='hide'}
+to_survey({
+  # Choices
+  choice(list_name = "yn", "0" = "No", "1" = "Yes")
+  choice(list_name = "states", "1" = "CA", "2" = "NC")
+  
+  # Meta questions for start and end time
+  start(name = "start_time")
+  end(name = "end_time")
+  
+  # Some questions, this is not a good survey :)
+  select_one(choices = "states", name = "favorite_state", 
+             label = "A1. What is your favorite state?")
+  select_one(choices = "yn", name = "live_in_fav_state",
+             label = "A2. Do you live in your favorite state?")
+  
+  # Verify location
+  geopoint(name = "survey_location", label = "A3. Enumerator: Please take a GPS recording.")
+})
+```
+
+Lastly, groups and repeat groups are quite intuitive:
+
+```{r, message=FALSE, warning=FALSE, results='hide'}
+a_survey <- to_survey({
+  # Group A
+  begin_group(name = "section_a", label = "Section A", {
+    # Integer questions use `int` so they don't overwrite base::integer
+    int("hh_size", "A1. How many people live in your household?")
+  })
+  
+  begin_repeat(name = "section_b", label = "Section B: Household Roster", 
+               repeat_count = "${hh_size}", {
+    int("age", "B1. What is this household member's age?")
+  })
+})
+```
+
+As mentioned, the `to_survey` function just returns a list of tibbles:
+
+```{r}
+a_survey
+```
+
+## Downsides
+
+There are of course several downsides. First, some users will find text-based programming intimidating than a nicely organized Excel workbook. Second, XLSFormTools does add another layer of abstraction. An ODK user must first program the survey in R, export to an XLSForm, then convert that to ODK's XForm standard. However, I consider this additional layer to be pretty thin.
+
+## Future Work
+
+There is still a lot of work to be done:
+
+* The language needs a name, I intend it to eventually be separate from the XLSFormTools package.
+* Currently choices are defined inside the `to_survey` environment, I'd like to import choices from a .csv file (matching the XLSForm choices sheet), or from a separate script.
+* I would also like to be able to import survey sections from separate scripts (or possibly even .csv and XLSForm files).
+* The whole implementation needs a refactor, it currently has the form of a minimum viable language.
+* Documentation and vignettes need to be written!
+

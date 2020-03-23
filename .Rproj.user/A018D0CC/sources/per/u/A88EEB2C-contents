@@ -1,0 +1,20 @@
+n <- 64
+features_in <- 1000
+features_out <- 10
+hidden <- 100
+
+x <- matrix(rnorm(n*features_in), nrow = n)
+y <- matrix(rnorm(n*features_out), nrow = n)
+
+w1 <- matrix(rnorm(features_in*hidden), ncol = hidden)
+w2 <- matrix(rnorm(hidden*features_out), ncol = features_out)
+
+alpha <- 0.00001
+
+# Dot each  
+h <- x %*% w1
+h_leaky_relu <- pmax(h, 0.00001)
+y_pred <- h_leaky_relu %*% w2
+
+loss = sum((y_pred - y)^2)
+

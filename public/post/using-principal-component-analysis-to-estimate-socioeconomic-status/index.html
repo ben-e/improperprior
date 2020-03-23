@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Using Principal Component Analysis to Estimate Socioeconomic Status | Ben Ewing | Improper Prior</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/things-i-like/">Links</a></li>
+      
+      <li><a href="https://github.com/ben-e/">GitHub</a></li>
+      
+      <li><a href="/index.xml">Subscribe</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Using Principal Component Analysis to Estimate Socioeconomic Status</span></h1>
+<h2 class="author">Ben Ewing</h2>
+<h2 class="date">2020/03/21</h2>
+</div>
+
+<main>
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Principal Component Analysis (PCA) is a dimension reduction technique that is commonly used in the social sciences to build single dimension estimates of socioeconomic status. In this post I will first walk through the intuition and math behind PCA, and then provide a simple example of its use in R to generate a simple asset index.</p>
+</div>
+<div id="intuition" class="section level2">
+<h2>Intuition</h2>
+<p>Dimension reduction is any process by which we reduce the number of variables in a dataset. For example, in the following plot the figure on the left has three dimensions: <code>x</code>, <code>y</code>, and the color of the points, while the figure on the right reduces the number of dimensions to two by dropping the <code>y</code> variable.</p>
+<p><img src="/post/2020-03-21-using-principal-component-analysis-to-estimate-socioeconomic-status_files/figure-html/unnamed-chunk-2-1.png" width="816" /></p>
+<p>Dimension reduction is quite useful when we would like to summarize or plot data with many dimensions. For example, we may want to summarize the relative weatlh of a household using a dataset of the household’s assets. However, we can clearly see that dimension reduction may be difficult to do without information loss: in the preceeding plot we can see that the <code>x</code> variable alone is not enough to distinguish the two classes.</p>
+<p>Ideally we would like to perform dimension reduction on our data while limiting the amount of information lost, if only there were some way to look at the <em>principal components</em> of the data. PCA achieves dimension reduction by taking a dataset and creating a set of uncorrelated components which capture most of the variance. The following plot shows a single dimensional plot of the first principal component, note that the groups are now distinct.</p>
+<p><img src="/post/2020-03-21-using-principal-component-analysis-to-estimate-socioeconomic-status_files/figure-html/unnamed-chunk-3-1.png" width="816" /></p>
+</div>
+<div id="a-little-bit-of-math" class="section level2">
+<h2>A Little Bit of Math</h2>
+<p>Calculating the components in PCA is relatively straightfoward, as each component is just a linear combination of the data itself. To keep the components uncorrelated each component subtracts out the sum of all previous components. That is, the components can be written as:</p>
+<p><span class="math display">\[\begin{align*}
+\text{pc}_1 &amp;= (w^{(1)}_1x_1 + w^{(1)}_2x_2 + \ldots + w^{(1)}_px_p)^2 \\
+\text{pc}_2 &amp;= (w^{(2)}_1(x_1 - w^{(1)}_1x_1) + w^{(2)}_2(x_2 - w^{(1)}_2x_2) + \ldots + w^{(2)}_p(x_p-w^{(1)}_px_p))^2\\
+&amp;\cdots \\\
+\text{pc}_k &amp;= \left(\left(\mathbf{x} - \sum_{s&lt;k} \text{pc}_s\right) \cdot w^{(k)}\right)^2 \\
+\end{align*}\]</span></p>
+<p>Where each <span class="math inline">\(\mathbf{w}\)</span> is required to be a <a href="https://en.wikipedia.org/wiki/Unit_vector">unit vector</a>. The process used to find the actual <span class="math inline">\(\mathbf{w}\)</span> values involves is straightforward, but a requires more linear algebra than I want to present here. It is well-explained on <a href="https://en.wikipedia.org/wiki/Principal_component_analysis#First_component">Wikipedia</a> if you are comfortable with the concept of eigenvectors.</p>
+</div>
+<div id="in-r" class="section level2">
+<h2>In R</h2>
+<p>First we need some data. I’ll just create a simple dataset containing some simple normalized assets and an indicator for poor and wealthy households.</p>
+<pre class="r"><code>library(dplyr)
+library(ggplot2)
+library(ggthemes)
+
+n &lt;- 2000
+
+df &lt;- tibble(
+  wealthy = rep(c(0, 1), each = n/2),
+  motorbikes = rbinom(n, 5, 0.25 + 0.2*wealthy),
+  bicycles = rbinom(n, 5, 0.65 + 0.2*wealthy),
+  chickens = rbinom(n, 5, 0.75 + 0.2*wealthy),
+  goats = rbinom(n, 5, 0.5 + 0.2*wealthy),
+  savings = rnorm(n, 0 + 0.2*wealthy),
+  land_area = rgamma(n, 1.5 + 0.25*wealthy),
+)</code></pre>
+<p>We only need a few lines of R to extract the principal components for a dataset.</p>
+<pre class="r"><code># Calculate and extract the components
+pr &lt;- prcomp(select(df, -wealthy))
+pr &lt;- predict(pr, select(df, -wealthy))
+
+# Add the first two components to the data
+df$pc1 &lt;- pr[ , 1]
+df$pc2 &lt;- pr[ , 2]
+df$pc3 &lt;- pr[ , 2]</code></pre>
+<p>And that’s it. We can now plot the components to see how well they separate the data.</p>
+<pre class="r"><code>df %&gt;% 
+  ggplot(aes(pc1, pc2, color = as.factor(wealthy))) +
+  geom_point() +
+  scale_color_few()</code></pre>
+<p><img src="/post/2020-03-21-using-principal-component-analysis-to-estimate-socioeconomic-status_files/figure-html/unnamed-chunk-6-1.png" width="816" /></p>
+<p>Note that the first component on its own does a pretty good job separating the groups. Density plots of the principal components can also be quite useful to understand how wealth is distributed; in this case, wealth is pretty normally distributed.</p>
+<pre class="r"><code>df %&gt;% 
+  select(matches(&quot;^pc&quot;)) %&gt;% 
+  gather(component, value) %&gt;% 
+  ggplot(aes(value)) +
+  geom_density() +
+  facet_wrap(. ~ component)</code></pre>
+<p><img src="/post/2020-03-21-using-principal-component-analysis-to-estimate-socioeconomic-status_files/figure-html/unnamed-chunk-7-1.png" width="816" /></p>
+</div>
+<div id="further-reading-and-sources" class="section level2">
+<h2>Further Reading and Sources</h2>
+<p>There is a lot of good content about PCA and dimension reduction on the web:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=_UVHneBUBW0&amp;t=868s">StatQuest</a> has a great intuitive/visual explanation.</li>
+<li><a href="https://academic.oup.com/heapol/article/21/6/459/612115">Vyas and Kumaranayake</a> present PCA as a tool for estimating socioeconomic status. This is probably a good next article to read.</li>
+<li>As ever, Wikipedia’s article on PCA is good <a href="https://en.wikipedia.org/wiki/Principal_component_analysis">reference</a>.</li>
+<li>Hastie et al’s modern classic <a href="https://web.stanford.edu/~hastie/ElemStatLearn/">The Elements of Statistical Learning</a> discusses the use of principal components in many different contexts.</li>
+</ul>
+<p>I would also recommend looking at other clustering and dimension reduction techniques such as Linear Discriminant Analysis or tSNE.</p>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+  </footer>
+  </body>
+</html>
+

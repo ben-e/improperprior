@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-03-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-03-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-03-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2020-03-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-03-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/technical/</loc>
+    <lastmod>2020-03-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/using-principal-component-analysis-to-estimate-socioeconomic-status/</loc>
+    <lastmod>2020-03-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/bayesian-stat/</loc>
+    <lastmod>2020-03-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/what-is-an-improper-prior/</loc>
+    <lastmod>2020-03-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/continuous-and-binary-dependent-variables/</loc>
+    <lastmod>2020-02-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/a-language-for-survey-programming/</loc>
+    <lastmod>2020-01-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/survey-design/</loc>
+    <lastmod>2020-01-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/xlsform/</loc>
+    <lastmod>2020-01-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+  </url>
+  
+  <url>
+    <loc>/things-i-like/</loc>
+  </url>
+  
+</urlset>

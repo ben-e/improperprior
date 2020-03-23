@@ -1,0 +1,120 @@
+---
+title: A Language for Survey Programming
+author: Ben Ewing
+date: '2020-01-05'
+slug: a-language-for-survey-programming
+categories: [technical]
+tags: [r, xlsform, survey design]
+---
+
+
+
+<div id="whats-wrong-with-xlsforms" class="section level2">
+<h2>What’s wrong with XLSForms?</h2>
+<p><a href="https://xlsform.org/en/">XLSForm</a> defines a very accessible (other than reliance on Excel) standard for programming surveys compatible with <a href="https://opendatakit.org/">OpenDataKit</a>, <a href="https://www.surveycto.com/">SurveyCTO</a>, and a myriad of other data collection tools used in low/no connectivity environments. XLSForm’s are dead easy to program, but can produce very complex surveys. However, in my ~5 years of programming XLSForm surveys I’ve encountered a few problems caused by the reliance on Excel for programming:</p>
+<ul>
+<li><strong>Collaboration</strong>: While it is easy to share Excel files, there is no easy way for multiple authors to work on the same survey at once. A typical workflow (at least in my experience) involves passing a survey around via email or Dropbox, and hoping that no conflicts occur, no one works on the wrong version of the survey, or other such nonsense.</li>
+<li><strong>Version Control</strong>: Excel can track changes and Dropbox has some good file management tools, but I wouldn’t consider either of these to be true version control, when compared to something like Git. Unfortunately Git is not ideal for binary files like Excel workbooks. It’s not uncommon (again, in my experience) for a survey to end up with a name like “household_survey_2019_11_08_ewing_farrell-v5-FINAL_UPDATE.xlsx.”</li>
+<li><strong>Excel</strong>: While easy to use, Excel is not free software, nor is it available on all platforms. While alternatives do exist, I think it is advantageous to move away from closed software/formats altogether.</li>
+</ul>
+<p>To address these issues, I’ve tried building a domain specific language (DSL) embedded in <a href="https://www.r-project.org/">R</a> that can generate XLSForms. This takes the form of the <a href="https://github.com/ben-e/XLSFormTools">XLSFormTools</a> R package. My first iteration used a tidyverse-style API, but I’ve found the <a href="http://adv-r.had.co.nz/dsl.html">embedded DSL</a> approach to be a little more flexible and easier to use for the end user. This solution solves all of the problems I outlined by allowing users can use Git (or any text/diff based version control system) for collaboration and version control. Users do not need Excel (or any alternative) to program their surveys.</p>
+</div>
+<div id="why-embed-in-r" class="section level2">
+<h2>Why embed in R?</h2>
+<p>I chose to use R for a number of reasons:</p>
+<ul>
+<li>I am most comfortable working in R.</li>
+<li>R’s <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">nonstandard evaluation</a> provides a myriad of useful tools for building an embedded DSL.</li>
+<li>XLSForms are just tabular data, and R is great at manipulating data.</li>
+<li>Embedding in R allows users to make use of the entire R ecosystem.</li>
+<li>This package can work anywhere R works.</li>
+</ul>
+</div>
+<div id="the-language" class="section level2">
+<h2>The Language</h2>
+<p>I tried to keep the language as close to the <a href="https://xlsform.org/en/ref-table/">XLSForm standard</a> as possible; if the user thinks something should work, it hopefully should.</p>
+<p>Surveys are defined inside the <code>to_survey</code> environment. Within this environment all R syntax and functions apply (though I’ve gone back and forth on importing the global environment; using a closed environment would allow for more specialized syntax).</p>
+<pre class="r"><code>library(XLSFormTools)
+
+to_survey({
+  # This is a survey, note that this is an R-style comment!
+})</code></pre>
+<p>This function returns a list with three <a href="https://tibble.tidyverse.org/">tibbles</a> which represent the <code>survey</code>, <code>choices</code>, and <code>settings</code> sheets of an XLSForm.</p>
+<p>Settings and choices are easily defined:</p>
+<pre class="r"><code>to_survey({
+  # Settings, this syntax could be improved
+  setting(form_title, &quot;example_form&quot;)
+  setting(version, &quot;1&quot;)
+  
+  # Choices
+  choice(list_name = &quot;yn&quot;, &quot;0&quot; = &quot;No&quot;, &quot;1&quot; = &quot;Yes&quot;)
+  choice(list_name = &quot;state&quot;, &quot;1&quot; = &quot;CA&quot;, &quot;2&quot; = &quot;NC&quot;)
+})</code></pre>
+<p>All meta and regular question types work as expected:</p>
+<pre class="r"><code>to_survey({
+  # Choices
+  choice(list_name = &quot;yn&quot;, &quot;0&quot; = &quot;No&quot;, &quot;1&quot; = &quot;Yes&quot;)
+  choice(list_name = &quot;states&quot;, &quot;1&quot; = &quot;CA&quot;, &quot;2&quot; = &quot;NC&quot;)
+  
+  # Meta questions for start and end time
+  start(name = &quot;start_time&quot;)
+  end(name = &quot;end_time&quot;)
+  
+  # Some questions, this is not a good survey :)
+  select_one(choices = &quot;states&quot;, name = &quot;favorite_state&quot;, 
+             label = &quot;A1. What is your favorite state?&quot;)
+  select_one(choices = &quot;yn&quot;, name = &quot;live_in_fav_state&quot;,
+             label = &quot;A2. Do you live in your favorite state?&quot;)
+  
+  # Verify location
+  geopoint(name = &quot;survey_location&quot;, label = &quot;A3. Enumerator: Please take a GPS recording.&quot;)
+})</code></pre>
+<p>Lastly, groups and repeat groups are quite intuitive:</p>
+<pre class="r"><code>a_survey &lt;- to_survey({
+  # Group A
+  begin_group(name = &quot;section_a&quot;, label = &quot;Section A&quot;, {
+    # Integer questions use `int` so they don&#39;t overwrite base::integer
+    int(&quot;hh_size&quot;, &quot;A1. How many people live in your household?&quot;)
+  })
+  
+  begin_repeat(name = &quot;section_b&quot;, label = &quot;Section B: Household Roster&quot;, 
+               repeat_count = &quot;${hh_size}&quot;, {
+    int(&quot;age&quot;, &quot;B1. What is this household member&#39;s age?&quot;)
+  })
+})</code></pre>
+<p>As mentioned, the <code>to_survey</code> function just returns a list of tibbles:</p>
+<pre class="r"><code>a_survey</code></pre>
+<pre><code>## $survey
+## # A tibble: 6 x 14
+##   type  name  hint  constraint constraint_mess~ required required_message
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt;           
+## 1 begi~ sect~ &quot;&quot;    &quot;&quot;         &quot;&quot;               &quot;&quot;       &quot;&quot;              
+## 2 inte~ hh_s~ &quot;&quot;    &quot;&quot;         &quot;&quot;               &quot;&quot;       &quot;&quot;              
+## 3 end_~ &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;             &lt;NA&gt;     &lt;NA&gt;           
+## 4 begi~ sect~ &quot;&quot;    &quot;&quot;         &quot;&quot;               &quot;&quot;       &quot;&quot;              
+## 5 inte~ age   &quot;&quot;    &quot;&quot;         &quot;&quot;               &quot;&quot;       &quot;&quot;              
+## 6 end_~ &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;             &lt;NA&gt;     &lt;NA&gt;           
+## # ... with 7 more variables: default &lt;chr&gt;, relevant &lt;chr&gt;, read_only &lt;chr&gt;,
+## #   calculation &lt;chr&gt;, appearance &lt;chr&gt;, label &lt;chr&gt;, repeat_count &lt;chr&gt;
+## 
+## $choices
+## # A tibble: 0 x 0
+## 
+## $settings
+## # A tibble: 0 x 0</code></pre>
+</div>
+<div id="downsides" class="section level2">
+<h2>Downsides</h2>
+<p>There are of course several downsides. First, some users will find text-based programming intimidating than a nicely organized Excel workbook. Second, XLSFormTools does add another layer of abstraction. An ODK user must first program the survey in R, export to an XLSForm, then convert that to ODK’s XForm standard. However, I consider this additional layer to be pretty thin.</p>
+</div>
+<div id="future-work" class="section level2">
+<h2>Future Work</h2>
+<p>There is still a lot of work to be done:</p>
+<ul>
+<li>The language needs a name, I intend it to eventually be separate from the XLSFormTools package.</li>
+<li>Currently choices are defined inside the <code>to_survey</code> environment, I’d like to import choices from a .csv file (matching the XLSForm choices sheet), or from a separate script.</li>
+<li>I would also like to be able to import survey sections from separate scripts (or possibly even .csv and XLSForm files).</li>
+<li>The whole implementation needs a refactor, it currently has the form of a minimum viable language.</li>
+<li>Documentation and vignettes need to be written!</li>
+</ul>
+</div>

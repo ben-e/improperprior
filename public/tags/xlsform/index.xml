@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>xlsform on Ben Ewing | Improper Prior</title>
+    <link>/tags/xlsform/</link>
+    <description>Recent content in xlsform on Ben Ewing | Improper Prior</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 05 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/xlsform/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A Language for Survey Programming</title>
+      <link>/post/a-language-for-survey-programming/</link>
+      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/a-language-for-survey-programming/</guid>
+      <description>What’s wrong with XLSForms?XLSForm defines a very accessible (other than reliance on Excel) standard for programming surveys compatible with OpenDataKit, SurveyCTO, and a myriad of other data collection tools used in low/no connectivity environments. XLSForm’s are dead easy to program, but can produce very complex surveys. However, in my ~5 years of programming XLSForm surveys I’ve encountered a few problems caused by the reliance on Excel for programming:</description>
+    </item>
+    
+  </channel>
+</rss>

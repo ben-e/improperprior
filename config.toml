@@ -1,0 +1,31 @@
+baseurl = "/"
+languageCode = "en-us"
+title = "Ben Ewing | Improper Prior"
+theme = "hugo-xmin"
+googleAnalytics = ""
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+footnotereturnlinkcontents = "↩"
+
+[permalinks]
+    note = "/note/:year/:month/:day/:slug/"
+
+[[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+[[menu.main]]
+    name = "Links"
+    url = "/things-i-like/"
+    weight = 2
+[[menu.main]]
+    name = "GitHub"
+    url = "https://github.com/ben-e/"
+    weight = 3
+[[menu.main]]
+    name = "Subscribe"
+    url = "/index.xml"
+    weight = 4
+
+[params]
+    description = "Ben Ewing's Blog."

@@ -1,0 +1,59 @@
+---
+title: What is an improper prior?
+author: Ben Ewing
+date: '2020-03-16'
+slug: what-is-an-improper-prior
+categories:
+  - technical
+tags:
+  - bayesian-stat
+---
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Since I’ve purchased improperprior.com it seems prudent that I write a short post explaining improper priors.</p>
+</div>
+<div id="typical-bayesian-process" class="section level2">
+<h2>Typical Bayesian Process</h2>
+<p>In Bayesian statistics we exploit <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Bayes’ theorem</a> to learn something about a population parameter. For example, if we have data <span class="math inline">\(Y\)</span> that follow a <a href="https://en.wikipedia.org/wiki/Binomial_distribution">Binomial distribution</a>, and we would like to estimate the <span class="math inline">\(\theta\)</span> parameter, we would compute:</p>
+<p><span class="math display">\[
+P(\theta|Y) = \frac{L(Y|\theta)P(\theta)}{P(Y)}.
+\]</span></p>
+<p>In this case:</p>
+<ul>
+<li><span class="math inline">\(P(\theta|Y)\)</span> is the posterior probability, this is what we’d like to estimate.</li>
+<li><span class="math inline">\(L(Y|\theta)\)</span> is the <a href="https://en.wikipedia.org/wiki/Likelihood_function">likelihood</a> of observing the (already observed) data, given <span class="math inline">\(\theta\)</span>.</li>
+<li><span class="math inline">\(P(\theta)\)</span> is a distribution representing a prior guess for <span class="math inline">\(\theta\)</span> before observing data.</li>
+<li><span class="math inline">\(P(Y)\)</span> is the unconditional likelihood of observing the data, also commonly called a normalizing constant. We will ignore this term as it is constant once the data has been observed, and only acts to make sure that the numerator integrates to 1 (i.e. it makes sure the posterior is a <em>proper</em> distribution), which is surprisingly unnecessary for posterior estimation.</li>
+</ul>
+<p>Continuing the example, the likelihood for binomial data is just a binomial distribution itself, though we can drop any constant terms, so we just end up with: <span class="math inline">\(\theta^{\sum_i y_i}(1-\theta)^{n-\sum_i y_i}\)</span>. We will combine this with a <span class="math inline">\(\text{Beta}(1, 1)\)</span> prior on <span class="math inline">\(\theta\)</span>, again dropping the constant terms so we just have: <span class="math inline">\(\theta^{1-1}(1-\theta)^{1-1}\)</span>. Note that this is just equivalent to the <span class="math inline">\(\text{Unif}(0, 1)\)</span> distribution. Together these give:</p>
+<p><span class="math display">\[
+P(\theta|Y) \propto \theta^{\sum_i y_i}(1-\theta)^{n-\sum_i y_i} \times \theta^{1-1}(1-\theta)^{1-1} \\
+            \propto \theta^{\sum_i y_i + 1 - 1}(1-\theta)^{n-\sum_i y_i  + 1 - 1}.
+\]</span></p>
+<p>From this we can see that the posterior distribution follows a <span class="math inline">\(\text{Beta}(\sum_i y_i + 1, n - \sum_i y_i + 1)\)</span> distribution. Intuitively because we used a prior that carried little information with it (effectively saying that <span class="math inline">\(\theta\)</span> could be any value in (0, 1)) our posterior estimate for <span class="math inline">\(\theta\)</span> is entirely determined by the data.</p>
+<p>Here’s a simple Shiny app to let you play with this model and build some intuition as to how the prior parameters and data interact. Note that every time sample size is increased a new random sample is drawn, thus it may be slightly jumpy.</p>
+<iframe src="https://ben-ewing.shinyapps.io/Beta-Binomial/?showcase=0" width="1440" height="465">
+</iframe>
+</div>
+<div id="impropriety" class="section level2">
+<h2>Impropriety</h2>
+<p>This is great, but what if we have data that follow a normal distribution with known <span class="math inline">\(\sigma^2\)</span> but completely unknown <span class="math inline">\(\mu\)</span>. Unlike the previous example, <span class="math inline">\(\mu\)</span> can take <em>any</em> real value (whereas <span class="math inline">\(\theta\)</span> in the previous example is bounded in <span class="math inline">\([0, 1]\)</span>), because of this, it is not possible to choose a proper prior that puts an equal probability on every possible value. Instead, we must use an improper prior. This is a prior that doesn’t integrate to 1 (so it is not a proper distribution), but does generate a valid posterior distribution that integrates to 1. This will allow us to place an equal amount of probability on every possible value without worrying so much about the prior, <em>as long as</em> the posterior is proper.</p>
+<p>Choosing an improper prior that generates a valid posterior can be a tricky affair, but using <a href="https://en.wikipedia.org/wiki/Jeffreys_prior">Jeffreys’ prior</a> is a good place to start. Continuing the normal example, we will just use a prior probability of 1 for every value of <span class="math inline">\(\mu\)</span>. While this might seem a little absurd, this actually is proportional to the <a href="https://en.wikipedia.org/wiki/Jeffreys_prior#Gaussian_distribution_with_mean_parameter">Jeffreys’ prior for this setup</a>. As with the previous example, we will set aside all constant terms:</p>
+<p><span class="math display">\[
+P(\theta|Y) \propto \exp{\left[-\frac{1}{2} \left(\frac{y-\mu}{\sigma^2}\right)^2\right]} \times 1.
+\]</span></p>
+<p>The posterior is pretty clearly just a proper normal distribution. And this is the whole ideas behind improper priors! Of course, it is possible to delve pretty deep into the world of building good improper priors, Jeffreys’ prior is only the start.</p>
+</div>
+<div id="further-resources" class="section level2">
+<h2>Further Resources</h2>
+<p><a href="https://algassert.com/post/1630">Craig Gidney</a> has a nice blog post walking through a slightly more technical example of improper priors. For a more general treatment <a href="https://duckduckgo.com/?t=ffab&amp;q=A+First+Course+in+Bayesian+Statistical+Methods&amp;atb=v198-1&amp;ia=shopping">A First Course in Bayesian Statistical Methods</a> by Hoff and <a href="https://duckduckgo.com/?q=bayesian+data+analysis&amp;t=ffab&amp;atb=v198-1&amp;ia=shopping">Bayesian Data Analysis</a> by Gelman et al are the standard introductory Bayesian statistics textbooks.</p>
+<p>As ever, Wikipedia has very detailed articles on priors, more suitable for reference than learning:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Prior_probability#Improper_priors">Improper Priors</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Jeffreys_prior">Jeffreys’ prior</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Conjugate_prior">Conjugate Priors</a></li>
+</ul>
+</div>
