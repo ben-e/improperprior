@@ -43,3 +43,23 @@ Additional notes:
 * The 'linear' in linear regression refers to the relationship between $y$ and $\beta$, the $x_i$'s can be polynomials, as in the case of polynomial regression.
 
 * While the $\beta$'s can be found through a number of techniques, choosing $\beta$ to minimize $(y- X\beta)^T(y- X\beta)$ (as is very common, this is just ordinary least squares) gives a very elegant closed form: $\hat{\beta} = (X^TX)^{-1}X^Ty$.
+
+## What’s the normal distribution? Why do we care about it? 
+
+The normal distribution with with parameters $\mu$ and $\sigma^2$ as $p(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp{\left(-\frac{1}{2\sigma^2}(x-\mu)^2\right)}$.
+
+There are a lot of reasons to care about the normal distribution (e.g. Alexey talks about the central limit theorem for this question). Perhaps the reason the normal distribution pops up everywhere is that it's kernel (with known variance) is just the squared difference between two quantities, which we use quite often.
+
+## How do we check if a variable follows the normal distribution?
+
+For exploratory data analysis (EDA) I would just plot a histogram or the empirical density. For a more formal setting one could look at the skew and kurtosis (both 0 for a normal distribution), or run any one of the many [normality tests](https://en.wikipedia.org/wiki/Normality_test).
+
+This is a pretty common procedure when looking at regression residuals, remember we want a normal error!
+
+## What if we want to build a model for predicting prices? Are prices distributed normally? Do we need to do any pre-processing for prices?
+
+My best guess (i.e. based on only my priors, no data) is that prices are not normally distributed, in fact I would expect the distribution of prices to be very skewed due to the presence of high-end luxury goods. We can deal with this by using a log-transformation on the data. I assume this question is not asking about pre-processing like converting to the same currency or other data cleaning steps.
+
+## What are the methods for solving linear regression do you know?
+
+See my answer for "What is linear regression? When do we use it?"

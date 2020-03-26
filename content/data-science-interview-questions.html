@@ -46,3 +46,17 @@ tags: []
 </ul>
 </div>
 </div>
+<div id="whats-the-normal-distribution-why-do-we-care-about-it" class="section level2">
+<h2>What’s the normal distribution? Why do we care about it?</h2>
+<p>The normal distribution with with parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> as <span class="math inline">\(p(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp{\left(-\frac{1}{2\sigma^2}(x-\mu)^2\right)}\)</span>.</p>
+<p>There are a lot of reasons to care about the normal distribution (e.g. Alexey talks about the central limit theorem for this question). Perhaps the reason the normal distribution pops up everywhere is that it’s kernel (with known variance) is just the squared difference between two quantities, which we use quite often.</p>
+</div>
+<div id="how-do-we-check-if-a-variable-follows-the-normal-distribution" class="section level2">
+<h2>How do we check if a variable follows the normal distribution?</h2>
+<p>For exploratory data analysis (EDA) I would just plot a histogram or the empirical density. For a more formal setting one could look at the skew and kurtosis (both 0 for a normal distribution), or run any one of the many <a href="https://en.wikipedia.org/wiki/Normality_test">normality tests</a>.</p>
+<p>This is a pretty common procedure when looking at regression residuals, remember we want a normal error!</p>
+</div>
+<div id="what-if-we-want-to-build-a-model-for-predicting-prices-are-prices-distributed-normally-do-we-need-to-do-any-pre-processing-for-prices" class="section level2">
+<h2>What if we want to build a model for predicting prices? Are prices distributed normally? Do we need to do any pre-processing for prices?</h2>
+<p>My best guess (i.e. based on only my priors, no data) is that prices are not normally distributed, in fact I would expect the distribution of prices to be very skewed due to the presence of high-end luxury goods. We can deal with this by using a log-transformation on the data. I assume this question is not asking about pre-processing like converting to the same currency or other data cleaning steps.</p>
+</div>
