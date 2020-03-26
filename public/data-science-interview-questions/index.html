@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Science Interview Questions | Ben Ewing | Improper Prior</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/things-i-like/">Links</a></li>
+      
+      <li><a href="https://github.com/ben-e/">GitHub</a></li>
+      
+      <li><a href="/index.xml">Subscribe</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Data Science Interview Questions</span></h1>
+<h2 class="author">Ben Ewing</h2>
+
+</div>
+
+<main>
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>I’ve seen a number of articles/posts pop up around the internet with lists of data science interview questions. I thought it might be a good exercise in communication and data science knowledge to answer these questions. I am finding it harder than I would have expected to write good (and hopefulyl useful) answers!</p>
+<p>Question sources:</p>
+<ul>
+<li><a href="https://hackernoon.com/160-data-science-interview-questions-415s3y2a">HackerNoon - 160+ Data Science Interview Questions</a></li>
+</ul>
+<p>Additional resources:</p>
+<ul>
+<li><a href="http://alexeygrigorev.com/">Alexey Grigorev</a> has put together a whole GitHub repo with data science interview questions <em>and</em> answers, <a href="https://github.com/alexeygrigorev/data-science-interviews/">available here</a>. He also has his own extensive collection of <a href="https://github.com/alexeygrigorev/data-science-interviews/blob/master/awesome.md">resources</a>.</li>
+<li><a href="https://chrisalbon.com/">Chris Albon</a> has a collection of machine learning flashcards, <a href="https://machinelearningflashcards.com/">available as a whole set for a price</a>, or sporadically posted <a href="https://twitter.com/chrisalbon">on his Twitter feed</a>. I’ve found these to be a useful way to identify gaps in my knowledge.</li>
+</ul>
+</div>
+<div id="supervised-machine-learning" class="section level2">
+<h2>Supervised machine learning</h2>
+<div id="what-is-supervised-machine-learning" class="section level3">
+<h3>What is supervised machine learning?</h3>
+<p>Supervised machine learning is when we use a dataset, <span class="math inline">\(X\)</span>, to predict some known target value <span class="math inline">\(y\)</span> where <span class="math inline">\(y\)</span> might be a label/class or some continous value. In unsupervised learning we learn about a dataset <span class="math inline">\(X\)</span> without any label, for example clustering individuals.</p>
+</div>
+</div>
+<div id="linear-regression" class="section level2">
+<h2>Linear Regression</h2>
+<div id="what-is-regression-which-models-can-you-use-to-solve-a-regression-problem" class="section level3">
+<h3>What is regression? Which models can you use to solve a regression problem?</h3>
+<p>In a regression problem we predict a continous value (rather than a label). Linear regression is very common; it can be augmented with polynomial features or regularization terms (lasso and ridge regression). Many other algorithms can also be used for regression problems, such as random forests with regression trees.</p>
+</div>
+<div id="what-is-linear-regression-when-do-we-use-it" class="section level3">
+<h3>What is linear regression? When do we use it?</h3>
+<p>For data <span class="math inline">\(X\)</span>, observation <span class="math inline">\(i\)</span>, a linear regression predicts a value <span class="math inline">\(y_i = x_i^T\beta\)</span> for a set of coefficents <span class="math inline">\(\beta\)</span>. We typically assume there tobe some error term <span class="math inline">\(\epsilon_i\)</span> that is normally distributed around 0.</p>
+<p>Additional notes:</p>
+<ul>
+<li><p>We can add an extra column of 1’s to the data to include an intercept term.</p></li>
+<li><p>The ‘linear’ in linear regression refers to the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(\beta\)</span>, the <span class="math inline">\(x_i\)</span>’s can be polynomials, as in the case of polynomial regression.</p></li>
+<li><p>While the <span class="math inline">\(\beta\)</span>’s can be found through a number of techniques, choosing <span class="math inline">\(\beta\)</span> to minimize <span class="math inline">\((y- X\beta)^T(y- X\beta)\)</span> (as is very common, this is just ordinary least squares) gives a very elegant closed form: <span class="math inline">\(\hat{\beta} = (X^TX)^{-1}X^Ty\)</span>.</p></li>
+</ul>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+  </footer>
+  </body>
+</html>
+

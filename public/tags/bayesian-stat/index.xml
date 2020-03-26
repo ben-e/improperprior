@@ -13,10 +13,10 @@
     
     <item>
       <title>What is an improper prior?</title>
-      <link>/post/what-is-an-improper-prior/</link>
+      <link>/post/2020/03/16/what-is-an-improper-prior/</link>
       <pubDate>Mon, 16 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/what-is-an-improper-prior/</guid>
+      <guid>/post/2020/03/16/what-is-an-improper-prior/</guid>
       <description>IntroductionSince I’ve purchased improperprior.com it seems prudent that I write a short post explaining improper priors.
 Typical Bayesian ProcessIn Bayesian statistics we exploit Bayes’ theorem to learn something about a population parameter. For example, if we have data \(Y\) that follow a Binomial distribution, and we would like to estimate the \(\theta\) parameter, we would compute:
 \[P(\theta|Y) = \frac{L(Y|\theta)P(\theta)}{P(Y)}.\]

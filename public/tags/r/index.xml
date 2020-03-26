@@ -13,29 +13,29 @@
     
     <item>
       <title>Using Principal Component Analysis to Estimate Socioeconomic Status</title>
-      <link>/post/using-principal-component-analysis-to-estimate-socioeconomic-status/</link>
+      <link>/post/2020/03/21/using-principal-component-analysis-to-estimate-socioeconomic-status/</link>
       <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/using-principal-component-analysis-to-estimate-socioeconomic-status/</guid>
+      <guid>/post/2020/03/21/using-principal-component-analysis-to-estimate-socioeconomic-status/</guid>
       <description>IntroductionPrincipal Component Analysis (PCA) is a dimension reduction technique that is commonly used in the social sciences to build single dimension estimates of socioeconomic status. In this post I will first walk through the intuition and math behind PCA, and then provide a simple example of its use in R to generate a simple asset index.
 IntuitionDimension reduction is any process by which we reduce the number of variables in a dataset.</description>
     </item>
     
     <item>
       <title>Continuous and Binary Dependent Variables</title>
-      <link>/post/continuous-and-binary-dependent-variables/</link>
+      <link>/post/2020/02/14/continuous-and-binary-dependent-variables/</link>
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/continuous-and-binary-dependent-variables/</guid>
+      <guid>/post/2020/02/14/continuous-and-binary-dependent-variables/</guid>
       <description>R Setup# Data manipulationlibrary(dplyr)library(purrr)library(tidyr)# Modelinglibrary(broom)# Plotting and tableslibrary(ggplot2)library(patchwork)library(ggthemes)library(knitr)# R settingstheme_set(theme_tufte() + theme(legend.position = &amp;quot;none&amp;quot;))opts_chunk$set(echo = T, warning = F, message = F, tidy = F,fig.width = 8.5, fig.height = 6)IntroductionIn his 2011 paper “Land tenure and investment incentives: Evidence from West Africa,” James Fenske notes that “studies that use binary investment measures…are also less likely to find a statistically significant effect.</description>
     </item>
     
     <item>
       <title>A Language for Survey Programming</title>
-      <link>/post/a-language-for-survey-programming/</link>
+      <link>/post/2020/01/05/a-language-for-survey-programming/</link>
       <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/a-language-for-survey-programming/</guid>
+      <guid>/post/2020/01/05/a-language-for-survey-programming/</guid>
       <description>What’s wrong with XLSForms?XLSForm defines a very accessible (other than reliance on Excel) standard for programming surveys compatible with OpenDataKit, SurveyCTO, and a myriad of other data collection tools used in low/no connectivity environments. XLSForm’s are dead easy to program, but can produce very complex surveys. However, in my ~5 years of programming XLSForm surveys I’ve encountered a few problems caused by the reliance on Excel for programming:</description>
     </item>
     
