@@ -37,7 +37,7 @@
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>I’ve seen a number of articles/posts pop up around the internet with lists of data science interview questions. I thought it might be a good exercise in communication and data science knowledge to answer these questions. I am finding it harder than I would have expected to write good (and hopefulyl useful) answers!</p>
+<p>I’ve seen a number of articles/posts pop up around the internet with lists of data science interview questions. I thought it might be a good exercise in communication and data science knowledge to answer these questions. I am finding it harder than I would have expected to write good (and hopefully useful) answers!</p>
 <p>Question sources:</p>
 <ul>
 <li><a href="https://hackernoon.com/160-data-science-interview-questions-415s3y2a">HackerNoon - 160+ Data Science Interview Questions</a></li>
@@ -52,21 +52,21 @@
 <h2>Supervised machine learning</h2>
 <div id="what-is-supervised-machine-learning" class="section level3">
 <h3>What is supervised machine learning?</h3>
-<p>Supervised machine learning is when we use a dataset, <span class="math inline">\(X\)</span>, to predict some known target value <span class="math inline">\(y\)</span> where <span class="math inline">\(y\)</span> might be a label/class or some continous value. In unsupervised learning we learn about a dataset <span class="math inline">\(X\)</span> without any label, for example clustering individuals.</p>
+<p>Supervised machine learning is when we use a dataset, <span class="math inline">\(X\)</span>, to predict some known target value <span class="math inline">\(y\)</span> where <span class="math inline">\(y\)</span> might be a label/class or some continuous value. In unsupervised learning we learn about a dataset <span class="math inline">\(X\)</span> without any label, for example clustering individuals.</p>
 </div>
 </div>
 <div id="linear-regression" class="section level2">
 <h2>Linear Regression</h2>
 <div id="what-is-regression-which-models-can-you-use-to-solve-a-regression-problem" class="section level3">
 <h3>What is regression? Which models can you use to solve a regression problem?</h3>
-<p>In a regression problem we predict a continous value (rather than a label). Linear regression is very common; it can be augmented with polynomial features or regularization terms (lasso and ridge regression). Many other algorithms can also be used for regression problems, such as random forests with regression trees.</p>
+<p>In a regression problem we predict a continuous value (rather than a label). Linear regression is very common; it can be augmented with polynomial features or regularization terms (lasso and ridge regression). Many other algorithms can also be used for regression problems, such as random forests with regression trees.</p>
 </div>
 <div id="what-is-linear-regression-when-do-we-use-it" class="section level3">
 <h3>What is linear regression? When do we use it?</h3>
-<p>For data <span class="math inline">\(X\)</span>, observation <span class="math inline">\(i\)</span>, a linear regression predicts a value <span class="math inline">\(y_i = x_i^T\beta\)</span> for a set of coefficents <span class="math inline">\(\beta\)</span>. We typically assume there tobe some error term <span class="math inline">\(\epsilon_i\)</span> that is normally distributed around 0.</p>
+<p>For data <span class="math inline">\(X\)</span>, observation <span class="math inline">\(i\)</span>, a linear regression predicts a value <span class="math inline">\(y_i = x_i^T\beta\)</span> for a set of coefficients <span class="math inline">\(\beta\)</span>. We typically assume there to be some error term <span class="math inline">\(\epsilon_i\)</span> that is normally distributed around 0.</p>
 <p>Additional notes:</p>
 <ul>
-<li><p>We can add an extra column of 1’s to the data to include an intercept term.</p></li>
+<li><p>We can add an extra column of 1s to the data to include an intercept term. The column of 1s allows us to add an extra <span class="math inline">\(\beta_0\)</span> which (in the case of linear regression with a single variable) changes where on the y-axis the line passes through. Without this term the line will just pass through 0.</p></li>
 <li><p>The ‘linear’ in linear regression refers to the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(\beta\)</span>, the <span class="math inline">\(x_i\)</span>’s can be polynomials, as in the case of polynomial regression.</p></li>
 <li><p>While the <span class="math inline">\(\beta\)</span>’s can be found through a number of techniques, choosing <span class="math inline">\(\beta\)</span> to minimize <span class="math inline">\((y- X\beta)^T(y- X\beta)\)</span> (as is very common, this is just ordinary least squares) gives a very elegant closed form: <span class="math inline">\(\hat{\beta} = (X^TX)^{-1}X^Ty\)</span>.</p></li>
 </ul>

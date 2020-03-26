@@ -68,7 +68,7 @@ In this case:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/data-science-interview-questions/</guid>
-      <description>IntroductionI’ve seen a number of articles/posts pop up around the internet with lists of data science interview questions. I thought it might be a good exercise in communication and data science knowledge to answer these questions. I am finding it harder than I would have expected to write good (and hopefulyl useful) answers!
+      <description>IntroductionI’ve seen a number of articles/posts pop up around the internet with lists of data science interview questions. I thought it might be a good exercise in communication and data science knowledge to answer these questions. I am finding it harder than I would have expected to write good (and hopefully useful) answers!
 Question sources:
 HackerNoon - 160+ Data Science Interview QuestionsAdditional resources:
 Alexey Grigorev has put together a whole GitHub repo with data science interview questions and answers, available here.</description>

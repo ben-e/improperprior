@@ -9,7 +9,7 @@ tags: []
 
 ## Introduction
 
-I've seen a number of articles/posts pop up around the internet with lists of data science interview questions. I thought it might be a good exercise in communication and data science knowledge to answer these questions. I am finding it harder than I would have expected to write good (and hopefulyl useful) answers!
+I've seen a number of articles/posts pop up around the internet with lists of data science interview questions. I thought it might be a good exercise in communication and data science knowledge to answer these questions. I am finding it harder than I would have expected to write good (and hopefully useful) answers!
 
 Question sources:
 
@@ -24,21 +24,21 @@ Additional resources:
 
 ### What is supervised machine learning?
 
-Supervised machine learning is when we use a dataset, $X$, to predict some known target value $y$ where $y$ might be a label/class or some continous value. In unsupervised learning we learn about a dataset $X$ without any label, for example clustering individuals.
+Supervised machine learning is when we use a dataset, $X$, to predict some known target value $y$ where $y$ might be a label/class or some continuous value. In unsupervised learning we learn about a dataset $X$ without any label, for example clustering individuals.
 
 ## Linear Regression
 
 ### What is regression? Which models can you use to solve a regression problem?
 
-In a regression problem we predict a continous value (rather than a label). Linear regression is very common; it can be augmented with polynomial features or regularization terms (lasso and ridge regression). Many other algorithms can also be used for regression problems, such as random forests with regression trees.
+In a regression problem we predict a continuous value (rather than a label). Linear regression is very common; it can be augmented with polynomial features or regularization terms (lasso and ridge regression). Many other algorithms can also be used for regression problems, such as random forests with regression trees.
 
 ### What is linear regression? When do we use it?
 
-For data $X$, observation $i$, a linear regression predicts a value $y_i = x_i^T\beta$ for a set of coefficents $\beta$. We typically assume there tobe some error term $\epsilon_i$ that is normally distributed around 0. 
+For data $X$, observation $i$, a linear regression predicts a value $y_i = x_i^T\beta$ for a set of coefficients $\beta$. We typically assume there to be some error term $\epsilon_i$ that is normally distributed around 0. 
 
 Additional notes:
 
-* We can add an extra column of 1's to the data to include an intercept term.
+* We can add an extra column of 1s to the data to include an intercept term. The column of 1s allows us to add an extra $\beta_0$ which (in the case of linear regression with a single variable) changes where on the y-axis the line passes through. Without this term the line will just pass through 0.
 
 * The 'linear' in linear regression refers to the relationship between $y$ and $\beta$, the $x_i$'s can be polynomials, as in the case of polynomial regression.
 
