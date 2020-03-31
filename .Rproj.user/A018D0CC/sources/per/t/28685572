@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1585661842165.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "441711462",
+    "id" : "28685572",
+    "lastKnownWriteTime" : 1585661949,
+    "last_content_update" : 1585661949689,
+    "path" : "~/improperprior/content/things-i-like.Rmd",
+    "project_path" : "content/things-i-like.Rmd",
+    "properties" : {
+        "cursorPosition" : "20,198",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
