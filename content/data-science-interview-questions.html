@@ -62,5 +62,35 @@ tags: []
 </div>
 <div id="what-are-the-methods-for-solving-linear-regression-do-you-know" class="section level2">
 <h2>What are the methods for solving linear regression do you know?</h2>
-<p>See my answer for “What is linear regression? When do we use it?”</p>
+<p>See my answer for “What is linear regression? When do we use it?” for the closed form approach (and where it comes from), but note that we can also use any(?) gradient-based optimization approach as well.</p>
+</div>
+<div id="what-is-gradient-descent-how-does-it-work" class="section level2">
+<h2>What is gradient descent? How does it work?</h2>
+<p>Gradient descent a calculus-based optimizatin method that iteratively updates parameters in a model in the opposite direction of the gradient. For a linear regression model gradient descent looks something like this: <span class="math inline">\(\mathbf{\beta}_{i+1} = \mathbf{\beta}_i -\alpha\nabla_\beta(\mathbf{X}^T\mathbf{\beta}_i - \mathbf{y})^2\)</span> where <span class="math inline">\(\alpha\)</span> is the learning rate (this controls the size of each update).</p>
+<p>Note that a gradient is just a multivaraite derivative, so if we have a linear model <span class="math inline">\(\beta_0 + \beta_1x_1\)</span> the gradient with respect to the betas is <span class="math inline">\([1, x]^T\)</span>. <a href="https://ruder.io/optimizing-gradient-descent/index.html">Sebastian Ruder</a> has a really great overview oof gradient-based optimization methods.</p>
+</div>
+<div id="what-is-the-normal-equation" class="section level2">
+<h2>What is the normal equation?</h2>
+<p>I think this is a silly interview question. A <span class="math inline">\(N(\mu, \sigma^2)\)</span> distribution has PDF <span class="math inline">\(\frac{1}{\sqrt{2\pi\sigma^2}} \exp{\left[-\frac{1}{2\sigma^2}(x-\mu)^2\right]}\)</span>.</p>
+</div>
+<div id="what-is-sgd-whats-the-difference-with-the-usual-gradient-descent" class="section level2">
+<h2>What is SGD? What’s the difference with the usual gradient descent?</h2>
+<p>In “standard” (i.e. Batch) gradient descent we use all of the data at once, but this is computationally infeasible for sufficiently large datasets. Stochastic Gradient Descent randomly shuffles the data and then performs gradient descent one observation at a time to allow for computationally efficient updates. This approach can also be combined with the minibatch approach, where gradient descent is applied to smaller (computationally feasible) subsets of the data.</p>
+</div>
+<div id="which-metrics-for-evaluating-regression-models-do-you-know" class="section level2">
+<h2>Which metrics for evaluating regression models do you know?</h2>
+<p>This is also kind of a silly question, what do you want to know about the model? There are goodness-of-fit measures like R-squared, measures of prediction accuracy like MSE, RMSE (next question), and heuristics that can be used to choose from many models like AIC and BIC. There are surely <em>many</em> other ways to evaluate a linear model.</p>
+</div>
+<div id="what-are-mse-and-rmse" class="section level2">
+<h2>What are MSE and RMSE?</h2>
+<ul>
+<li>Mean Squared Error is the squared difference between a prediction and its true value: <span class="math inline">\(\frac{1}{n}\sum_i^n(y_i - \hat{y}_i)^2\)</span>.</li>
+<li>Root Mean Squared Error is the square-root of the MSE. The rescaling just allows us to talk about the error using the same units as the dependent variable, for example:</li>
+</ul>
+<pre class="r"><code>y &lt;- 5
+y_hat &lt;- 2
+
+paste0(&quot;MSE: &quot;, mean((y - y_hat)^2), 
+       &quot;; RMSE: &quot;, mean((y - y_hat)^2)^0.5)</code></pre>
+<pre><code>## [1] &quot;MSE: 9; RMSE: 3&quot;</code></pre>
 </div>
