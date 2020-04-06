@@ -2,19 +2,19 @@
     "collab_server" : "",
     "contents" : "",
     "created" : 1585054593054.000,
-    "dirty" : true,
+    "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "4136020341",
+    "hash" : "0",
     "id" : "7C0BA65",
-    "lastKnownWriteTime" : 1585742935,
-    "last_content_update" : 1585742969491,
+    "lastKnownWriteTime" : 1586174421,
+    "last_content_update" : 1586174421301,
     "path" : "~/improperprior/content/data-science-interview-questions.Rmd",
     "project_path" : "content/data-science-interview-questions.Rmd",
     "properties" : {
-        "cursorPosition" : "89,6",
+        "cursorPosition" : "138,8",
         "ignored_words" : "HackerNoon,https,hackernoon,Alexey,Grigorev,http,alexeygrigorev,GitHub,repo,Albon,chrisalbon,dataset,tobe\n",
-        "scrollLine" : "82"
+        "scrollLine" : "129"
     },
     "read_only" : false,
     "read_only_alternatives" : [
