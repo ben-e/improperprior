@@ -129,11 +129,86 @@ lm(y ~ x)</code></pre>
 ## 
 ## Coefficients:
 ## (Intercept)           x1           x2           x3  
-##   1.078e-15    5.000e-01    2.500e-01    3.000e+00</code></pre>
+##   1.134e-15    5.000e-01    2.500e-01    3.000e+00</code></pre>
 </div>
 <div id="implement-logistic-regression" class="section level3">
 <h3>Implement Logistic Regression</h3>
-<pre class="python"><code># Python</code></pre>
+<p>When using logistic regression we are interested in modeling the probability of an event, usually just a Bernoulli random variable (sidenote: <a href="https://en.wikipedia.org/wiki/Bernoulli_family">the Bernoulli family is pretty incredible</a>). As with linear regression we use a linear model of the form <span class="math inline">\(X^T\beta\)</span> but this time we use a <a href="https://en.wikipedia.org/wiki/Generalized_linear_model#Logit_link_function">logit link function</a> to relate our model to the log odds of the outcome. We can also solve for the probability of the model and get the logistic function; <a href="https://stats.stackexchange.com/questions/120329/what-is-the-difference-between-logistic-and-logit-regression">here</a> is a good StackExchange discussion on what the logit and logistic functions do.</p>
+<p>Using the logit link function our model is <span class="math inline">\(\log{\left(\frac{\pi(y = 1|X)}{1-\pi(y = 1|X)}\right)} = X^T\beta\)</span>, which we rewrite using the logistic function as <span class="math inline">\(\pi(y = 1|X) = \frac{1}{1+e^{-X^T\beta}}\)</span>. To fit the model, we want to choose <span class="math inline">\(\beta\)</span> to maximize the likelihood that this model matches our data. The likelihood is just <span class="math inline">\(\prod_i \left(\frac{1}{1+e^{-x_i^T\beta}}\right)^{y_i}\left(1 - \frac{1}{1+e^{-x_i^T\beta}}\right)^{1-y_i}\)</span>, and taking the log gives <span class="math inline">\(\sum_i y_i\log{\left(\frac{1}{1+e^{-x_i^T\beta}}\right)} + (1-y_i)\log{\left(\frac{1}{1+e^{-x_i^T\beta}}\right)}\)</span>. Finally, taking the derivative with respect to <span class="math inline">\(\beta\)</span> gives a pretty intuitive form <span class="math inline">\(X^T\left(y - \frac{1}{1+e^{-x_i^T\beta}}\right)\)</span>. Unfortunately, unlike linear regression, there is no closed form solution, instead we must use an optimization technique to find good values for <span class="math inline">\(\beta\)</span>, we can do this using gradient descent.</p>
+<p>For a longer and more detailed walk through I’d recommend <a href="https://beckernick.github.io/logistic-regression-from-scratch/">Nick Becker’s post on logistic regression</a>.</p>
+<pre class="r"><code># R
+
+# Sigmoid function is useful, this assumes x is a matrix
+sigm &lt;- function(x, beta) {
+  1/(1 + exp(-apply(x, 1, function(.x) .x %*% beta)))
+}
+
+# First, create some data!
+n &lt;- 10000
+p &lt;- 4
+x &lt;- cbind(rep(1, n), replicate(p - 1, rnorm(n)))
+true_beta &lt;- rpois(p, 2.5)
+y &lt;- rbinom(n, 1, sigm(x, true_beta))
+
+# Now we can begin our search, need to initalize beta, determine number of iterations of gradient
+# descent, and choose a learning rate, these are by no means optimal choices.
+beta_hat &lt;- rnorm(p, 0, 10)
+starting_beta_hat &lt;- beta_hat
+n_iters &lt;- 1000
+lr &lt;- 1e-3
+
+for (iter in 1:n_iters) {
+  # Get predictions using the current weights
+  y_hat &lt;- sigm(x, beta_hat)
+  
+  # Get the gradient
+  grad &lt;- c(t(x) %*% (y - y_hat))
+  
+  # And update the parameters
+  beta_hat &lt;- beta_hat + lr*grad
+}
+
+# And let&#39;s look at how well we did.
+rbind(true_beta = true_beta,
+      beta_hat = beta_hat,
+      starting_beta_hat = starting_beta_hat)</code></pre>
+<pre><code>##                        [,1]       [,2]      [,3]       [,4]
+## true_beta          3.000000  0.0000000  2.000000   5.000000
+## beta_hat           3.122330 -0.0628714  2.046963   5.193725
+## starting_beta_hat -7.748933 12.0581592 -8.384324 -27.470764</code></pre>
+<p>This is not too bad considering the coarse learning rate (which may jump over optimal solutions) and the relatively low number of iterations! Why don’t we try stochastic gradient descent as well? Here it is using the same data and initial values.</p>
+<pre class="r"><code>sgd_beta_hat &lt;- starting_beta_hat
+n_epochs &lt;- 100
+lr &lt;- 1e-2
+
+for (epoch in 1:n_epochs) {
+  # Split thed data into batches
+  batches &lt;- split(sample.int(n), seq(1, n, 4))
+  
+  # Update for each batch
+  for (batch in batches) {
+    # Get predictions using the current weights
+    y_hat &lt;- sigm(x[batch, ], sgd_beta_hat)
+    
+    # Get the gradient
+    grad &lt;- c(t(x[batch, ]) %*% (y[batch] - y_hat))
+    
+    # And update the parameters
+    sgd_beta_hat &lt;- sgd_beta_hat + lr*grad
+  }
+}
+
+# And let&#39;s look at how well we did.
+rbind(true_beta = true_beta,
+      beta_hat = beta_hat,
+      sgd_beta_hat  = sgd_beta_hat,
+      starting_beta_hat = starting_beta_hat)</code></pre>
+<pre><code>##                        [,1]        [,2]      [,3]       [,4]
+## true_beta          3.000000  0.00000000  2.000000   5.000000
+## beta_hat           3.122330 -0.06287140  2.046963   5.193725
+## sgd_beta_hat       3.170299 -0.06065229  1.972926   5.183843
+## starting_beta_hat -7.748933 12.05815919 -8.384324 -27.470764</code></pre>
+<p>SGD should run faster because we are doing fewer operations per update (though the total number of iterations, number of batches * number of epochs, is larger).</p>
 </div>
 <div id="implement-a-perceptron" class="section level3">
 <h3>Implement a Perceptron</h3>

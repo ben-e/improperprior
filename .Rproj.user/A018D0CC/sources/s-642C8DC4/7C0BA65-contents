@@ -135,9 +135,83 @@ lm(y ~ x)
 
 ### Implement Logistic Regression
 
-```{Python}
-# Python
+When using logistic regression we are interested in modeling the probability of an event, usually just a Bernoulli random variable (sidenote: [the Bernoulli family is pretty incredible](https://en.wikipedia.org/wiki/Bernoulli_family)). As with linear regression we use a linear model of the form $X^T\beta$ but this time we use a [logit link function](https://en.wikipedia.org/wiki/Generalized_linear_model#Logit_link_function) to relate our model to the log odds of the outcome. We can also solve for the probability of the model and get the logistic function; [here](https://stats.stackexchange.com/questions/120329/what-is-the-difference-between-logistic-and-logit-regression) is a good StackExchange discussion on what the logit and logistic functions do. 
+
+Using the logit link function our model is $\log{\left(\frac{\pi(y = 1|X)}{1-\pi(y = 1|X)}\right)} = X^T\beta$, which we rewrite using the logistic function as $\pi(y = 1|X) = \frac{1}{1+e^{-X^T\beta}}$. To fit the model, we want to choose $\beta$ to maximize the likelihood that this model matches our data. The likelihood is just $\prod_i \left(\frac{1}{1+e^{-x_i^T\beta}}\right)^{y_i}\left(1 - \frac{1}{1+e^{-x_i^T\beta}}\right)^{1-y_i}$, and taking the log gives $\sum_i y_i\log{\left(\frac{1}{1+e^{-x_i^T\beta}}\right)} + (1-y_i)\log{\left(\frac{1}{1+e^{-x_i^T\beta}}\right)}$. Finally, taking the derivative with respect to $\beta$ gives a pretty intuitive form $X^T\left(y - \frac{1}{1+e^{-x_i^T\beta}}\right)$. Unfortunately, unlike linear regression, there is no closed form solution, instead we must use an optimization technique to find good values for $\beta$, we can do this using gradient descent.
+
+For a longer and more detailed walk through I'd recommend [Nick Becker's post on logistic regression](https://beckernick.github.io/logistic-regression-from-scratch/).
+
+```{r, cache = T}
+# R
+
+# Sigmoid function is useful, this assumes x is a matrix
+sigm <- function(x, beta) {
+  1/(1 + exp(-apply(x, 1, function(.x) .x %*% beta)))
+}
+
+# First, create some data!
+n <- 10000
+p <- 4
+x <- cbind(rep(1, n), replicate(p - 1, rnorm(n)))
+true_beta <- rpois(p, 2.5)
+y <- rbinom(n, 1, sigm(x, true_beta))
+
+# Now we can begin our search, need to initalize beta, determine number of iterations of gradient
+# descent, and choose a learning rate, these are by no means optimal choices.
+beta_hat <- rnorm(p, 0, 10)
+starting_beta_hat <- beta_hat
+n_iters <- 1000
+lr <- 1e-3
+
+for (iter in 1:n_iters) {
+  # Get predictions using the current weights
+  y_hat <- sigm(x, beta_hat)
+  
+  # Get the gradient
+  grad <- c(t(x) %*% (y - y_hat))
+  
+  # And update the parameters
+  beta_hat <- beta_hat + lr*grad
+}
+
+# And let's look at how well we did.
+rbind(true_beta = true_beta,
+      beta_hat = beta_hat,
+      starting_beta_hat = starting_beta_hat)
 ```
+
+This is not too bad considering the coarse learning rate (which may jump over optimal solutions) and the relatively low number of iterations! Why don't we try stochastic gradient descent as well? Here it is using the same data and initial values.
+
+```{r}
+sgd_beta_hat <- starting_beta_hat
+n_epochs <- 100
+lr <- 1e-2
+
+for (epoch in 1:n_epochs) {
+  # Split thed data into batches
+  batches <- split(sample.int(n), seq(1, n, 4))
+  
+  # Update for each batch
+  for (batch in batches) {
+    # Get predictions using the current weights
+    y_hat <- sigm(x[batch, ], sgd_beta_hat)
+    
+    # Get the gradient
+    grad <- c(t(x[batch, ]) %*% (y[batch] - y_hat))
+    
+    # And update the parameters
+    sgd_beta_hat <- sgd_beta_hat + lr*grad
+  }
+}
+
+# And let's look at how well we did.
+rbind(true_beta = true_beta,
+      beta_hat = beta_hat,
+      sgd_beta_hat  = sgd_beta_hat,
+      starting_beta_hat = starting_beta_hat)
+```
+
+SGD should run faster because we are doing fewer operations per update (though the total number of iterations, number of batches * number of epochs, is larger). 
 
 ### Implement a Perceptron
 

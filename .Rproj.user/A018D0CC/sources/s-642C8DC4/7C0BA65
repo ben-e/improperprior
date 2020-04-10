@@ -7,14 +7,14 @@
     "folds" : "",
     "hash" : "0",
     "id" : "7C0BA65",
-    "lastKnownWriteTime" : 1586174421,
-    "last_content_update" : 1586174421301,
+    "lastKnownWriteTime" : 1586532221,
+    "last_content_update" : 1586532221493,
     "path" : "~/improperprior/content/data-science-interview-questions.Rmd",
     "project_path" : "content/data-science-interview-questions.Rmd",
     "properties" : {
-        "cursorPosition" : "138,8",
+        "cursorPosition" : "213,160",
         "ignored_words" : "HackerNoon,https,hackernoon,Alexey,Grigorev,http,alexeygrigorev,GitHub,repo,Albon,chrisalbon,dataset,tobe\n",
-        "scrollLine" : "129"
+        "scrollLine" : "199"
     },
     "read_only" : false,
     "read_only_alternatives" : [
