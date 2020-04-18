@@ -155,7 +155,7 @@ lm(y ~ x)</code></pre>
 ## 
 ## Coefficients:
 ## (Intercept)           x1           x2           x3  
-##   1.134e-15    5.000e-01    2.500e-01    3.000e+00</code></pre>
+##   7.373e-16    5.000e-01    2.500e-01    3.000e+00</code></pre>
 </div>
 <div id="implement-logistic-regression" class="section level3">
 <h3>Implement Logistic Regression</h3>
@@ -238,12 +238,81 @@ rbind(true_beta = true_beta,
 </div>
 <div id="implement-a-perceptron" class="section level3">
 <h3>Implement a Perceptron</h3>
+<p>The Perceptron is a is a seminal classification method which attempts to learn <em>a</em> decision boundary for binary classification problems. For the perceptron class labels are either <span class="math inline">\(-1\)</span> or <span class="math inline">\(1\)</span>, and the goal is to minimize (using Hastie’s notation from Elements of Statistical Learning) the sum of the missclassified points <span class="math inline">\(-\sum_{i\in M} y_i (x_i^T\beta + \beta_0)\)</span>. The gradient (again from ESL) is just <span class="math inline">\(-\sum_{i\in M}y_ix_i\)</span>. We can optimize using stochastic gradient descent (i.e. we can update <em>online</em>).</p>
+<pre class="r"><code># Generate some data
+n &lt;- 500
+x &lt;- rbind(cbind(rnorm(n/2, mean = 2.25), rnorm(n/2, mean = 2.25)),
+           cbind(rnorm(n/2, mean = -2.25), rnorm(n/2, mean = -2.25)))
+y &lt;- ifelse(x[ , 1] + x[ , 2] &gt; 0, -1, 1)
+
+plot(x, col = ifelse(y &gt; 0, &quot;blue&quot;, &quot;black&quot;))</code></pre>
+<p><img src="/data-science-interview-questions_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Great, now let’s implement the algorithm! Note that I won’t be including an intercept term here, which will force the decision boundary to pass through the origin. The data is generated about (0, 0) so this won’t really matter.</p>
+<pre class="r"><code># Define a simple function that can update weights beta
+# given a _vector_ x and a length 1 label y.
+# So each call to perceptron will run one step of the algorithm by looking at
+# one data point.
+perceptron &lt;- function(x, y, beta, lr = 1) {
+  # Get the prediction
+  y_hat &lt;- sign(t(beta) %*% x)[1]
+  # Update the betas if incorrect
+  beta &lt;- beta + (y != y_hat)*lr*(y*x)
+  # Return
+  beta
+}
+
+accuracy &lt;- function(x, y, beta) {
+  y_hat &lt;- apply(x, 1, function(.x) sign(t(beta) %*% .x))
+  mean(y == y_hat)
+}</code></pre>
+<p>And now we can run the algorithm.</p>
+<pre class="r"><code># Initialize some very wrong weights.
+beta &lt;- c(1000, 1000)
+
+# Should be 0.
+print(paste0(&quot;Initial Accuracy: &quot;, accuracy(x, y, beta)))</code></pre>
+<pre><code>## [1] &quot;Initial Accuracy: 0&quot;</code></pre>
+<pre class="r"><code># Iterate over the data
+n_epochs &lt;- 100
+for (epoch in 1:n_epochs) {
+  # Shuffle data
+  shuffle &lt;- sample(1:nrow(x))
+  x &lt;- x[shuffle, ]
+  y &lt;- y[shuffle]
+  
+  # Update, one observation at a time
+  # Note that I&#39;m letting the learning rate step down so that it can
+  # initially take very large steps, then smaller and smaller steps.
+  # I&#39;m not actually sure if this helps..anything.
+  for (row in nrow(x)) {
+    beta &lt;- perceptron(x[row, ], y[row], beta, lr = n_epochs/epoch)
+  }
+  
+  # Progress report
+  if (epoch %% 25 == 0)
+    print(paste0(&quot;Epoch: &quot;, epoch, &quot;; Accuracy: &quot;, accuracy(x, y, beta)))
+}</code></pre>
+<pre><code>## [1] &quot;Epoch: 25; Accuracy: 0&quot;
+## [1] &quot;Epoch: 50; Accuracy: 0.964&quot;
+## [1] &quot;Epoch: 75; Accuracy: 0.964&quot;
+## [1] &quot;Epoch: 100; Accuracy: 0.964&quot;</code></pre>
+<p>Let’s take a look at how well the classification worked. Red points are classified incorrectly.</p>
+<pre class="r"><code>y_hat &lt;- apply(x, 1, function(.x) sign(t(beta) %*% .x))
+plot(x, col = ifelse(y != y_hat, &quot;red&quot;, ifelse(y &gt; 0, &quot;blue&quot;, &quot;black&quot;)))</code></pre>
+<p><img src="/data-science-interview-questions_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Note that for a perceptron to work the data must be <a href="https://en.wikipedia.org/wiki/Linear_separability">linearly separable</a>, but multilayer perceptrons can learn non-linear boundaries.</p>
 </div>
 <div id="implement-a-decision-tree" class="section level3">
 <h3>Implement a Decision Tree</h3>
 </div>
 <div id="implement-adaboost" class="section level3">
 <h3>Implement AdaBoost</h3>
+</div>
+<div id="implement-regularized-regression" class="section level3">
+<h3>Implement Regularized Regression</h3>
+</div>
+<div id="implement-a-single-layer-perceptron" class="section level3">
+<h3>Implement a Single Layer Perceptron</h3>
 </div>
 </div>
 

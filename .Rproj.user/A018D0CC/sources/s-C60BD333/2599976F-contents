@@ -215,6 +215,85 @@ SGD should run faster because we are doing fewer operations per update (though t
 
 ### Implement a Perceptron
 
+The Perceptron is a is a seminal classification method which attempts to learn _a_ decision boundary for binary classification problems. For the perceptron class labels are either $-1$ or $1$, and the goal is to minimize (using Hastie's notation from Elements of Statistical Learning) the sum of the missclassified points $-\sum_{i\in M} y_i (x_i^T\beta + \beta_0)$. The gradient (again from ESL) is just $-\sum_{i\in M}y_ix_i$. We can optimize using stochastic gradient descent (i.e. we can update _online_).
+
+```{r}
+# Generate some data
+n <- 500
+x <- rbind(cbind(rnorm(n/2, mean = 2.25), rnorm(n/2, mean = 2.25)),
+           cbind(rnorm(n/2, mean = -2.25), rnorm(n/2, mean = -2.25)))
+y <- ifelse(x[ , 1] + x[ , 2] > 0, -1, 1)
+
+plot(x, col = ifelse(y > 0, "blue", "black"))
+```
+
+Great, now let's implement the algorithm! Note that I won't be including an intercept term here, which will force the decision boundary to pass through the origin. The data is generated about (0, 0) so this won't really matter.
+
+```{r}
+# Define a simple function that can update weights beta
+# given a _vector_ x and a length 1 label y.
+# So each call to perceptron will run one step of the algorithm by looking at
+# one data point.
+perceptron <- function(x, y, beta, lr = 1) {
+  # Get the prediction
+  y_hat <- sign(t(beta) %*% x)[1]
+  # Update the betas if incorrect
+  beta <- beta + (y != y_hat)*lr*(y*x)
+  # Return
+  beta
+}
+
+accuracy <- function(x, y, beta) {
+  y_hat <- apply(x, 1, function(.x) sign(t(beta) %*% .x))
+  mean(y == y_hat)
+}
+```
+
+And now we can run the algorithm.
+
+```{r}
+# Initialize some very wrong weights.
+beta <- c(1000, 1000)
+
+# Should be 0.
+print(paste0("Initial Accuracy: ", accuracy(x, y, beta)))
+
+# Iterate over the data
+n_epochs <- 100
+for (epoch in 1:n_epochs) {
+  # Shuffle data
+  shuffle <- sample(1:nrow(x))
+  x <- x[shuffle, ]
+  y <- y[shuffle]
+  
+  # Update, one observation at a time
+  # Note that I'm letting the learning rate step down so that it can
+  # initially take very large steps, then smaller and smaller steps.
+  # I'm not actually sure if this helps..anything.
+  for (row in nrow(x)) {
+    beta <- perceptron(x[row, ], y[row], beta, lr = n_epochs/epoch)
+  }
+  
+  # Progress report
+  if (epoch %% 25 == 0)
+    print(paste0("Epoch: ", epoch, "; Accuracy: ", accuracy(x, y, beta)))
+}
+```
+
+Let's take a look at how well the classification worked. Red points are classified incorrectly.
+
+```{r}
+y_hat <- apply(x, 1, function(.x) sign(t(beta) %*% .x))
+plot(x, col = ifelse(y != y_hat, "red", ifelse(y > 0, "blue", "black")))
+```
+
+Note that for a perceptron to work the data must be [linearly separable](https://en.wikipedia.org/wiki/Linear_separability), but multilayer perceptrons can learn non-linear boundaries.
+
+
 ### Implement a Decision Tree
 
 ### Implement AdaBoost
+
+### Implement Regularized Regression
+
+### Implement a Single Layer Perceptron
