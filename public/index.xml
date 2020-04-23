@@ -6,10 +6,21 @@
     <description>Recent content in Home on Ben Ewing | Improper Prior</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 21 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Learning SQL</title>
+      <link>/post/2020/04/23/learning-sql/</link>
+      <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020/04/23/learning-sql/</guid>
+      <description>I’ve been using the past few weeks to improve my SQL fluency, and I just wanted to share a few quick resources that I’ve found useful.
+SQLZoo. The quizzes and questions hit the perfect balance of challenging but not so hard that it breaks my sense of flow.
+The sqlite3 package for Python and RSQLite package for R. While one certainly could install and use something like PostgreSQL on their laptop (and it’s definitely a useful tool to learn!</description>
+    </item>
     
     <item>
       <title>Using Principal Component Analysis to Estimate Socioeconomic Status</title>

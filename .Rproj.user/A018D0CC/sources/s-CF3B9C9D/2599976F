@@ -14,7 +14,7 @@
     "properties" : {
         "cursorPosition" : "286,33",
         "ignored_words" : "HackerNoon,https,hackernoon,Alexey,Grigorev,http,alexeygrigorev,GitHub,repo,Albon,chrisalbon,dataset,tobe\n",
-        "scrollLine" : "281"
+        "scrollLine" : "0"
     },
     "read_only" : false,
     "read_only_alternatives" : [

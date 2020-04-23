@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587658837687.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "F0B45A2F",
+    "lastKnownWriteTime" : 1587661394,
+    "last_content_update" : 1587661394704,
+    "path" : "~/improperprior/content/post/2020-04-23-learning-sql.Rmd",
+    "project_path" : "content/post/2020-04-23-learning-sql.Rmd",
+    "properties" : {
+        "cursorPosition" : "19,10",
+        "ignored_words" : "SQLZoo,usecases\n",
+        "scrollLine" : "6"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

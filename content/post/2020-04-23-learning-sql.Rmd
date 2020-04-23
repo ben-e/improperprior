@@ -1,0 +1,20 @@
+---
+title: Learning SQL
+author: Ben Ewing
+date: '2020-04-23'
+slug: learning-sql
+categories:
+  - technical
+tags:
+  - sql
+  - python
+  - r
+---
+
+I've been using the past few weeks to improve my SQL fluency, and I just wanted to share a few quick resources that I've found useful.
+
+1. [__SQLZoo__](https://sqlzoo.net/wiki/SQL_Tutorial). The quizzes and questions hit the perfect balance of challenging but not so hard that it breaks my sense of flow.
+
+2. The [__sqlite3__](https://docs.python.org/3/library/sqlite3.html) package for Python and [__RSQLite__](https://db.rstudio.com/databases/sqlite/) package for R. While one certainly could install and use something like PostgreSQL on their laptop (and it's definitely a useful tool to learn!), I suspect it's overkill when learning SQL and for most laptop-based projects. The sqlite3 and RSQLite these packages both come with a copy of [SQLite](https://sqlite.org/index.html), and let you write queries in SQL and get results in language-native data types.
+
+That's it for now, happy querying!
