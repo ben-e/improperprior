@@ -11,10 +11,14 @@ tags:
   - r
 ---
 
-I've been using the past few weeks to improve my SQL fluency, and I just wanted to share a few quick resources that I've found useful.
+I've been using the past few weeks to improve my SQL fluency, and I just wanted to share a few quick resources that I've found useful. In no particular order:
 
 1. [__SQLZoo__](https://sqlzoo.net/wiki/SQL_Tutorial). The quizzes and questions hit the perfect balance of challenging but not so hard that it breaks my sense of flow.
 
 2. The [__sqlite3__](https://docs.python.org/3/library/sqlite3.html) package for Python and [__RSQLite__](https://db.rstudio.com/databases/sqlite/) package for R. While one certainly could install and use something like PostgreSQL on their laptop (and it's definitely a useful tool to learn!), I suspect it's overkill when learning SQL and for most laptop-based projects. The sqlite3 and RSQLite these packages both come with a copy of [SQLite](https://sqlite.org/index.html), and let you write queries in SQL and get results in language-native data types.
+
+3. [__Mode__](https://mode.com/sql-tutorial/) is a company which, among other prodcuts, provides an interactive SQL editor and some pretty well written tutorials. I'm a little more dubious about recommending Mode as it does require an account, and I've found the editor to be clunky, but the tutorials seem to be quite thorough.
+
+4. [__SQL Murder Mystery__](https://mystery.knightlab.com/) is a set of tutorials from Northwestern's Knight Lab. I haven't had a chance to try this out yet, but it looks fun.
 
 That's it for now, happy querying!
