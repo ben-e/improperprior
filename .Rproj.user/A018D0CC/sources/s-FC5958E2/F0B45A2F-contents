@@ -21,4 +21,6 @@ I've been using the past few weeks to improve my SQL fluency, and I just wanted 
 
 4. [__SQL Murder Mystery__](https://mystery.knightlab.com/) is a set of tutorials from Northwestern's Knight Lab. I haven't had a chance to try this out yet, but it looks fun.
 
+5. [__Practical SQL__](https://www.practicalsqlbook.com/) is a good book if you decide that PostgreSQL is in fact not overkill! It is definitely written for people newer to programming in general, though it does cover deeper topics than many intro books.
+
 That's it for now, happy querying!
