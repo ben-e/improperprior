@@ -64,16 +64,6 @@ In this case:
     </item>
     
     <item>
-      <title>Bad Data Science</title>
-      <link>/bad-data-science/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/bad-data-science/</guid>
-      <description>There’s a lot of bad data science out there.
-FightCOVID19: To me this looks like a blatant attempt to profit (at least reputationally) from the COVID-19 pandemic. At the time I am writing this, it looks like the author of this repo has felt the need to build a massive ecosystem (Android/iOS/Web apps? Whos is this for?) around a pre-trained Neural Net, updated with COVID-19 victim chest scans. While updating pre-trained models is standard (and very often a good idea!</description>
-    </item>
-    
-    <item>
       <title>Data Science Interview Questions</title>
       <link>/data-science-interview-questions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

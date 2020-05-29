@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1589999392441.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "74FCBB03",
+    "lastKnownWriteTime" : 1590764855,
+    "last_content_update" : 1590764855925,
+    "path" : "~/improperprior/content/post/2020-05-20-formula-1-and-genetic-algorithms.Rmd",
+    "project_path" : "content/post/2020-05-20-formula-1-and-genetic-algorithms.Rmd",
+    "properties" : {
+        "cursorPosition" : "13,626",
+        "ignored_words" : "iteratively,instantiations,maxima,https,www,reddit,arxt,racefans,netflix,Daniil,Kvyat,youtube,chainbearf,Matchett\n",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

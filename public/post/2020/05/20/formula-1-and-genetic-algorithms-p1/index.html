@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formula One and Genetic Algorithms - Part 1 | Ben Ewing | Improper Prior</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/things-i-like/">Links</a></li>
+      
+      <li><a href="https://github.com/ben-e/">GitHub</a></li>
+      
+      <li><a href="/index.xml">Subscribe</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Formula One and Genetic Algorithms - Part 1</span></h1>
+<h2 class="author">Ben Ewing</h2>
+<h2 class="date">2020/05/20</h2>
+</div>
+
+<main>
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>For all of its flaws, and there are many, I’ve developed an infatuation with <a href="https://en.wikipedia.org/wiki/Formula_One">Formula One</a> over the past year. While the racing is sometimes exciting and the driver narratives are always dramatic, I think what attracts me most to the sport is the way cars and teams develop over a season.</p>
+<p>Each year F1 teams develop and <a href="https://www.youtube.com/watch?v=xG8t1Wc13x8">unveil new cars</a> (warning: loud + flashing lights) adhering to a set of regulations. Throughout the season teams will continue to change their cars, sometimes resulting in <a href="https://www.youtube.com/watch?v=VhPw8gtfgv4">dramatic improvements</a> or <a href="https://en.wikipedia.org/wiki/Haas_VF-19#Developmental_issues">baffling steps backwards</a> in car performance. Initial performance and season long improvements tend to be highly related to team budgets, which vary from an estimated <a href="https://www.racefans.net/2020/01/02/the-cost-of-f1-2019-part-two-what-the-top-teams-spent/">$400 million on the high end</a>, to <a href="https://www.racefans.net/2019/12/27/the-cost-of-f1-2019-team-budgets-analysed-part-one/">$120 million on the low end</a>, though this is not always the case.</p>
+<p>Teams work independently to develop their cars, though teams commonly purchase individual parts and engines from each other. Car development philosophy can also be very different across times, for example <a href="https://www.youtube.com/watch?v=a__6bJAohhg&amp;t=12s">high and low rake aerodynamics</a>. Often a team will <a href="https://www.youtube.com/watch?v=U_uKHNJLSQs">have a significant development</a> that is copied, or protested, by the other teams. This car development process reminds me strongly of a class of optimization/search algorithms which I am quite fond of: <a href="https://en.wikipedia.org/wiki/Genetic_algorithm">genetic algorithms</a>.</p>
+<p>Over the next three posts I’ll be looking at genetic algorithms and how they can be used to simulate Formula One car development. In this post I will present a brief introduction to genetic algorithms, the following post will apply these algorithms to F1 car development, and the final post will evaluate the likely effects of some of the incoming regulations (budget caps, open source parts, and more).</p>
+<p>Oh, and for these posts I’ll be using entirely base R version 4.0.0 (2020-04-24).</p>
+</div>
+<div id="a-brief-introduction-to-genetic-algorithms" class="section level2">
+<h2>A Brief Introduction to Genetic Algorithms</h2>
+<p>Genetic algorithms are a class of search algorithms which aim to find the optimal solution for some objective function with one or many parameters, which need not be known as long as its output can be given, by mimicking biological evolution. In the simplest case the algorithm starts by initializing a population of possible solutions, these can be random or based on some prior knowledge. Then the algorithm proceeds by iteratively evolving the population:</p>
+<ol style="list-style-type: decimal">
+<li>Score each individual in the population according to the objective function.</li>
+<li>Keep the top <span class="math inline">\(m\)</span> scoring individuals; replicate to create a new population.</li>
+<li>Add mutation by:
+<ul>
+<li>Adding random noise to each solution.</li>
+<li>Mating different solutions with each other. For example, forming a new possible solution by taking parameter <span class="math inline">\(a\)</span> from one surviving solution and parameter <span class="math inline">\(b\)</span> from another, or by taking bits from each solution.</li>
+<li><a href="https://en.wikipedia.org/wiki/Crossover_(genetic_algorithm)">There are many well-studied possibilities</a> for otherwise mutating individuals.</li>
+</ul></li>
+<li>Repeat.</li>
+</ol>
+<p>Of course there are <a href="https://mitpress.mit.edu/books/introduction-genetic-algorithms">many ways</a> to expand upon this basic algorithm. The most important extension for our purposes will be the addition of islands: independent and concurrent instantiations of the algorithm which rarely interact to share parameters.</p>
+<p>As a simple example, suppose we want to maximize <span class="math inline">\(y = \text{sigmoid}(sin(x) + 0.05x^2)\)</span> subject to the constraint that <span class="math inline">\(|x| \leq 10\)</span> (ignoring the fact that this is an analytically easy problem). Start by defining the objective function:</p>
+<pre class="r"><code># Define the objective function
+obj &lt;- function(x, y) {
+  # If outside the bounds then return some very negative number
+  1/(1 + (exp(ifelse(abs(x) &gt; 10, 9e10, sin(x) + 0.05*x^2))))
+}
+
+# Plot the function
+x &lt;- seq(-15, 15, 0.01)
+plot(x, obj(x), type = &#39;l&#39;)</code></pre>
+<p><img src="/post/2020-05-20-formula-1-and-genetic-algorithms_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>To proceed with the algorithm create a starting population of potential solutions. I’ve chosen a bad starting point on purpose.</p>
+<pre class="r"><code># Create the initial population, uniformly spread across the space
+pop_size &lt;- 14
+
+# Choose a bad initial population
+pop &lt;- c(
+  seq(-10, -5, length.out = pop_size/2),
+  seq(10, 6.25, length.out = pop_size/2)
+)
+
+# And plot the initial population
+plot(x, obj(x), type = &#39;l&#39;)
+points(pop, obj(pop), col = &quot;red&quot;)</code></pre>
+<p><img src="/post/2020-05-20-formula-1-and-genetic-algorithms_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Now we can enter the main evolutionary loop. Each iteration we keep the three best scoring solutions, and use them to generate a new population. Please note that this is representative of best practices or even a nearly an optimal implementation (seriously, I would not copy-paste this code), I’m aiming for clarity.</p>
+<pre class="r"><code>generations &lt;- 5
+n_surv &lt;- 4
+n_mates &lt;- 3
+
+for (i in 0:generations) {
+  # Score each member of the population
+  scores &lt;- obj(pop)
+  
+  # Keep the best performing point
+  survivors &lt;- order(scores, decreasing = T)[1:n_surv]
+  survivor_pop &lt;- pop[survivors] 
+  
+  # Plot the current pop  
+  plot(x, obj(x), type = &#39;l&#39;, main = paste0(&#39;Iteration &#39;, i))
+  # Survivors in red, others in blue
+  points(pop[-survivors], scores[-survivors], col = &quot;blue&quot;)
+  points(pop[survivors], scores[survivors], col = &quot;red&quot;)
+  
+  # Create a new population by:
+  # 1. keep all of the survivors in their original form
+  #    (if any of them represent an optimal solution we don&#39;t want to lose it)
+  # 2. to generate the rest of the new population sample the survivors
+  # 3. add some random noise
+  # 4. do some random mating
+  
+  # Step 2
+  pop &lt;- sample(pop[survivors], size = pop_size - n_surv, replace = T)
+  # Step 3 - the amount of mutation added here can be very important, as usual
+  #          too much and we could step over global optima, too little
+  #          and the algorithm may be very slow
+  mutation &lt;- runif(pop_size - n_surv, min = -1, max = 1)
+  pop &lt;- pop + mutation
+  # Step 4 - there are lots of ways to mate, as mentioned, 
+  #          I&#39;ll just take a weighted average of some randomly chosen points
+  #          but this is pretty arbitrary
+  mates &lt;- sample.int(pop_size - n_surv, size = n_mates)
+  pop[mates] &lt;- (0.9*pop[mates] + 0.1*sample(pop, n_mates))/2
+  # Step 1
+  pop &lt;- c(survivor_pop, pop)
+}</code></pre>
+<p><img src="/post/2020-05-20-formula-1-and-genetic-algorithms_files/figure-html/unnamed-chunk-3-.gif" width="672" /></p>
+<p>We can see that this works fairly well, but with a bad initialization and bad mutation parameters the algorithm can get stuck at local maxima. The mutation parameters are quite important for exploring the space.</p>
+<p>In the next post we’ll go racing!</p>
+</div>
+<div id="appendix-getting-started-with-formula-one" class="section level2">
+<h2>Appendix: Getting Started with Formula One</h2>
+<p>Formula One is a pretty intimidating sport to start watching. Coming in as a new watcher it can be hard to tell what’s actually happening in a race or to choose a driver to support. Luckily, Formula One is big enough that there are plenty of resources for the incoming fan:</p>
+<ul>
+<li><a href="https://www.netflix.com/title/80204890">Formula 1: Drive to Survive</a> - This Netflix show is responsible for introducing me, and many others, to Formula 1 (I blew through the entire first season while recovering from an appendectomy, good times). While it is a good introduction to the sport and most of the drivers (poor Daniil Kvyat), I personally feel that the second season is quite weak, it manufactures non-existent rivalries and ignores <a href="https://www.youtube.com/watch?v=kvTc1z2jWgE">some of the season’s most dramatic moments</a>.</li>
+<li><a href="https://www.f1.cool/">Shift+F1</a> - This is probably my favorite F1 podcast. In particular they <a href="https://www.f1.cool/blog/96">produce preseason primers</a> each year to introduce new viewers to the sport and the drivers.</li>
+<li><a href="https://www.youtube.com/user/chainbearf1">Chain Bear</a> - Chain Bear produces high quality videos usually picking apart technical aspects of F1.</li>
+<li><a href="https://bookshop.org/books/the-mechanic-s-tale/9780752827834">The Mechanic’s Tale by Steve Matchett</a> - This is a great book that really highlights how <em>hard</em> F1.</li>
+<li><a href="https://www.reddit.com/r/formula1/">r/formula1</a> and <a href="https://www.reddit.com/r/formuladank/">r/formuladank</a> - I enjoy these Reddit communities, but your mileage may vary, it <em>is</em> Reddit afterall.</li>
+</ul>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+  </footer>
+  </body>
+</html>
+

@@ -1,3 +1,12 @@
+---
+title: Formula One and Genetic Algorithms
+author: Ben Ewing
+date: '2020-01-01'
+slug: formula-1-and-genetic-algorithms
+categories: []
+tags: []
+---
+
 ----------------------------------------------------------------------------------------------------
 
 # Introduction to Bayesian Deep Learning
@@ -43,4 +52,8 @@ https://dl.acm.org/doi/abs/10.1145/3206004.3206012
 
 ----------------------------------------------------------------------------------------------------
 
-# TripleByte data science experience
+# Formula 1 as evolutionary search
+
+----------------------------------------------------------------------------------------------------
+
+# Testing tax policies with neural net agents
