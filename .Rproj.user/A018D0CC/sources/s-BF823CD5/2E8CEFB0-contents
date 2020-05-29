@@ -1,0 +1,68 @@
+---
+title: What is an improper prior?
+author: Ben Ewing
+date: '2020-03-16'
+slug: what-is-an-improper-prior
+categories:
+  - technical
+tags:
+  - bayesian-stat
+---
+
+## Introduction
+
+Since I've purchased improperprior.com it seems prudent that I write a short post explaining improper priors.
+
+## Typical Bayesian Process
+
+In Bayesian statistics we exploit [Bayes' theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem) to learn something about a population parameter. For example, if we have data $Y$ that follow a [Binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution), and we would like to estimate the $\theta$ parameter, we would compute:
+
+$$
+P(\theta|Y) = \frac{L(Y|\theta)P(\theta)}{P(Y)}.
+$$
+
+In this case:
+
+* $P(\theta|Y)$ is the posterior probability, this is what we'd like to estimate.
+* $L(Y|\theta)$ is the [likelihood](https://en.wikipedia.org/wiki/Likelihood_function) of observing the (already observed) data, given $\theta$.
+* $P(\theta)$ is a distribution representing a prior guess for $\theta$ before observing data.
+* $P(Y)$ is the unconditional likelihood of observing the data, also commonly called a normalizing constant. We will ignore this term as it is constant once the data has been observed, and only acts to make sure that the numerator integrates to 1 (i.e. it makes sure the posterior is a _proper_ distribution), which is surprisingly unnecessary for posterior estimation.
+
+Continuing the example, the likelihood for binomial data is just a binomial distribution itself, though we can drop any constant terms, so we just end up with: $\theta^{\sum_i y_i}(1-\theta)^{n-\sum_i y_i}$. We will combine this with a $\text{Beta}(1, 1)$ prior on $\theta$, again dropping the constant terms so we just have: $\theta^{1-1}(1-\theta)^{1-1}$. Note that this is just equivalent to the $\text{Unif}(0, 1)$ distribution. Together these give:
+
+$$
+P(\theta|Y) \propto \theta^{\sum_i y_i}(1-\theta)^{n-\sum_i y_i} \times \theta^{1-1}(1-\theta)^{1-1} \\
+            \propto \theta^{\sum_i y_i + 1 - 1}(1-\theta)^{n-\sum_i y_i  + 1 - 1}.
+$$
+
+From this we can see that the posterior distribution follows a $\text{Beta}(\sum_i y_i + 1, n - \sum_i y_i + 1)$ distribution. Intuitively  because we used a prior that carried little information with it (effectively saying that $\theta$ could be any value in (0, 1)) our posterior estimate for $\theta$ is entirely determined by the data.
+
+Here's a simple Shiny app to let you play with this model and build some intuition as to how the prior parameters and data interact. Note that every time sample size is increased a new random sample is drawn, thus it may be slightly jumpy.
+
+```{r, fig.width = 15, echo = F}
+knitr::include_app("https://ben-ewing.shinyapps.io/Beta-Binomial/", height = 465)
+```
+
+## Impropriety
+
+This is great, but what if we have data that follow a normal distribution with known $\sigma^2$ but completely unknown $\mu$. Unlike the previous example, $\mu$ can take _any_ real value (whereas $\theta$ in the previous example is bounded in $[0, 1]$), because of this, it is not possible to choose a proper prior that puts an equal probability on every possible value. Instead, we must use an improper prior. This is a prior that doesn't integrate to 1 (so it is not a proper distribution), but does generate a valid posterior distribution that integrates to 1. This will allow us to place an equal amount of probability on every possible value without worrying so much about the prior, _as long as_ the posterior is proper. 
+
+Choosing an improper prior that generates a valid posterior can be a tricky affair, but using [Jeffreys' prior](https://en.wikipedia.org/wiki/Jeffreys_prior) is a good place to start. Continuing the normal example, we will just use a prior probability of 1 for every value of $\mu$. While this might seem a little absurd, this actually is proportional to the [Jeffreys' prior for this setup](https://en.wikipedia.org/wiki/Jeffreys_prior#Gaussian_distribution_with_mean_parameter). As with the previous example, we will set aside all constant terms:
+
+$$
+P(\theta|Y) \propto \exp{\left[-\frac{1}{2} \left(\frac{y-\mu}{\sigma^2}\right)^2\right]} \times 1.
+$$
+
+The posterior is pretty clearly just a proper normal distribution. And this is the whole ideas behind improper priors! Of course, it is possible to delve pretty deep into the world of building good improper priors, Jeffreys' prior is only the start.
+
+## Further Resources
+
+[Craig Gidney](https://algassert.com/post/1630) has a nice blog post walking through a slightly more technical example of improper priors. For a more general treatment [A First Course in Bayesian Statistical Methods](https://duckduckgo.com/?t=ffab&q=A+First+Course+in+Bayesian+Statistical+Methods&atb=v198-1&ia=shopping) by Hoff and [Bayesian Data Analysis](https://duckduckgo.com/?q=bayesian+data+analysis&t=ffab&atb=v198-1&ia=shopping) by Gelman et al are the standard introductory Bayesian statistics textbooks.
+
+As ever, Wikipedia has very detailed articles on priors, more suitable for reference than learning:
+
+* [Improper Priors](https://en.wikipedia.org/wiki/Prior_probability#Improper_priors)
+* [Jeffreys' prior](https://en.wikipedia.org/wiki/Jeffreys_prior)
+* [Conjugate Priors](https://en.wikipedia.org/wiki/Conjugate_prior)
+
+
