@@ -10,9 +10,9 @@ tags: []
 
 _Note_: I wrote this post mostly for my Facebook page, which I regrettably still maintain. As such, there are references to posts I have seen from family and friends which may not entirely make sense in the context of this blog.
 
-I basically don't post anything on social media anymore, but at this point it feels irresponsible not to (it is also the absolute least I can do). Unequivocally black lives matter. 
+I basically don't post anything on social media anymore, but at this point it feels irresponsible not to (it is also the absolute least I can do). Unequivocally: Black Lives Matter. 
 
-To my family and friends who support "peaceful" protests but oppose the BLM movement broadly or these protests specifically (especially those of you from Turlock): many of you condemned Colin Kaepernick's protest too. That is what a peaceful protest looks like. This leads me to believe that you do not in fact support any kind of protest where Black Americans dare to speak out about the injustices they have faced. If this sounds like you, please take some time for introspection, it's never to late to change, feel free to reach out to me.
+To my family and friends who support "peaceful" protests but oppose the BLM movement broadly or these protests specifically (especially those of you from Turlock): many of you condemned Colin Kaepernick's protest too. That is what a peaceful protest looks like. This leads me to believe that you do not in fact support any kind of protest where Black Americans dare to speak out about the injustices they have faced. If this sounds like you, please take some time for introspection, and reach out to me if you'd like to talk.
 
 Moving forward, I'm not sure how these protests end, or when they should. I don't know the best path forward, but for now I will be taking the following steps (and please feel free to reach out if you have any further suggestions):
 
