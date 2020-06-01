@@ -1,19 +1,33 @@
+---
+title: Formula One and Genetic Algorithms - Part 2
+author: Ben Ewing
+date: '2020-05-29'
+slug: formula-one-and-genetic-algorithms-p-2
+categories:
+  - technical
+tags:
+  - r
+  - f1
+---
+
+## Introduction
+
+In the [previous post](https://improperprior.com/post/2020/05/20/formula-1-and-genetic-algorithms-p1/) I gave a brief overview of Formula 1 and Genetic Algorithms, in this post I will bring these topics together to show how we can simulate the car development process. The extension of the genetic algorithm to F1 is pretty natural. We can treat the performance of the car as the objective function. This function has many parameters, for example the speed of the car depends on many engine tuning parameters, and the cornering  ability will depend heavily on the aerodynamic qualities of the car. 
+
+Assuming each team can explore a number of different design options, we can treat each team as a separate island of the genetic algorithm. Occasionally mixing islands allows for teams to copy parameters or maybe in some cases complete cars, see the infamous ['Tracing Point'](https://www.racefans.net/2020/02/28/racing-point-critics-were-naive-about-teams-potential/). Team budgets can be interpreted as a limit on the number of designs each team can explore, and the number of iterations of exploration each team gets, such that high budget teams can explore more of the space.
+
+But first we need a suitable objective function.
+
+## Designing an Objective Function
 
 
 ## Simulating Formula One Car Development
-
-The extension of the genetic algorithm to F1 is pretty natural. We can treat the performance of the car as the objective function. This function has many parameters, for example the speed of the car depends on many engine tuning parameters, and the cornering  ability will depend heavily on the aerodynamic qualities of the car. 
-
-Assuming each team can explore a number of different design options, we can treat each team as a separate island of the genetic algorithm. Occasionally mixing islands allows for teams to copy parameters or maybe in some cases complete cars, see the infamous ['Tracing Point'](https://www.racefans.net/2020/02/28/racing-point-critics-were-naive-about-teams-potential/). 
-
-Team budgets can be interpreted as a limit on the number of designs each team can explore, and the number of iterations of exploration each team gets, such that high budget teams can explore more of the space.  Let's try it.
 
 TODO:
 
 - [ ] Use team colors: https://www.reddit.com/r/formula1/comments/arxt0r/f1_2019_team_colors_hex_codes/
 - [ ] Use actual team budgets: https://www.racefans.net/2019/12/27/the-cost-of-f1-2019-team-budgets-analysed-part-one/ and https://www.racefans.net/2020/01/02/the-cost-of-f1-2019-part-two-what-the-top-teams-spent/
 - [ ] Build a random way to define complicated functions with 1000s of parameters. Parameters should be all be integers that can take values between 0 and 100 so that the representation for each car can easily be represented as a binary string (allowing for easy mutation, mating, and so on)
-
 
 ## Adding Noise: Driver Quality
 

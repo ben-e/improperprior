@@ -3,8 +3,11 @@ title: Formula One and Genetic Algorithms - Part 1
 author: Ben Ewing
 date: '2020-05-20'
 slug: formula-1-and-genetic-algorithms-p1
-categories: [technical]
-tags: [r, f1]
+categories:
+  - technical
+tags:
+  - r
+  - f1
 ---
 
 ## Introduction

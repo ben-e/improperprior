@@ -6,10 +6,20 @@
     <description>Recent content in Home on Ben Ewing | Improper Prior</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A Note - Black Lives Matter</title>
+      <link>/post/2020/06/01/a-note-black-lives-matter/</link>
+      <pubDate>Mon, 01 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020/06/01/a-note-black-lives-matter/</guid>
+      <description>Note: I wrote this post mostly for my Facebook page, which I regrettably still maintain. As such, there are references to posts I have seen from family and friends which may not entirely make sense in the context of this blog.
+I basically don&#39;t post anything on social media anymore, but at this point it feels irresponsible not to (it is also the absolute least I can do). Unequivocally black lives matter.</description>
+    </item>
     
     <item>
       <title>Formula One and Genetic Algorithms - Part 1</title>
