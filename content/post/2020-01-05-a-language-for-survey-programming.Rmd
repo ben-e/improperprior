@@ -90,10 +90,11 @@ a_survey <- to_survey({
     int("hh_size", "A1. How many people live in your household?")
   })
   
-  begin_repeat(name = "section_b", label = "Section B: Household Roster", 
-               repeat_count = "${hh_size}", {
-    int("age", "B1. What is this household member's age?")
-  })
+  # Refactor needed :)
+  # begin_repeat(name = "section_b", label = "Section B: Household Roster", 
+  #              repeat_count = "${hh_size}", {
+  #   int("age", "B1. What is this household member's age?")
+  # })
 })
 ```
 

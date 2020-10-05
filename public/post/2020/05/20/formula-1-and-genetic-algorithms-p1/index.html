@@ -1,38 +1,70 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Formula One and Genetic Algorithms - Part 1 | Ben Ewing | Improper Prior</title>
+    <meta name="description" content="Ben Ewing&#39;s blog.">
+    <title>Formula One and Genetic Algorithms - Part 1 | Improper Prior</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
-    
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">improper_prior</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/friends/">friends_on_the_internet</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
   </head>
 
   <body>
-    <nav>
-    <ul class="menu">
-      
-      <li><a href="/">Home</a></li>
-      
-      <li><a href="/things-i-like/">Links</a></li>
-      
-      <li><a href="https://github.com/ben-e/">GitHub</a></li>
-      
-      <li><a href="/index.xml">Subscribe</a></li>
-      
-    </ul>
-    <hr/>
-    </nav>
+    <br/>
 
 <div class="article-meta">
 <h1><span class="title">Formula One and Genetic Algorithms - Part 1</span></h1>
 <h2 class="author">Ben Ewing</h2>
 <h2 class="date">2020/05/20</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/technical">technical</a> 
+  
+  
+  
+  Tags: <a href="/tags/r">r</a> <a href="/tags/f1">f1</a> 
+  
+  
+</p>
 </div>
 
-<main>
 
+<div class="content-wrapper">
+  <main>
+    
 
 
 <div id="introduction" class="section level2">
@@ -41,7 +73,7 @@
 <p>Each year F1 teams develop and <a href="https://www.youtube.com/watch?v=xG8t1Wc13x8">unveil new cars</a> (warning: loud + flashing lights) adhering to a set of regulations. Throughout the season teams will continue to change their cars, sometimes resulting in <a href="https://www.youtube.com/watch?v=VhPw8gtfgv4">dramatic improvements</a> or <a href="https://en.wikipedia.org/wiki/Haas_VF-19#Developmental_issues">baffling steps backwards</a> in car performance. Initial performance and season long improvements tend to be highly related to team budgets, which vary from an estimated <a href="https://www.racefans.net/2020/01/02/the-cost-of-f1-2019-part-two-what-the-top-teams-spent/">$400 million on the high end</a>, to <a href="https://www.racefans.net/2019/12/27/the-cost-of-f1-2019-team-budgets-analysed-part-one/">$120 million on the low end</a>, though this is not always the case.</p>
 <p>Teams work independently to develop their cars, though teams commonly purchase individual parts and engines from each other. Car development philosophy can also be very different across times, for example <a href="https://www.youtube.com/watch?v=a__6bJAohhg&amp;t=12s">high and low rake aerodynamics</a>. Often a team will <a href="https://www.youtube.com/watch?v=U_uKHNJLSQs">have a significant development</a> that is copied, or protested, by the other teams. This car development process reminds me strongly of a class of optimization/search algorithms which I am quite fond of: <a href="https://en.wikipedia.org/wiki/Genetic_algorithm">genetic algorithms</a>.</p>
 <p>Over the next three posts I’ll be looking at genetic algorithms and how they can be used to simulate Formula One car development. In this post I will present a brief introduction to genetic algorithms, the following post will apply these algorithms to F1 car development, and the final post will evaluate the likely effects of some of the incoming regulations (budget caps, open source parts, and more).</p>
-<p>Oh, and for these posts I’ll be using entirely base R version 4.0.0 (2020-04-24).</p>
+<p>Oh, and for these posts I’ll be using entirely base R version 4.0.2 (2020-06-22).</p>
 </div>
 <div id="a-brief-introduction-to-genetic-algorithms" class="section level2">
 <h2>A Brief Introduction to Genetic Algorithms</h2>
@@ -140,16 +172,46 @@ for (i in 0:generations) {
 </ul>
 </div>
 
-</main>
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
 
-  <footer>
-  <script src="//yihui.name/js/math-code.js"></script>
-<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 
-<script async src="//yihui.name/js/center-img.js"></script>
-
-  
-  </footer>
+      
+      <hr/>
+      <a href="https://github.com/ben-e">Github</a> | <a href="https://www.linkedin.com/in/ben-e/">LinkedIn</a> | Built with Hugo 🧙
+      
+    </footer>
   </body>
 </html>
 

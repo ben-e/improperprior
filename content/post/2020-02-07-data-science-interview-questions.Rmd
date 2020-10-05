@@ -1,0 +1,300 @@
+---
+title: Data Science Interview Questions
+author: Ben Ewing
+date: '2020-02-07'
+slug: data-science-interview-questions
+categories:
+  - technical
+tags: 
+  - job-search
+---
+
+## Introduction
+
+I've seen a number of articles/posts pop up around the internet with lists of data science interview questions. I thought it might be a good exercise in communication and data science knowledge to answer these questions. I am finding it harder than I would have expected to write good (and hopefully useful) answers!
+
+Question sources:
+
+* [HackerNoon - 160+ Data Science Interview Questions](https://hackernoon.com/160-data-science-interview-questions-415s3y2a)
+
+Additional resources:
+
+* [Alexey Grigorev](http://alexeygrigorev.com/) has put together a whole GitHub repo with data science interview questions _and_ answers, [available here](https://github.com/alexeygrigorev/data-science-interviews/). He also has his own extensive collection of [resources](https://github.com/alexeygrigorev/data-science-interviews/blob/master/awesome.md).
+* [Chris Albon](https://chrisalbon.com/) has a collection of machine learning flashcards, [available as a whole set for a price](https://machinelearningflashcards.com/), or sporadically posted [on his Twitter feed](https://twitter.com/chrisalbon). I've found these to be a useful way to identify gaps in my knowledge.
+
+## Supervised machine learning
+
+### What is supervised machine learning?
+
+Supervised machine learning is when we use a dataset, $X$, to predict some known target value $y$ where $y$ might be a label/class or some continuous value. In unsupervised learning we learn about a dataset $X$ without any label, for example clustering individuals.
+
+## Linear Regression
+
+### What is regression? Which models can you use to solve a regression problem?
+
+In a regression problem we predict a continuous value (rather than a label). Linear regression is very common; it can be augmented with polynomial features or regularization terms (lasso and ridge regression). Many other algorithms can also be used for regression problems, such as random forests with regression trees.
+
+### What is linear regression? When do we use it?
+
+For data $X$, observation $i$, a linear regression predicts a value $y_i = x_i^T\beta$ for a set of coefficients $\beta$. We typically assume there to be some error term $\epsilon_i$ that is normally distributed around 0. 
+
+Additional notes:
+
+* We can add an extra column of 1s to the data to include an intercept term. The column of 1s allows us to add an extra $\beta_0$ which (in the case of linear regression with a single variable) changes where on the y-axis the line passes through. Without this term the line will just pass through 0.
+
+* The 'linear' in linear regression refers to the relationship between $y$ and $\beta$, the $x_i$'s can be polynomials, as in the case of polynomial regression.
+
+* While the $\beta$'s can be found through a number of techniques, choosing $\beta$ to minimize $(y- X\beta)^T(y- X\beta)$ (as is very common, this is just ordinary least squares) gives a very elegant closed form: $\hat{\beta} = (X^TX)^{-1}X^Ty$.
+
+### What’s the normal distribution? Why do we care about it? 
+
+The normal distribution with with parameters $\mu$ and $\sigma^2$ as $p(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp{\left(-\frac{1}{2\sigma^2}(x-\mu)^2\right)}$.
+
+There are a lot of reasons to care about the normal distribution (e.g. Alexey talks about the central limit theorem for this question). Perhaps the reason the normal distribution pops up everywhere is that it's kernel (with known variance) is just the squared difference between two quantities, which we use quite often.
+
+### How do we check if a variable follows the normal distribution?
+
+For exploratory data analysis (EDA) I would just plot a histogram or the empirical density. For a more formal setting one could look at the skew and kurtosis (both 0 for a normal distribution), or run any one of the many [normality tests](https://en.wikipedia.org/wiki/Normality_test).
+
+This is a pretty common procedure when looking at regression residuals, remember we want a normal error!
+
+### What if we want to build a model for predicting prices? Are prices distributed normally? Do we need to do any pre-processing for prices?
+
+My best guess (i.e. based on only my priors, no data) is that prices are not normally distributed, in fact I would expect the distribution of prices to be very skewed due to the presence of high-end luxury goods. We can deal with this by using a log-transformation on the data. I assume this question is not asking about pre-processing like converting to the same currency or other data cleaning steps.
+
+### What are the methods for solving linear regression do you know?
+
+See my answer for "What is linear regression? When do we use it?" for the closed form approach (and where it comes from), but note that we can also use any(?) gradient-based optimization approach as well.
+
+## What is gradient descent? How does it work?
+
+Gradient descent a calculus-based optimizatin method that iteratively updates parameters in a model in the opposite direction of the gradient. For a linear regression model gradient descent looks something like this: $\mathbf{\beta}_{i+1} = \mathbf{\beta}_i -\alpha\nabla_\beta(\mathbf{X}^T\mathbf{\beta}_i - \mathbf{y})^2$ where $\alpha$ is the learning rate (this controls the size of each update).
+
+Note that a gradient is just a multivaraite derivative, so if we have a linear model $\beta_0 + \beta_1x_1$ the gradient with respect to the betas is $[1, x]^T$. [Sebastian Ruder](https://ruder.io/optimizing-gradient-descent/index.html) has a really great overview oof gradient-based optimization methods.
+
+### What is the normal equation?
+
+I think this is a silly interview question. A $N(\mu, \sigma^2)$ distribution has PDF $\frac{1}{\sqrt{2\pi\sigma^2}} \exp{\left[-\frac{1}{2\sigma^2}(x-\mu)^2\right]}$.
+
+### What is SGD? What’s the difference with the usual gradient descent?
+
+In "standard" (i.e. Batch) gradient descent we use all of the data at once, but this is computationally infeasible for sufficiently large datasets. Stochastic Gradient Descent randomly shuffles the data and then performs gradient descent one observation at a time to allow for computationally efficient updates. This approach can also be combined with the minibatch approach, where gradient descent is applied to smaller (computationally feasible) subsets of the data.
+
+### Which metrics for evaluating regression models do you know?
+
+This is also kind of a silly question, what do you want to know about the model? There are goodness-of-fit measures like R-squared, measures of prediction accuracy like MSE, RMSE (next question), and heuristics that can be used to choose from many models like AIC and BIC. There are surely _many_ other ways to evaluate a linear model.
+
+### What are MSE and RMSE?
+
+* Mean Squared Error is the squared difference between a prediction and its true value: $\frac{1}{n}\sum_i^n(y_i - \hat{y}_i)^2$.
+* Root Mean Squared Error is the square-root of the MSE. The rescaling just allows us to talk about the error using the same units as the dependent variable, for example:
+
+```{r}
+# R
+
+y <- 5
+y_hat <- 2
+
+paste0("MSE: ", mean((y - y_hat)^2), 
+       "; RMSE: ", mean((y - y_hat)^2)^0.5)
+```
+
+## Coding
+
+### Implement OLS Linear Regression
+
+Some data, note that the outcome really is a linear function of the input! Also note that no intercept is needed.
+
+```{r}
+# R
+
+n <- 1000
+x <- matrix(c(rnorm(n), rnorm(n, mean = 1), rnorm(n, sd = 3)),
+            nrow = n)
+y <- x[ , 1]*0.5 + x[ , 2]*0.25 + x[ , 3]*3
+```
+
+In OLS we assume our outoome is the product of some linear model (as it is in the example data above), and we seek to minimize the squared distance between our predictions, $X^T\beta$, and the true value $y$. In matrix form we want to minimze $(y- X\beta)^T(y- X\beta)$. Take the derivative with respect to $\Beta$, set it equal to 0, solve for $\beta$ (with the assumption that $X$ is invertible), and you end up with $\beta_{OLS} = (X^TX)^{-1}X^Ty$.
+
+This is an easy closed-form equation to implement in any language, assuming the interviewer doesn't require the interviewee to implement their own matrix inversion function.
+
+```{r}
+# R
+
+bens_lm <- function(x, y) {
+  solve((t(x) %*% x)) %*% (t(x) %*% y) 
+}
+bens_lm(x, y)
+```
+
+Compare with R's linear model.
+
+```{r}
+# R
+
+lm(y ~ x)
+```
+
+### Implement Logistic Regression
+
+When using logistic regression we are interested in modeling the probability of an event, usually just a Bernoulli random variable (sidenote: [the Bernoulli family is pretty incredible](https://en.wikipedia.org/wiki/Bernoulli_family)). As with linear regression we use a linear model of the form $X^T\beta$ but this time we use a [logit link function](https://en.wikipedia.org/wiki/Generalized_linear_model#Logit_link_function) to relate our model to the log odds of the outcome. We can also solve for the probability of the model and get the logistic function; [here](https://stats.stackexchange.com/questions/120329/what-is-the-difference-between-logistic-and-logit-regression) is a good StackExchange discussion on what the logit and logistic functions do. 
+
+Using the logit link function our model is $\log{\left(\frac{\pi(y = 1|X)}{1-\pi(y = 1|X)}\right)} = X^T\beta$, which we rewrite using the logistic function as $\pi(y = 1|X) = \frac{1}{1+e^{-X^T\beta}}$. To fit the model, we want to choose $\beta$ to maximize the likelihood that this model matches our data. The likelihood is just $\prod_i \left(\frac{1}{1+e^{-x_i^T\beta}}\right)^{y_i}\left(1 - \frac{1}{1+e^{-x_i^T\beta}}\right)^{1-y_i}$, and taking the log gives $\sum_i y_i\log{\left(\frac{1}{1+e^{-x_i^T\beta}}\right)} + (1-y_i)\log{\left(\frac{1}{1+e^{-x_i^T\beta}}\right)}$. Finally, taking the derivative with respect to $\beta$ gives a pretty intuitive form $X^T\left(y - \frac{1}{1+e^{-x_i^T\beta}}\right)$. Unfortunately, unlike linear regression, there is no closed form solution, instead we must use an optimization technique to find good values for $\beta$, we can do this using gradient descent.
+
+For a longer and more detailed walk through I'd recommend [Nick Becker's post on logistic regression](https://beckernick.github.io/logistic-regression-from-scratch/).
+
+```{r, cache = T}
+# R
+
+# Sigmoid function is useful, this assumes x is a matrix
+sigm <- function(x, beta) {
+  1/(1 + exp(-apply(x, 1, function(.x) .x %*% beta)))
+}
+
+# First, create some data!
+n <- 10000
+p <- 4
+x <- cbind(rep(1, n), replicate(p - 1, rnorm(n)))
+true_beta <- rpois(p, 2.5)
+y <- rbinom(n, 1, sigm(x, true_beta))
+
+# Now we can begin our search, need to initalize beta, determine number of iterations of gradient
+# descent, and choose a learning rate, these are by no means optimal choices.
+beta_hat <- rnorm(p, 0, 10)
+starting_beta_hat <- beta_hat
+n_iters <- 1000
+lr <- 1e-3
+
+for (iter in 1:n_iters) {
+  # Get predictions using the current weights
+  y_hat <- sigm(x, beta_hat)
+  
+  # Get the gradient
+  grad <- c(t(x) %*% (y - y_hat))
+  
+  # And update the parameters
+  beta_hat <- beta_hat + lr*grad
+}
+
+# And let's look at how well we did.
+rbind(true_beta = true_beta,
+      beta_hat = beta_hat,
+      starting_beta_hat = starting_beta_hat)
+```
+
+This is not too bad considering the coarse learning rate (which may jump over optimal solutions) and the relatively low number of iterations! Why don't we try stochastic gradient descent as well? Here it is using the same data and initial values.
+
+```{r}
+sgd_beta_hat <- starting_beta_hat
+n_epochs <- 100
+lr <- 1e-2
+
+for (epoch in 1:n_epochs) {
+  # Split thed data into batches
+  batches <- split(sample.int(n), seq(1, n, 4))
+  
+  # Update for each batch
+  for (batch in batches) {
+    # Get predictions using the current weights
+    y_hat <- sigm(x[batch, ], sgd_beta_hat)
+    
+    # Get the gradient
+    grad <- c(t(x[batch, ]) %*% (y[batch] - y_hat))
+    
+    # And update the parameters
+    sgd_beta_hat <- sgd_beta_hat + lr*grad
+  }
+}
+
+# And let's look at how well we did.
+rbind(true_beta = true_beta,
+      beta_hat = beta_hat,
+      sgd_beta_hat  = sgd_beta_hat,
+      starting_beta_hat = starting_beta_hat)
+```
+
+SGD should run faster because we are doing fewer operations per update (though the total number of iterations, number of batches * number of epochs, is larger). 
+
+### Implement a Perceptron
+
+The Perceptron is a is a seminal classification method which attempts to learn _a_ decision boundary for binary classification problems. For the perceptron class labels are either $-1$ or $1$, and the goal is to minimize (using Hastie's notation from Elements of Statistical Learning) the sum of the missclassified points $-\sum_{i\in M} y_i (x_i^T\beta + \beta_0)$. The gradient (again from ESL) is just $-\sum_{i\in M}y_ix_i$. We can optimize using stochastic gradient descent (i.e. we can update _online_).
+
+```{r}
+# Generate some data
+n <- 500
+x <- rbind(cbind(rnorm(n/2, mean = 2.25), rnorm(n/2, mean = 2.25)),
+           cbind(rnorm(n/2, mean = -2.25), rnorm(n/2, mean = -2.25)))
+y <- ifelse(x[ , 1] + x[ , 2] > 0, -1, 1)
+
+plot(x, col = ifelse(y > 0, "blue", "black"))
+```
+
+Great, now let's implement the algorithm! Note that I won't be including an intercept term here, which will force the decision boundary to pass through the origin. The data is generated about (0, 0) so this won't really matter.
+
+```{r}
+# Define a simple function that can update weights beta
+# given a _vector_ x and a length 1 label y.
+# So each call to perceptron will run one step of the algorithm by looking at
+# one data point.
+perceptron <- function(x, y, beta, lr = 1) {
+  # Get the prediction
+  y_hat <- sign(t(beta) %*% x)[1]
+  # Update the betas if incorrect
+  beta <- beta + (y != y_hat)*lr*(y*x)
+  # Return
+  beta
+}
+
+accuracy <- function(x, y, beta) {
+  y_hat <- apply(x, 1, function(.x) sign(t(beta) %*% .x))
+  mean(y == y_hat)
+}
+```
+
+And now we can run the algorithm.
+
+```{r}
+# Initialize some very wrong weights.
+beta <- c(1000, 1000)
+
+# Should be 0.
+print(paste0("Initial Accuracy: ", accuracy(x, y, beta)))
+
+# Iterate over the data
+n_epochs <- 100
+for (epoch in 1:n_epochs) {
+  # Shuffle data
+  shuffle <- sample(1:nrow(x))
+  x <- x[shuffle, ]
+  y <- y[shuffle]
+  
+  # Update, one observation at a time
+  # Note that I'm letting the learning rate step down so that it can
+  # initially take very large steps, then smaller and smaller steps.
+  # I'm not actually sure if this helps..anything.
+  for (row in nrow(x)) {
+    beta <- perceptron(x[row, ], y[row], beta, lr = n_epochs/epoch)
+  }
+  
+  # Progress report
+  if (epoch %% 25 == 0)
+    print(paste0("Epoch: ", epoch, "; Accuracy: ", accuracy(x, y, beta)))
+}
+```
+
+Let's take a look at how well the classification worked. Red points are classified incorrectly.
+
+```{r}
+y_hat <- apply(x, 1, function(.x) sign(t(beta) %*% .x))
+plot(x, col = ifelse(y != y_hat, "red", ifelse(y > 0, "blue", "black")))
+```
+
+Note that for a perceptron to work the data must be [linearly separable](https://en.wikipedia.org/wiki/Linear_separability), but multilayer perceptrons can learn non-linear boundaries.
+
+### Implement a Decision Tree
+
+### Implement AdaBoost
+
+### Implement Regularized Regression
+
+### Implement a Single Layer Perceptron

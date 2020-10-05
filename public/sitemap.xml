@@ -98,6 +98,11 @@
   </url>
   
   <url>
+    <loc>/post/2020/02/07/data-science-interview-questions/</loc>
+    <lastmod>2020-02-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/2020/01/05/a-language-for-survey-programming/</loc>
     <lastmod>2020-01-05T00:00:00+00:00</lastmod>
   </url>
@@ -113,11 +118,7 @@
   </url>
   
   <url>
-    <loc>/data-science-interview-questions/</loc>
-  </url>
-  
-  <url>
-    <loc>/things-i-like/</loc>
+    <loc>/friends/</loc>
   </url>
   
 </urlset>

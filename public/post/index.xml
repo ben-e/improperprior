@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Ben Ewing | Improper Prior</title>
+    <title>Posts on Improper Prior</title>
     <link>/post/</link>
-    <description>Recent content in Posts on Ben Ewing | Improper Prior</description>
+    <description>Recent content in Posts on Improper Prior</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Jun 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 01 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A Note - Black Lives Matter</title>
       <link>/post/2020/06/01/a-note-black-lives-matter/</link>
@@ -18,7 +14,7 @@
       
       <guid>/post/2020/06/01/a-note-black-lives-matter/</guid>
       <description>Note: I wrote this post mostly for my Facebook page, which I regrettably still maintain. As such, there are references to posts I have seen from family and friends which may not entirely make sense in the context of this blog.
-I basically don&#39;t post anything on social media anymore, but at this point it feels irresponsible not to (it is also the absolute least I can do). Unequivocally: Black Lives Matter.</description>
+I basically don&amp;rsquo;t post anything on social media anymore, but at this point it feels irresponsible not to (it is also the absolute least I can do). Unequivocally: Black Lives Matter.</description>
     </item>
     
     <item>
@@ -81,6 +77,18 @@ In this case:
       
       <guid>/post/2020/02/14/continuous-and-binary-dependent-variables/</guid>
       <description>R Setup# Data manipulationlibrary(dplyr)library(purrr)library(tidyr)# Modelinglibrary(broom)# Plotting and tableslibrary(ggplot2)library(patchwork)library(ggthemes)library(knitr)# R settingstheme_set(theme_tufte() + theme(legend.position = &amp;quot;none&amp;quot;))opts_chunk$set(echo = T, warning = F, message = F, tidy = F,fig.width = 8.5, fig.height = 6)IntroductionIn his 2011 paper “Land tenure and investment incentives: Evidence from West Africa,” James Fenske notes that “studies that use binary investment measures…are also less likely to find a statistically significant effect.</description>
+    </item>
+    
+    <item>
+      <title>Data Science Interview Questions</title>
+      <link>/post/2020/02/07/data-science-interview-questions/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020/02/07/data-science-interview-questions/</guid>
+      <description>IntroductionI’ve seen a number of articles/posts pop up around the internet with lists of data science interview questions. I thought it might be a good exercise in communication and data science knowledge to answer these questions. I am finding it harder than I would have expected to write good (and hopefully useful) answers!
+Question sources:
+HackerNoon - 160+ Data Science Interview QuestionsAdditional resources:
+Alexey Grigorev has put together a whole GitHub repo with data science interview questions and answers, available here.</description>
     </item>
     
     <item>

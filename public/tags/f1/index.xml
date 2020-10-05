@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>f1 on Ben Ewing | Improper Prior</title>
+    <title>f1 on Improper Prior</title>
     <link>/tags/f1/</link>
-    <description>Recent content in f1 on Ben Ewing | Improper Prior</description>
+    <description>Recent content in f1 on Improper Prior</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 May 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/f1/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 20 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/f1/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Formula One and Genetic Algorithms - Part 1</title>
       <link>/post/2020/05/20/formula-1-and-genetic-algorithms-p1/</link>

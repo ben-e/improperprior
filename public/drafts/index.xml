@@ -1,28 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Drafts on Ben Ewing | Improper Prior</title>
-    <link>/drafts/</link>
-    <description>Recent content in Drafts on Ben Ewing | Improper Prior</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 16 Mar 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/drafts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>What is an improper prior?</title>
-      <link>/drafts/what-is-an-improper-prior/</link>
-      <pubDate>Mon, 16 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/drafts/what-is-an-improper-prior/</guid>
-      <description>IntroductionSince I’ve purchased improperprior.com it seems prudent that I write a short post explaining improper priors.
-Typical Bayesian ProcessIn Bayesian statistics we exploit Bayes’ theorem to learn something about a population parameter. For example, if we have data \(Y\) that follow a Binomial distribution, and we would like to estimate the \(\theta\) parameter, we would compute:
-\[P(\theta|Y) = \frac{L(Y|\theta)P(\theta)}{P(Y)}.\]
-In this case:
-\(P(\theta|Y)\) is the posterior probability, this is what we’d like to estimate.</description>
-    </item>
-    
-  </channel>
-</rss>

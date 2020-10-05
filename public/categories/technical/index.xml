@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>technical on Ben Ewing | Improper Prior</title>
+    <title>technical on Improper Prior</title>
     <link>/categories/technical/</link>
-    <description>Recent content in technical on Ben Ewing | Improper Prior</description>
+    <description>Recent content in technical on Improper Prior</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 May 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/technical/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 20 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="/categories/technical/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Formula One and Genetic Algorithms - Part 1</title>
       <link>/post/2020/05/20/formula-1-and-genetic-algorithms-p1/</link>
@@ -65,24 +61,24 @@ In this case:
     </item>
     
     <item>
+      <title>Data Science Interview Questions</title>
+      <link>/post/2020/02/07/data-science-interview-questions/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020/02/07/data-science-interview-questions/</guid>
+      <description>IntroductionI’ve seen a number of articles/posts pop up around the internet with lists of data science interview questions. I thought it might be a good exercise in communication and data science knowledge to answer these questions. I am finding it harder than I would have expected to write good (and hopefully useful) answers!
+Question sources:
+HackerNoon - 160+ Data Science Interview QuestionsAdditional resources:
+Alexey Grigorev has put together a whole GitHub repo with data science interview questions and answers, available here.</description>
+    </item>
+    
+    <item>
       <title>A Language for Survey Programming</title>
       <link>/post/2020/01/05/a-language-for-survey-programming/</link>
       <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/2020/01/05/a-language-for-survey-programming/</guid>
       <description>What’s wrong with XLSForms?XLSForm defines a very accessible (other than reliance on Excel) standard for programming surveys compatible with OpenDataKit, SurveyCTO, and a myriad of other data collection tools used in low/no connectivity environments. XLSForm’s are dead easy to program, but can produce very complex surveys. However, in my ~5 years of programming XLSForm surveys I’ve encountered a few problems caused by the reliance on Excel for programming:</description>
-    </item>
-    
-    <item>
-      <title>Data Science Interview Questions</title>
-      <link>/data-science-interview-questions/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/data-science-interview-questions/</guid>
-      <description>IntroductionI’ve seen a number of articles/posts pop up around the internet with lists of data science interview questions. I thought it might be a good exercise in communication and data science knowledge to answer these questions. I am finding it harder than I would have expected to write good (and hopefully useful) answers!
-Question sources:
-HackerNoon - 160+ Data Science Interview QuestionsAdditional resources:
-Alexey Grigorev has put together a whole GitHub repo with data science interview questions and answers, available here.</description>
     </item>
     
   </channel>

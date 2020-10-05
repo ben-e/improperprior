@@ -34,9 +34,34 @@ tags: [r, xlsform, survey design]
 <h2>The Language</h2>
 <p>I tried to keep the language as close to the <a href="https://xlsform.org/en/ref-table/">XLSForm standard</a> as possible; if the user thinks something should work, it hopefully should.</p>
 <p>Surveys are defined inside the <code>to_survey</code> environment. Within this environment all R syntax and functions apply (though I’ve gone back and forth on importing the global environment; using a closed environment would allow for more specialized syntax).</p>
-<pre class="r"><code>library(XLSFormTools)
-
-to_survey({
+<pre class="r"><code>library(XLSFormTools)</code></pre>
+<pre><code>## Warning: replacing previous import &#39;purrr::list_along&#39; by &#39;rlang::list_along&#39;
+## when loading &#39;XLSFormTools&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;purrr::invoke&#39; by &#39;rlang::invoke&#39; when
+## loading &#39;XLSFormTools&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;purrr::flatten_raw&#39; by &#39;rlang::flatten_raw&#39;
+## when loading &#39;XLSFormTools&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;purrr::modify&#39; by &#39;rlang::modify&#39; when
+## loading &#39;XLSFormTools&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;purrr::as_function&#39; by &#39;rlang::as_function&#39;
+## when loading &#39;XLSFormTools&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;purrr::flatten_dbl&#39; by &#39;rlang::flatten_dbl&#39;
+## when loading &#39;XLSFormTools&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;purrr::flatten_lgl&#39; by &#39;rlang::flatten_lgl&#39;
+## when loading &#39;XLSFormTools&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;purrr::flatten_int&#39; by &#39;rlang::flatten_int&#39;
+## when loading &#39;XLSFormTools&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;purrr::%@%&#39; by &#39;rlang::%@%&#39; when loading
+## &#39;XLSFormTools&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;purrr::flatten_chr&#39; by &#39;rlang::flatten_chr&#39;
+## when loading &#39;XLSFormTools&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;purrr::splice&#39; by &#39;rlang::splice&#39; when
+## loading &#39;XLSFormTools&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;purrr::flatten&#39; by &#39;rlang::flatten&#39; when
+## loading &#39;XLSFormTools&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;purrr::prepend&#39; by &#39;rlang::prepend&#39; when
+## loading &#39;XLSFormTools&#39;</code></pre>
+<pre class="r"><code>to_survey({
   # This is a survey, note that this is an R-style comment!
 })</code></pre>
 <p>This function returns a list with three <a href="https://tibble.tidyverse.org/">tibbles</a> which represent the <code>survey</code>, <code>choices</code>, and <code>settings</code> sheets of an XLSForm.</p>
@@ -77,25 +102,23 @@ to_survey({
     int(&quot;hh_size&quot;, &quot;A1. How many people live in your household?&quot;)
   })
   
-  begin_repeat(name = &quot;section_b&quot;, label = &quot;Section B: Household Roster&quot;, 
-               repeat_count = &quot;${hh_size}&quot;, {
-    int(&quot;age&quot;, &quot;B1. What is this household member&#39;s age?&quot;)
-  })
+  # Refactor needed :)
+  # begin_repeat(name = &quot;section_b&quot;, label = &quot;Section B: Household Roster&quot;, 
+  #              repeat_count = &quot;${hh_size}&quot;, {
+  #   int(&quot;age&quot;, &quot;B1. What is this household member&#39;s age?&quot;)
+  # })
 })</code></pre>
 <p>As mentioned, the <code>to_survey</code> function just returns a list of tibbles:</p>
 <pre class="r"><code>a_survey</code></pre>
 <pre><code>## $survey
-## # A tibble: 6 x 14
+## # A tibble: 3 x 13
 ##   type  name  hint  constraint constraint_mess~ required required_message
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt;           
 ## 1 begi~ sect~ &quot;&quot;    &quot;&quot;         &quot;&quot;               &quot;&quot;       &quot;&quot;              
 ## 2 inte~ hh_s~ &quot;&quot;    &quot;&quot;         &quot;&quot;               &quot;&quot;       &quot;&quot;              
 ## 3 end_~ &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;             &lt;NA&gt;     &lt;NA&gt;           
-## 4 begi~ sect~ &quot;&quot;    &quot;&quot;         &quot;&quot;               &quot;&quot;       &quot;&quot;              
-## 5 inte~ age   &quot;&quot;    &quot;&quot;         &quot;&quot;               &quot;&quot;       &quot;&quot;              
-## 6 end_~ &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;             &lt;NA&gt;     &lt;NA&gt;           
-## # ... with 7 more variables: default &lt;chr&gt;, relevant &lt;chr&gt;, read_only &lt;chr&gt;,
-## #   calculation &lt;chr&gt;, appearance &lt;chr&gt;, label &lt;chr&gt;, repeat_count &lt;chr&gt;
+## # ... with 6 more variables: default &lt;chr&gt;, relevant &lt;chr&gt;, read_only &lt;chr&gt;,
+## #   calculation &lt;chr&gt;, appearance &lt;chr&gt;, label &lt;chr&gt;
 ## 
 ## $choices
 ## # A tibble: 0 x 0

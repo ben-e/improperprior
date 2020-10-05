@@ -1,9 +1,0 @@
-base
-dplyr
-purrr
-tidyr
-broom
-ggplot2
-patchwork
-ggthemes
-knitr

@@ -1,56 +1,105 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>xlsform | Ben Ewing | Improper Prior</title>
+    <meta name="description" content="Ben Ewing&#39;s blog.">
+    <title>xlsform | Improper Prior</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
-    
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">improper_prior</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/friends/">friends_on_the_internet</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
   </head>
 
   <body>
-    <nav>
-    <ul class="menu">
-      
-      <li><a href="/">Home</a></li>
-      
-      <li><a href="/things-i-like/">Links</a></li>
-      
-      <li><a href="https://github.com/ben-e/">GitHub</a></li>
-      
-      <li><a href="/index.xml">Subscribe</a></li>
-      
-    </ul>
-    <hr/>
-    </nav>
+    <br/>
 
 
+<div class="content-wrapper">
 
-<h1>xlsform</h1>
-
-
-
-
-<ul>
+  <h1>xlsform</h1>
   
-  
-  
-  <li>
-    <span class="date">2020/01/05</span>
-    <a href="/post/2020/01/05/a-language-for-survey-programming/">A Language for Survey Programming</a>
-  </li>
-  
-</ul>
-
-  <footer>
-  <script src="//yihui.name/js/math-code.js"></script>
-<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<script async src="//yihui.name/js/center-img.js"></script>
 
   
-  </footer>
+
+  <ul>
+     
+     
+     
+     <li>
+       <span class="date">2020/01/05</span>
+       <a href="/post/2020/01/05/a-language-for-survey-programming/">A Language for Survey Programming</a>
+     </li>
+     
+   </ul>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+      
+      <hr/>
+      <a href="https://github.com/ben-e">Github</a> | <a href="https://www.linkedin.com/in/ben-e/">LinkedIn</a> | Built with Hugo 🧙
+      
+    </footer>
   </body>
 </html>
 

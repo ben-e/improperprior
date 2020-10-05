@@ -1,38 +1,66 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Things I Like | Ben Ewing | Improper Prior</title>
+    <meta name="description" content="A simple, minimal blog for those who love text.">
+    <title>Things I Like | Improper Prior</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
-    
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">improper_prior</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/things-i-like/">friends_on_the_internet</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
   </head>
 
   <body>
-    <nav>
-    <ul class="menu">
-      
-      <li><a href="/">Home</a></li>
-      
-      <li><a href="/things-i-like/">Links</a></li>
-      
-      <li><a href="https://github.com/ben-e/">GitHub</a></li>
-      
-      <li><a href="/index.xml">Subscribe</a></li>
-      
-    </ul>
-    <hr/>
-    </nav>
+    <br/>
 
 <div class="article-meta">
 <h1><span class="title">Things I Like</span></h1>
 <h2 class="author">Ben Ewing</h2>
 
+<p class="terms">
+  
+  
+  
+  
+  
+</p>
 </div>
 
-<main>
 
+<div class="content-wrapper">
+  <main>
+    
 
 
 <p>These are some things I like:</p>
@@ -56,7 +84,6 @@
 <div id="artists" class="section level2">
 <h2>Artists</h2>
 <ul>
-<li><a href="https://www.catscafecomics.com/">Matt Tarpley’s Cat’s Cafe</a> - Matt writes/illustrates very wholesome comics. <a href="https://www.catscafecomics.com/post/613750137827770368/i-am-trying">Current favorite</a>.</li>
 <li><a href="https://mariaprotopopov.com/">Maria Protopopov’s Mo(ve)ments</a> - Maria is a friend from UC Santa Cruz who uses photography as a medium for meditation and reflection.</li>
 <li><a href="https://aurawalmer.com/">Aura Walmer’s Art + Music</a> - Aura (another friend from UC Santa Cruz!) is a wonderfully talented artist across several mediums. I’ve got one print of her’s in my house right now, and I hope to add more in the future!</li>
 </ul>
@@ -68,16 +95,46 @@
 </ul>
 </div>
 
-</main>
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
 
-  <footer>
-  <script src="//yihui.name/js/math-code.js"></script>
-<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 
-<script async src="//yihui.name/js/center-img.js"></script>
-
-  
-  </footer>
+      
+      <hr/>
+      Open-Source | <a href="https://github.com/goodroot/hugo-classic">Github</a> | <a href="https://keybase.io/goodroot">Keybase</a>
+      
+    </footer>
   </body>
 </html>
 

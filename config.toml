@@ -1,32 +1,21 @@
 baseurl = "/"
 languageCode = "en-us"
-title = "Ben Ewing | Improper Prior"
-theme = "hugo-xmin"
+title = "Improper Prior"
+theme = "hugo-classic"
 googleAnalytics = ""
-disqusShortname = ""
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
-footnotereturnlinkcontents = "↩"
+ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
+enableEmoji = true
+footnotereturnlinkcontents = "©"
 
 [permalinks]
     post = "/post/:year/:month/:day/:slug/"
-    note = "/note/:year/:month/:day/:slug/"
-
+    
 [[menu.main]]
-    name = "Home"
-    url = "/"
+    name = "Friends On The Internet"
+    url = "/friends/"
     weight = 1
-[[menu.main]]
-    name = "Links"
-    url = "/things-i-like/"
-    weight = 2
-[[menu.main]]
-    name = "GitHub"
-    url = "https://github.com/ben-e/"
-    weight = 3
-[[menu.main]]
-    name = "Subscribe"
-    url = "/index.xml"
-    weight = 4
 
 [params]
-    description = "Ben Ewing's Blog."
+    description = "Ben Ewing's blog."
+    footer = "[Github](https://github.com/ben-e) | [LinkedIn](https://www.linkedin.com/in/ben-e/) | Built with Hugo 🧙"
+    custom_css = ["css/theme-override.css"]
