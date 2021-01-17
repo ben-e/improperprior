@@ -14,6 +14,12 @@ footnotereturnlinkcontents = "©"
     name = "Friends On The Internet"
     url = "/friends/"
     weight = 1
+    
+[[menu.main]]
+    name = "Book Log"
+    url = "/book_log/"
+    weight = 2
+    
 
 [params]
     description = "Ben Ewing's blog."

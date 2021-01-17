@@ -1,0 +1,12 @@
+---
+title: Formula One and Genetic Algorithms - Part 2
+author: Ben Ewing
+date: '2020-11-29'
+slug: formula-one-and-genetic-algorithms-part-2
+categories:
+  - technical
+tags:
+  - r
+  - f1
+description: ''
+---

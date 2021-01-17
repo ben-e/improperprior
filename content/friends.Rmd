@@ -12,6 +12,7 @@ These are some of the people I like across the internet:
 * [Craig Gidney's Algorithmic Assertions](https://algassert.com/) - This is a fantastic math/computer science blog.
 * [Kristoffer Magnusson's R Psychologist](https://rpsychologist.com/) - Kristoffer's blog is full of seriously beautiful interactive visualizations and intuitive explanations of many topics across statistics. Kristoffer is also the creator of the [powerlmm](https://cran.r-project.org/web/packages/powerlmm/index.html) package for power analysis.
 * [The Littlest Dick](https://thelittlestdick.wordpress.com/) - This is a blog written by an acquaintance of mine who wishes to remain _unsearchable_.
+* [maya.land](https://maya.land/who/) - Maya's blog (?) feels like the old internet and I really love it.
 
 ## People
 
@@ -22,7 +23,3 @@ These are some of the people I like across the internet:
 
 * [Maria Protopopov's Mo(ve)ments](https://mariaprotopopov.com/) - Maria is a friend from UC Santa Cruz who uses photography as a medium for meditation and reflection.
 * [Aura Walmer's Art + Music](https://aurawalmer.com/) - Aura (another friend from UC Santa Cruz!) is a wonderfully talented artist across several mediums. I've got one print of her's in my house right now, and I hope to add more in the future!
-
-## Books
-
-* [Osvaldo Martin's Bayesian Analysis with Python](https://www.packtpub.com/big-data-and-business-intelligence/bayesian-analysis-python-second-edition) - Review forthcoming, but so far I really like this book!
