@@ -6,7 +6,17 @@
     <description>Recent content in Home on Improper Prior</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Staying Stuck in Emacs</title>
+      <link>/post/2021/01/17/staying-stuck-in-emacs/</link>
+      <pubDate>Sun, 17 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2021/01/17/staying-stuck-in-emacs/</guid>
+      <description>I recently saw this post, The values of Emacs, the Neovim revolution, and the VSCode gorilla, pop up on HackerNews (I know, it&amp;rsquo;s terrible there), and it really captured why I feel stuck to a degree in Emacs despite the other genuinely good options out there.
+For context, I use Doom Emacs as my distribution of choice: Evil Mode is great and it&amp;rsquo;s fast. I&amp;rsquo;m also interested in checking out Centaur Emacs at some point.</description>
+    </item>
+    
     <item>
       <title>Formula One and Genetic Algorithms - Part 2</title>
       <link>/post/2021/01/16/formula-one-and-genetic-algorithms-part-2/</link>
