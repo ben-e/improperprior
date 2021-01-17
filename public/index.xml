@@ -6,7 +6,16 @@
     <description>Recent content in Home on Improper Prior</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Formula One and Genetic Algorithms - Part 2</title>
+      <link>/post/2021/01/16/formula-one-and-genetic-algorithms-part-2/</link>
+      <pubDate>Sat, 16 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2021/01/16/formula-one-and-genetic-algorithms-part-2/</guid>
+      <description>Coming soon, or at least before the next season starts. At this rate I&#39;ll get one post out per season.</description>
+    </item>
+    
     <item>
       <title>A Note - Black Lives Matter</title>
       <link>/post/2020/06/01/a-note-black-lives-matter/</link>
@@ -98,6 +107,16 @@ Question sources:
       
       <guid>/post/2020/01/05/a-language-for-survey-programming/</guid>
       <description>What’s wrong with XLSForms?XLSForm defines a very accessible (other than reliance on Excel) standard for programming surveys compatible with OpenDataKit, SurveyCTO, and a myriad of other data collection tools used in low/no connectivity environments. XLSForm’s are dead easy to program, but can produce very complex surveys. However, in my ~5 years of programming XLSForm surveys I’ve encountered a few problems caused by the reliance on Excel for programming:</description>
+    </item>
+    
+    <item>
+      <title>Book Log</title>
+      <link>/book_log/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/book_log/</guid>
+      <description>This is some of the media I’ve interacted with, by year.
+2021BooksDune - [In Progress]The Return of the King - [In Progress]Murder on the Orient Express, Agatha Christie - I do enjoy Christie’s books, and this is no exception. Not sure how I feel about the ending.GamesFallout: New Vegas - [In Progress]Spiritfarer - [In Progress]MoviesOnward - I liked this movie.</description>
     </item>
     
     <item>
