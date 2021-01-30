@@ -6,7 +6,16 @@
     <description>Recent content in personal on Improper Prior</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/personal/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/personal/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Technologies for 2021</title>
+      <link>/post/2021/01/24/technologies-for-2021/</link>
+      <pubDate>Sun, 24 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2021/01/24/technologies-for-2021/</guid>
+      <description>These are my goals for the coming year. I&amp;rsquo;ve tried to make each actionable, with a rough plan, time estimate, and an end goal. The end goals are all something to be built, not something to be necessarily finished. The &amp;ldquo;How&amp;rdquo; section of each of these goals may list a particular book or tutorials, but I want to be clear that the goal is not finishing these, but to use them to accomplish the goal.</description>
+    </item>
+    
     <item>
       <title>Staying Stuck in Emacs</title>
       <link>/post/2021/01/17/staying-stuck-in-emacs/</link>
