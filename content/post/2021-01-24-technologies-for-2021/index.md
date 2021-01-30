@@ -63,6 +63,14 @@ __How__: No specific resource.
 
 __Goal__: Set up a small ETL pipeline on my home server to be (either a RaspPi or an old laptop; my actual server literally went up in flames). This pipeline will just gather some disparate data about my life I might find useful to have on hand: account balances, Strava activities, and whatever sensors I hook up to my wife's  more finicky plants.
 
+## Odds and Ends: Drawing
+
+__Why__: I'd love to be competent at a hobby that does not require either exercising or screens.
+
+__How__: Working through Rudy De Renya's [How to Draw What You See](https://www.penguinrandomhouse.com/books/39671/how-to-draw-what-you-see-by-rudy-de-reyna/) and Juliette Aristides' [Beginning Drawing Atelier](https://www.aristidesarts.com/explore).
+
+__Goal__: Finishing these two books would be sufficient.
+
 ## Bonus: Text Analysis (by way of Tidymodels)
 
 __Why__: This feels like another blind spot for me.
