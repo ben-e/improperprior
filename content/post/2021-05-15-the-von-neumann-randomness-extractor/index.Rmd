@@ -1,0 +1,51 @@
+---
+title: The Von Neumann Randomness Extractor
+author: ''
+date: '2021-05-15'
+slug: the-von-neumann-randomness-extractor
+categories: []
+tags: []
+description: ''
+---
+
+```{r, warning=F, message=F}
+# Data manipulation
+library(dplyr)
+library(purrr)
+# Visualization
+library(ggplot2)
+```
+
+I was browsing Twitter this morning, as I unfortunately do, when I came across this tweet (the image does not embed, you'll need to check it our for yourself).
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">The Von Neumann Randomness Extractor: How do you construct an unbiased coin from a biased one? <a href="https://t.co/PtRZUaIUQv">pic.twitter.com/PtRZUaIUQv</a></p>&mdash; Fermat&#39;s Library (@fermatslibrary) <a href="https://twitter.com/fermatslibrary/status/1393577170161786880?ref_src=twsrc%5Etfw">May 15, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+
+Upon seeing this, my first thought was something along the lines of "Well that's really clever" and my second thought was "how has no one taught me this before, this is high school or intro to probability stuff!" - alternatively, is this something I forgot? was I not so impressed?
+
+While it's easy to write down the probabilities and see that it works, I still get quite a bit of satisfaction from "seeing" it work as well. As ever, this isn't the most efficient R code, but I think it works well for demonstration purposes
+
+```{r, animation.hook = 'gifski'}
+flip_twice <- function(pr = 0.5) {
+  sample(c("H", "T"), 
+         replace = T, 
+         prob = c(pr, 1 - pr)) %>% 
+    paste0(collapse = "")
+}
+
+
+```
+
+What's neat is that we can just keep expanding this. You've got a biased die? Just roll six times.
+
+```{r}
+roll_six <- function(pr = c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)) {
+  sample(1:6,
+         replace = T,
+         prob = pr) %>% 
+    paste0(collapse = "")
+}
+
+tibble(
+  die = roll_six()
+)
+```

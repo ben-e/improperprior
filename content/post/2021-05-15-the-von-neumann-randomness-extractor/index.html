@@ -1,0 +1,39 @@
+---
+title: The Von Neumann Randomness Extractor
+author: ''
+date: '2021-05-15'
+slug: the-von-neumann-randomness-extractor
+categories: []
+tags: []
+description: ''
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<pre class="r"><code># Data manipulation
+library(dplyr)</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.0.3</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(purrr)</code></pre>
+<pre><code>## Warning: package &#39;purrr&#39; was built under R version 4.0.3</code></pre>
+<pre class="r"><code># Visualization
+library(ggplot2)</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.0.3</code></pre>
+<p>I was browsing Twitter this morning, as I unfortunately do, when I came across this tweet (the image does not embed, you’ll need to check it our for yourself).</p>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+The Von Neumann Randomness Extractor: How do you construct an unbiased coin from a biased one? <a href="https://t.co/PtRZUaIUQv">pic.twitter.com/PtRZUaIUQv</a>
+</p>
+— Fermat's Library (<span class="citation">@fermatslibrary</span>) <a href="https://twitter.com/fermatslibrary/status/1393577170161786880?ref_src=twsrc%5Etfw">May 15, 2021</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>Upon seeing this, my first thought was something along the lines of “Well that’s really clever” and my second thought was “how has no one taught me this before, this is high school or intro to probability stuff!” - alternatively, is this something I forgot? was I not so impressed?</p>
+<p>While it’s easy to write down the probabilities and see that it works, I still get quite a bit of satisfaction from “seeing” it work as well.</p>
