@@ -24,7 +24,7 @@ Upon seeing this, my first thought was something along the lines of "Well that's
 
 While it's easy to write down the probabilities and see that it works, I still get quite a bit of satisfaction from "seeing" it work as well. As ever, this isn't the most efficient R code, but I think it works well for demonstration purposes
 
-```{r, animation.hook = 'gifski'}
+```{r}
 flip_twice <- function(pr = 0.5) {
   sample(c("H", "T"), 
          replace = T, 
@@ -32,20 +32,41 @@ flip_twice <- function(pr = 0.5) {
     paste0(collapse = "")
 }
 
-
+tibble(flips = replicate(500, flip_twice(0.7)),
+       keep = flips %in% c("HT", "TH")) %>% 
+  ggplot(aes(flips, fill = keep)) +
+  geom_bar() +
+  coord_flip() +
+  theme_minimal() +
+  scale_fill_brewer()
 ```
 
-What's neat is that we can just keep expanding this. You've got a biased die? Just roll six times.
+What's neat is that we can just keep expanding this. You've got a biased die? Just roll six times. Rolling a six-sided die six times actually has quite a few possible outcomes, so maybe let's try a three sided one?
 
 ```{r}
-roll_six <- function(pr = c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)) {
-  sample(1:6,
+roll_three <- function(pr = c(1/6, 1/6, 1/6)) {
+  sample(1:3,
          replace = T,
-         prob = pr) %>% 
+         prob = pr) %>%
+    .[1:3] %>% 
     paste0(collapse = "")
 }
 
 tibble(
-  die = roll_six()
-)
+  rolls = replicate(100000, roll_three(c(0.2, 0.2, 0.6)))
+) %>% 
+  ggplot(aes(rolls)) +
+  geom_bar() +
+  coord_flip() +
+  theme_minimal() +
+  scale_fill_brewer()
 ```
+
+You'll notice that there are of course more than three equally likely possibilities now, but choose three to keep and you've got a fair die. There may be a more clever way to extend this, let me know!
+
+This isn't a perfect process though, the limiting factors are:
+
+1. The more bias you have, the higher the number of rolls you'll need.
+2. The more possibilities you have (i.e. six sides of a die vs. two sides of a coin), the higher the number of rolls you'll need.
+
+This might not make much sense in any real-world scenario, but it's a fun party trick. Or maybe I'm no fun at parties.
