@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Ben Ewing&#39;s blog.">
+    <title>The Von Neumann Randomness Extractor | Improper Prior</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">improper_prior</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/friends/">friends_on_the_internet</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/book_log/">book_log</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">The Von Neumann Randomness Extractor</span></h1>
+
+<h2 class="date">2021/05/15</h2>
+<p class="terms">
+  
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    
+<script src="/post/2021/05/15/the-von-neumann-randomness-extractor/index_files/header-attrs/header-attrs.js"></script>
+
+
+<pre class="r"><code># Data manipulation
+library(dplyr)
+library(purrr)
+# Visualization
+library(ggplot2)</code></pre>
+<p>I was browsing Twitter this morning, as I unfortunately do, when I came across this tweet (the image does not embed, you’ll need to check it our for yourself).</p>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+The Von Neumann Randomness Extractor: How do you construct an unbiased coin from a biased one? <a href="https://t.co/PtRZUaIUQv">pic.twitter.com/PtRZUaIUQv</a>
+</p>
+— Fermat's Library (<span class="citation">@fermatslibrary</span>) <a href="https://twitter.com/fermatslibrary/status/1393577170161786880?ref_src=twsrc%5Etfw">May 15, 2021</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>Upon seeing this, my first thought was something along the lines of “Well that’s really clever” and my second thought was “how has no one taught me this before, this is high school or intro to probability stuff!” - alternatively, is this something I forgot? was I not so impressed?</p>
+<p>While it’s easy to write down the probabilities and see that it works, I still get quite a bit of satisfaction from seeing it work with data as well. As ever, this isn’t the most efficient R code, but I think it works well for demonstration purposes</p>
+<pre class="r"><code>flip_twice &lt;- function(pr = 0.5) {
+  sample(c(&quot;H&quot;, &quot;T&quot;), 
+         replace = T, 
+         prob = c(pr, 1 - pr)) %&gt;% 
+    paste0(collapse = &quot;&quot;)
+}
+
+tibble(flips = replicate(500, flip_twice(0.7)),
+       keep = flips %in% c(&quot;HT&quot;, &quot;TH&quot;)) %&gt;% 
+  ggplot(aes(flips, fill = keep)) +
+  geom_bar() +
+  coord_flip() +
+  theme_minimal() +
+  scale_fill_brewer()</code></pre>
+<p><img src="/post/2021/05/15/the-von-neumann-randomness-extractor/index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>What’s neat is that we can just keep expanding this. You’ve got a biased die? Just roll six times. Rolling a six-sided die six times actually has quite a few possible outcomes, so maybe let’s try a three sided one?</p>
+<pre class="r"><code>roll_three &lt;- function(pr = c(1/6, 1/6, 1/6)) {
+  sample(1:3,
+         replace = T,
+         prob = pr) %&gt;%
+    .[1:3] %&gt;% 
+    paste0(collapse = &quot;&quot;)
+}
+
+tibble(
+  rolls = replicate(100000, roll_three(c(0.2, 0.2, 0.6)))
+) %&gt;% 
+  ggplot(aes(rolls)) +
+  geom_bar() +
+  coord_flip() +
+  theme_minimal() +
+  scale_fill_brewer()</code></pre>
+<p><img src="/post/2021/05/15/the-von-neumann-randomness-extractor/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>You’ll notice that there are of course more than three equally likely possibilities now, but choose three to keep and you’ve got a fair die. There may be a more clever way to extend this, let me know!</p>
+<p>This isn’t a perfect process though, the limiting factors are:</p>
+<ol style="list-style-type: decimal">
+<li>The more bias you have, the higher the number of rolls you’ll need.</li>
+<li>The more possibilities you have (i.e. six sides of a die vs. two sides of a coin), the higher the number of rolls you’ll need.</li>
+</ol>
+<p>This might not make much sense in any real-world scenario, but it’s a fun party trick. Or maybe I’m no fun at parties.</p>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+      
+      <hr/>
+      <a href="https://github.com/ben-e">Github</a> | <a href="https://www.linkedin.com/in/ben-e/">LinkedIn</a> | Built with Hugo 🧙
+      
+    </footer>
+  </body>
+</html>
+

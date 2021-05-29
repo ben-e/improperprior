@@ -6,7 +6,17 @@
     <description>Recent content in Home on Improper Prior</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Von Neumann Randomness Extractor</title>
+      <link>/post/2021/05/15/the-von-neumann-randomness-extractor/</link>
+      <pubDate>Sat, 15 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2021/05/15/the-von-neumann-randomness-extractor/</guid>
+      <description># Data manipulationlibrary(dplyr)library(purrr)# Visualizationlibrary(ggplot2)I was browsing Twitter this morning, as I unfortunately do, when I came across this tweet (the image does not embed, you’ll need to check it our for yourself).
+The Von Neumann Randomness Extractor: How do you construct an unbiased coin from a biased one? pic.twitter.com/PtRZUaIUQv— Fermat&#39;s Library (@fermatslibrary) May 15, 2021Upon seeing this, my first thought was something along the lines of “Well that’s really clever” and my second thought was “how has no one taught me this before, this is high school or intro to probability stuff!</description>
+    </item>
+    
     <item>
       <title>Technologies for 2021</title>
       <link>/post/2021/01/24/technologies-for-2021/</link>
