@@ -22,7 +22,7 @@ I was browsing Twitter this morning, as I unfortunately do, when I came across t
 
 Upon seeing this, my first thought was something along the lines of "Well that's really clever" and my second thought was "how has no one taught me this before, this is high school or intro to probability stuff!" - alternatively, is this something I forgot? was I not so impressed?
 
-While it's easy to write down the probabilities and see that it works, I still get quite a bit of satisfaction from "seeing" it work as well. As ever, this isn't the most efficient R code, but I think it works well for demonstration purposes
+While it's easy to write down the probabilities and see that it works, I still get quite a bit of satisfaction from seeing it work with data as well. As ever, this isn't the most efficient R code, but I think it works well for demonstration purposes
 
 ```{r}
 flip_twice <- function(pr = 0.5) {
