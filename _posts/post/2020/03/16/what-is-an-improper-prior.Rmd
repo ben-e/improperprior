@@ -1,0 +1,14 @@
+---
+title: "What is an improper prior?"
+description: |
+  A short description of the post.
+author:
+  - name: Ben Ewing
+    url: https://example.com/norajones
+date: 07-18-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+TODO.
