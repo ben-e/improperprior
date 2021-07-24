@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Improper Prior</title>
+    <link>https://improperprior.com/</link>
+    <atom:link href="https://improperprior.com/blog.xml" rel="self" type="application/rss+xml"/>
+    <description>Ben Ewing's blog.
+</description>
+    <image>
+      <title>Improper Prior</title>
+      <url>https://improperprior.com/images/favicon.png</url>
+      <link>https://improperprior.com/</link>
+    </image>
+    <generator>Distill</generator>
+    <lastBuildDate>Sun, 18 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>What is an improper prior?</title>
+      <dc:creator>Ben Ewing</dc:creator>
+      <link>https://improperprior.com/posts/2021-07-18-what-is-an-improper-prior</link>
+      <description>A short description of the post.</description>
+      <guid>https://improperprior.com/posts/2021-07-18-what-is-an-improper-prior</guid>
+      <pubDate>Sun, 18 Jul 2021 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>

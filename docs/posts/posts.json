@@ -1,0 +1,19 @@
+[
+  {
+    "path": "posts/2021-07-18-what-is-an-improper-prior/",
+    "title": "What is an improper prior?",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Ben Ewing",
+        "url": "https://example.com/norajones"
+      }
+    ],
+    "date": "2021-07-18",
+    "categories": [],
+    "contents": "\r\nTODO.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-07-23T23:34:17-07:00",
+    "input_file": {}
+  }
+]
