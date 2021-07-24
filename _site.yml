@@ -3,7 +3,7 @@ title: "Improper Prior"
 description: |
   Ben Ewing's blog.
 base_url: https://improperprior.com/
-output_dir: "docs"
+output_dir: "public"
 theme: themes/fairyfloss-light.css
 favicon: images/favicon.png
 
