@@ -6,7 +6,7 @@ base_url: https://improperprior.com/
 output_dir: "public"
 theme: themes/fairyfloss-light.css
 favicon: images/favicon.png
-
+include: ['_redirects']
 navbar:
   search: false
   logo:
