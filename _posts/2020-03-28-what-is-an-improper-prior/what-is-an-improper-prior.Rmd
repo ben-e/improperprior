@@ -1,7 +1,7 @@
 ---
 title: "What is an improper prior?"
 description: |
-  A short description of the post.
+  A short introduction to the use of improper priors in Bayesian statistics.
 author:
   - name: Ben Ewing
     url: https://improperprior.com/
@@ -126,8 +126,47 @@ P(\theta|Y) \propto \theta^{\sum_i y_i}(1-\theta)^{n-\sum_i y_i} \times \theta^{
             \propto \theta^{\sum_i y_i + 1 - 1}(1-\theta)^{n-\sum_i y_i  + 1 - 1}.
 \end{equation}
 
+From this we can see that the posterior distribution follows a $\text{Beta}(\sum_i y_i + 1, n - \sum_i y_i + 1)$ distribution. Intuitively  because we used a prior that carried little information with it (effectively saying that $\theta$ could be any value in (0, 1)) our posterior estimate for $\theta$ is entirely determined by the data.
+
+Here's a simple Shiny app to let you play with this model and build some intuition as to how the prior parameters and data interact.
+
+```{r, fig.width = 15, echo = F}
+knitr::include_app("https://ben-ewing.shinyapps.io/Beta-Binomial/", height = 465)
+```
+
 # Limitations
 
+So far this seems like a great framework, but the requirement that the prior be a proper distribution can be quite restrictive. Consider the normal distribution (for simplicity, assume known $\sigma^2$): $\mu$ can take _any_ real value, so how can we use a flat prior with equal probability for each possible value of $\mu$?
+
+<aside>
+Note that a proper distribution is one with a density function that integrates to 1.
+</aside>
+
+While powerful in specific cases, Bayesian modeling is rather limited if we can only use proper distributions as priors.
+
 # Improper Priors
+
+Naively, what would happen if we just set the probability of each $\mu$ to 1? Well it turns out that we can do exactly this - we can use any prior, even an _improper prior_ as long as the posterior comes out to be a proper distribution.
+
+Choosing an improper prior that generates a valid posterior can be a tricky affair, but using [Jeffreys' prior](https://en.wikipedia.org/wiki/Jeffreys_prior) is a good place to start. Continuing the normal example, we will just use a prior probability of 1 for every value of $\mu$. This is actially proportional to the [Jeffreys' prior for this setup](https://en.wikipedia.org/wiki/Jeffreys_prior#Gaussian_distribution_with_mean_parameter). As with the previous example, we will set aside all constant terms:
+
+$$
+P(\theta|Y) \propto \exp{\left[-\frac{1}{2} \left(\frac{y-\mu}{\sigma^2}\right)^2\right]} \times 1.
+$$
+
+The posterior is just a proper normal distribution!
+
+It is of course possible to go much deeper into improper priors, particularly choosing a good prior, but as far as the concept goes, this is mostly all there is to it!
+
+## Further Resources
+
+[Craig Gidney](https://algassert.com/post/1630) has a nice blog post walking through a slightly more technical example of improper priors. Likewise, [Andy Jones](https://andrewcharlesjones.github.io/journal/improper-priors.html) has a great podcast with a few additional examples. For a more general treatment [A First Course in Bayesian Statistical Methods](https://duckduckgo.com/?t=ffab&q=A+First+Course+in+Bayesian+Statistical+Methods&atb=v198-1&ia=shopping) by Hoff and [Bayesian Data Analysis](https://duckduckgo.com/?q=bayesian+data+analysis&t=ffab&atb=v198-1&ia=shopping) by Gelman et al are the standard introductory Bayesian statistics textbooks.
+
+As ever, Wikipedia has very detailed articles on priors, more suitable for reference than learning:
+
+* [Improper Priors](https://en.wikipedia.org/wiki/Prior_probability#Improper_priors)
+* [Jeffreys' prior](https://en.wikipedia.org/wiki/Jeffreys_prior)
+* [Conjugate Priors](https://en.wikipedia.org/wiki/Conjugate_prior)
+
 
 # Further Resources

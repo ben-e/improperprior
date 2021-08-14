@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
-    <title>Improper Prior</title>
+    <title>Improper Prior | Ben Ewing</title>
     <link>https://improperprior.com/</link>
     <atom:link href="https://improperprior.com/blog.xml" rel="self" type="application/rss+xml"/>
     <description>Ben Ewing's blog.
 </description>
     <image>
-      <title>Improper Prior</title>
+      <title>Improper Prior | Ben Ewing</title>
       <url>https://improperprior.com/images/favicon.png</url>
       <link>https://improperprior.com/</link>
     </image>
@@ -17,7 +17,7 @@
       <title>What is an improper prior?</title>
       <dc:creator>Ben Ewing</dc:creator>
       <link>https://improperprior.com/posts/2020-03-28-what-is-an-improper-prior</link>
-      <description>A short description of the post.</description>
+      <description>A short introduction to the use of improper priors in Bayesian statistics.</description>
       <guid>https://improperprior.com/posts/2020-03-28-what-is-an-improper-prior</guid>
       <pubDate>Sat, 28 Mar 2020 00:00:00 +0000</pubDate>
     </item>

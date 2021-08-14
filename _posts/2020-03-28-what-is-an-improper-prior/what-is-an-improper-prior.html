@@ -88,7 +88,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
   <title>What is an improper prior?</title>
 
-  <meta property="description" itemprop="description" content="A short description of the post."/>
+  <meta property="description" itemprop="description" content="A short introduction to the use of improper priors in Bayesian statistics."/>
 
 
   <!--  https://schema.org/Article -->
@@ -99,19 +99,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="What is an improper prior?"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="A short description of the post."/>
+  <meta property="og:description" content="A short introduction to the use of improper priors in Bayesian statistics."/>
   <meta property="og:locale" content="en_US"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="What is an improper prior?"/>
-  <meta property="twitter:description" content="A short description of the post."/>
+  <meta property="twitter:description" content="A short introduction to the use of improper priors in Bayesian statistics."/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["What is an improper prior?"]},{"type":"character","attributes":{},"value":["A short description of the post.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Ben Ewing"]},{"type":"character","attributes":{},"value":["https://improperprior.com/"]}]}]},{"type":"character","attributes":{},"value":["2020-03-28"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["What is an improper prior?"]},{"type":"character","attributes":{},"value":["A short introduction to the use of improper priors in Bayesian statistics.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Ben Ewing"]},{"type":"character","attributes":{},"value":["https://improperprior.com/"]}]}]},{"type":"character","attributes":{},"value":["2020-03-28"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1455,7 +1455,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"What is an improper prior?","description":"A short description of the post.","authors":[{"author":"Ben Ewing","authorURL":"https://improperprior.com/","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2020-03-28T00:00:00.000-07:00","citationText":"Ewing, 2020"}
+{"title":"What is an improper prior?","description":"A short introduction to the use of improper priors in Bayesian statistics.","authors":[{"author":"Ben Ewing","authorURL":"https://improperprior.com/","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2020-03-28T00:00:00.000-07:00","citationText":"Ewing, 2020"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1468,7 +1468,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>What is an improper prior?</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>A short introduction to the use of improper priors in Bayesian statistics.</p></p>
 </div>
 
 <div class="d-byline">
@@ -1510,19 +1510,46 @@ P(\theta|Y) = \frac{L(Y|\theta)P(\theta)}{P(Y)}.
 <li><span class="math inline">\(P(\theta)\)</span> is a distribution representing a prior guess for <span class="math inline">\(\theta\)</span> before observing data.</li>
 <li><span class="math inline">\(P(Y)\)</span> is the unconditional likelihood of observing the data, also commonly called a normalizing constant. We will ignore this term as it is constant once the data has been observed, and only acts to make sure that the numerator integrates to 1 (i.e. it makes sure the posterior is a <em>proper</em> distribution), which is surprisingly unnecessary for posterior estimation.</li>
 </ul>
-<p>The canonical prior for data from a binomial distribution is the beta distribution. This is for good reason, the beta distribution has support between 0 and 1 (bounded or not!) and is very versatile with respect to it’s potential shapes. For this example we’ll use a flat prior, which gives equal weight to all possible values of <span class="math inline">\(\theta\)</span>. The <span class="math inline">\(\text{Beta}(1, 1)\)</span> distribution does this by just giving a Uniform distribution over <span class="math inline">\([0, 1]\)</span>.</p>
+<p>The canonical prior for data from a binomial distribution is the beta distribution. This is for good reason, the beta distribution has support between 0 and 1 (bounded or not!) and is very versatile with respect to it’s potential shapes.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="what-is-an-improper-prior_files/figure-html5/beta-distribution-demo-1.gif" /><!-- --></p>
 </div>
+<p>For this example we’ll use a flat prior, which gives equal weight to all possible values of <span class="math inline">\(\theta\)</span>. The <span class="math inline">\(\text{Beta}(1, 1)\)</span> distribution does this by just giving a Uniform distribution over <span class="math inline">\([0, 1]\)</span>.</p>
 <p>The likelihood is just the probability that we observe the data sampled data. The likelihood for binomial data is just a binomial distribution itself. Setting aside constant terms the likelihood is just <span class="math inline">\(\theta^{\sum_i y_i}(1-\theta)^{n-\sum_i y_i}\)</span>. We can complete the numerator of <a href="#eq:bayes">(1)</a> by combining this likelihood with the <span class="math inline">\(\text{Beta}(1, 1)\)</span> prior, which gives:</p>
 <p><span class="math display" id="eq:posterior">\[\begin{equation}
 \tag{2}
 P(\theta|Y) \propto \theta^{\sum_i y_i}(1-\theta)^{n-\sum_i y_i} \times \theta^{1-1}(1-\theta)^{1-1} \\
             \propto \theta^{\sum_i y_i + 1 - 1}(1-\theta)^{n-\sum_i y_i  + 1 - 1}.
 \end{equation}\]</span></p>
+<p>From this we can see that the posterior distribution follows a <span class="math inline">\(\text{Beta}(\sum_i y_i + 1, n - \sum_i y_i + 1)\)</span> distribution. Intuitively because we used a prior that carried little information with it (effectively saying that <span class="math inline">\(\theta\)</span> could be any value in (0, 1)) our posterior estimate for <span class="math inline">\(\theta\)</span> is entirely determined by the data.</p>
+<p>Here’s a simple Shiny app to let you play with this model and build some intuition as to how the prior parameters and data interact.</p>
+<div class="layout-chunk" data-layout="l-body">
+<iframe src="https://ben-ewing.shinyapps.io/Beta-Binomial/?showcase=0" width="1440" height="465">
+</iframe>
+</div>
 <h1 id="limitations">Limitations</h1>
+<p>So far this seems like a great framework, but the requirement that the prior be a proper distribution can be quite restrictive. Consider the normal distribution (for simplicity, assume known <span class="math inline">\(\sigma^2\)</span>): <span class="math inline">\(\mu\)</span> can take <em>any</em> real value, so how can we use a flat prior with equal probability for each possible value of <span class="math inline">\(\mu\)</span>?</p>
+<aside>
+Note that a proper distribution is one with a density function that integrates to 1.
+</aside>
+<p>While powerful in specific cases, Bayesian modeling is rather limited if we can only use proper distributions as priors.</p>
 <h1 id="improper-priors">Improper Priors</h1>
-<h1 id="further-resources">Further Resources</h1>
+<p>Naively, what would happen if we just set the probability of each <span class="math inline">\(\mu\)</span> to 1? Well it turns out that we can do exactly this - we can use any prior, even an <em>improper prior</em> as long as the posterior comes out to be a proper distribution.</p>
+<p>Choosing an improper prior that generates a valid posterior can be a tricky affair, but using <a href="https://en.wikipedia.org/wiki/Jeffreys_prior">Jeffreys’ prior</a> is a good place to start. Continuing the normal example, we will just use a prior probability of 1 for every value of <span class="math inline">\(\mu\)</span>. This is actially proportional to the <a href="https://en.wikipedia.org/wiki/Jeffreys_prior#Gaussian_distribution_with_mean_parameter">Jeffreys’ prior for this setup</a>. As with the previous example, we will set aside all constant terms:</p>
+<p><span class="math display">\[
+P(\theta|Y) \propto \exp{\left[-\frac{1}{2} \left(\frac{y-\mu}{\sigma^2}\right)^2\right]} \times 1.
+\]</span></p>
+<p>The posterior is just a proper normal distribution!</p>
+<p>It is of course possible to go much deeper into improper priors, particularly choosing a good prior, but as far as the concept goes, this is mostly all there is to it!</p>
+<h2 id="further-resources">Further Resources</h2>
+<p><a href="https://algassert.com/post/1630">Craig Gidney</a> has a nice blog post walking through a slightly more technical example of improper priors. Likewise, <a href="https://andrewcharlesjones.github.io/journal/improper-priors.html">Andy Jones</a> has a great podcast with a few additional examples. For a more general treatment <a href="https://duckduckgo.com/?t=ffab&amp;q=A+First+Course+in+Bayesian+Statistical+Methods&amp;atb=v198-1&amp;ia=shopping">A First Course in Bayesian Statistical Methods</a> by Hoff and <a href="https://duckduckgo.com/?q=bayesian+data+analysis&amp;t=ffab&amp;atb=v198-1&amp;ia=shopping">Bayesian Data Analysis</a> by Gelman et al are the standard introductory Bayesian statistics textbooks.</p>
+<p>As ever, Wikipedia has very detailed articles on priors, more suitable for reference than learning:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Prior_probability#Improper_priors">Improper Priors</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Jeffreys_prior">Jeffreys’ prior</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Conjugate_prior">Conjugate Priors</a></li>
+</ul>
+<h1 id="further-resources-1">Further Resources</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
