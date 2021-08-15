@@ -1,23 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>interview on Improper Prior</title>
-    <link>/tags/interview/</link>
-    <description>Recent content in interview on Improper Prior</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 16 Mar 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/interview/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Data Science Interview Questions</title>
-      <link>/post/2020/03/16/data-science-interview-questions/</link>
-      <pubDate>Mon, 16 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2020/03/16/data-science-interview-questions/</guid>
-      <description>IntroductionI’ve seen a number of articles/posts pop up around the internet with lists of data science interview questions. I thought it might be a good exercise in communication and data science knowledge to answer these questions. I am finding it harder than I would have expected to write good (and hopefully useful) answers!
-Question sources:
-HackerNoon - 160+ Data Science Interview QuestionsAdditional resources:
-Alexey Grigorev has put together a whole GitHub repo with data science interview questions and answers, available here.</description>
-    </item>
-    
-  </channel>
-</rss>

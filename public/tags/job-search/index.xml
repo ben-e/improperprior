@@ -1,32 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>job-search on Improper Prior</title>
-    <link>/tags/job-search/</link>
-    <description>Recent content in job-search on Improper Prior</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 18 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/job-search/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>My TripleByte Data Science Experience</title>
-      <link>/post/2020/05/18/my-triplebyte-data-science-experience/</link>
-      <pubDate>Mon, 18 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2020/05/18/my-triplebyte-data-science-experience/</guid>
-      <description>What is TripleByte?TripleByte aims to simplify the hiring process for candidates and companies by conducting background-blind interviews to certify candidates (seriously, you can get a certificate) based solely on their skills. The TripleByte process is meant to replace every interview except the final round, in theory easing the burden on job-seekers, who need only prepare for a single standardized interview (plus the final round), and speeding up the hiring process for companies.</description>
-    </item>
-    
-    <item>
-      <title>Data Science Interview Questions</title>
-      <link>/post/2020/02/07/data-science-interview-questions/</link>
-      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2020/02/07/data-science-interview-questions/</guid>
-      <description>IntroductionI’ve seen a number of articles/posts pop up around the internet with lists of data science interview questions. I thought it might be a good exercise in communication and data science knowledge to answer these questions. I am finding it harder than I would have expected to write good (and hopefully useful) answers!
-Question sources:
-HackerNoon - 160+ Data Science Interview QuestionsAdditional resources:
-Alexey Grigorev has put together a whole GitHub repo with data science interview questions and answers, available here.</description>
-    </item>
-    
-  </channel>
-</rss>

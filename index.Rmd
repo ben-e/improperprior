@@ -1,3 +1,15 @@
 ---
-site: blogdown:::blogdown_site
+title: "Ben Ewing"
+image: "images/ben.jpg"
+favicon: images/favicon.png
+links:
+  - label: LinkedIn
+    url: "https://www.linkedin.com/in/ben-e/"
+  - label: GitHub
+    url: "https://github.com/ben-e"
+site: distill::distill_website
+output:
+  postcards::jolla
 ---
+
+Hi! I am a data scientist, amateur economist, dabbling Bayesian, pretty mediocre cyclist, and an uninspired climber. My academic background includes computer science, economics, and mathematics; my B.A. is from UC Santa Cruz and my M.S. is from Duke University. I am currently interested in R, tidymodels, Bayesian statistics, Rust, and a bunch of other things. I am also a Data Scientist at Teladoc Health.

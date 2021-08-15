@@ -1,152 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Home on Improper Prior</title>
-    <link>/</link>
-    <description>Recent content in Home on Improper Prior</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 24 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Technologies for 2021</title>
-      <link>/post/2021/01/24/technologies-for-2021/</link>
-      <pubDate>Sun, 24 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2021/01/24/technologies-for-2021/</guid>
-      <description>These are my goals for the coming year. I&amp;rsquo;ve tried to make each actionable, with a rough plan, time estimate, and an end goal. The end goals are all something to be built, not something to be necessarily finished. The &amp;ldquo;How&amp;rdquo; section of each of these goals may list a particular book or tutorials, but I want to be clear that the goal is not finishing these, but to use them to accomplish the goal.</description>
-    </item>
-    
-    <item>
-      <title>Staying Stuck in Emacs</title>
-      <link>/post/2021/01/17/staying-stuck-in-emacs/</link>
-      <pubDate>Sun, 17 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2021/01/17/staying-stuck-in-emacs/</guid>
-      <description>I recently saw this post, The values of Emacs, the Neovim revolution, and the VSCode gorilla, pop up on HackerNews (I know, it&amp;rsquo;s terrible there), and it really captured why I feel stuck to a degree in Emacs despite the other genuinely good options out there.
-For context, I use Doom Emacs as my distribution of choice: Evil Mode is great and it&amp;rsquo;s fast. I&amp;rsquo;m also interested in checking out Centaur Emacs at some point.</description>
-    </item>
-    
-    <item>
-      <title>Formula One and Genetic Algorithms - Part 2</title>
-      <link>/post/2021/01/16/formula-one-and-genetic-algorithms-part-2/</link>
-      <pubDate>Sat, 16 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2021/01/16/formula-one-and-genetic-algorithms-part-2/</guid>
-      <description>Coming soon, or at least before the next season starts. At this rate I&#39;ll get one post out per season.</description>
-    </item>
-    
-    <item>
-      <title>A Note - Black Lives Matter</title>
-      <link>/post/2020/06/01/a-note-black-lives-matter/</link>
-      <pubDate>Mon, 01 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2020/06/01/a-note-black-lives-matter/</guid>
-      <description>Note: I wrote this post mostly for my Facebook page, which I regrettably still maintain. As such, there are references to posts I have seen from family and friends which may not entirely make sense in the context of this blog.
-I basically don&amp;rsquo;t post anything on social media anymore, but at this point it feels irresponsible not to (it is also the absolute least I can do). Unequivocally: Black Lives Matter.</description>
-    </item>
-    
-    <item>
-      <title>Formula One and Genetic Algorithms - Part 1</title>
-      <link>/post/2020/05/20/formula-1-and-genetic-algorithms-p1/</link>
-      <pubDate>Wed, 20 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2020/05/20/formula-1-and-genetic-algorithms-p1/</guid>
-      <description>IntroductionFor all of its flaws, and there are many, I’ve developed an infatuation with Formula One over the past year. While the racing is sometimes exciting and the driver narratives are always dramatic, I think what attracts me most to the sport is the way cars and teams develop over a season.
-Each year F1 teams develop and unveil new cars (warning: loud + flashing lights) adhering to a set of regulations.</description>
-    </item>
-    
-    <item>
-      <title>My TripleByte Data Science Experience</title>
-      <link>/post/2020/05/18/my-triplebyte-data-science-experience/</link>
-      <pubDate>Mon, 18 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2020/05/18/my-triplebyte-data-science-experience/</guid>
-      <description>What is TripleByte?TripleByte aims to simplify the hiring process for candidates and companies by conducting background-blind interviews to certify candidates (seriously, you can get a certificate) based solely on their skills. The TripleByte process is meant to replace every interview except the final round, in theory easing the burden on job-seekers, who need only prepare for a single standardized interview (plus the final round), and speeding up the hiring process for companies.</description>
-    </item>
-    
-    <item>
-      <title>Learning SQL</title>
-      <link>/post/2020/04/23/learning-sql/</link>
-      <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2020/04/23/learning-sql/</guid>
-      <description>I’ve been using the past few weeks to improve my SQL fluency, and I just wanted to share a few quick resources that I’ve found useful. In no particular order:
-SQLZoo. The quizzes and questions hit the perfect balance of challenging but not so hard that it breaks my sense of flow.
-The sqlite3 package for Python and RSQLite package for R. While one certainly could install and use something like PostgreSQL on their laptop (and it’s definitely a useful tool to learn!</description>
-    </item>
-    
-    <item>
-      <title>Using Principal Component Analysis to Estimate Socioeconomic Status</title>
-      <link>/post/2020/03/21/using-principal-component-analysis-to-estimate-socioeconomic-status/</link>
-      <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2020/03/21/using-principal-component-analysis-to-estimate-socioeconomic-status/</guid>
-      <description>IntroductionPrincipal Component Analysis (PCA) is a dimension reduction technique that is commonly used in the social sciences to build single dimension estimates of socioeconomic status. In this post I will first walk through the intuition and math behind PCA, and then provide a simple example of its use in R to generate a simple asset index.
-IntuitionDimension reduction is any process by which we reduce the number of variables in a dataset.</description>
-    </item>
-    
-    <item>
-      <title>What is an improper prior?</title>
-      <link>/post/2020/03/16/what-is-an-improper-prior/</link>
-      <pubDate>Mon, 16 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2020/03/16/what-is-an-improper-prior/</guid>
-      <description>IntroductionSince I’ve purchased improperprior.com it seems prudent that I write a short post explaining improper priors.
-Typical Bayesian ProcessIn Bayesian statistics we exploit Bayes’ theorem to learn something about a population parameter. For example, if we have data \(Y\) that follow a Binomial distribution, and we would like to estimate the \(\theta\) parameter, we would compute:
-\[P(\theta|Y) = \frac{L(Y|\theta)P(\theta)}{P(Y)}.\]
-In this case:
-\(P(\theta|Y)\) is the posterior probability, this is what we’d like to estimate.</description>
-    </item>
-    
-    <item>
-      <title>Continuous and Binary Dependent Variables</title>
-      <link>/post/2020/02/14/continuous-and-binary-dependent-variables/</link>
-      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2020/02/14/continuous-and-binary-dependent-variables/</guid>
-      <description>R Setup# Data manipulationlibrary(dplyr)library(purrr)library(tidyr)# Modelinglibrary(broom)# Plotting and tableslibrary(ggplot2)library(patchwork)library(ggthemes)library(knitr)# R settingstheme_set(theme_tufte() + theme(legend.position = &amp;quot;none&amp;quot;))opts_chunk$set(echo = T, warning = F, message = F, tidy = F,fig.width = 8.5, fig.height = 6)IntroductionIn his 2011 paper “Land tenure and investment incentives: Evidence from West Africa,” James Fenske notes that “studies that use binary investment measures…are also less likely to find a statistically significant effect.</description>
-    </item>
-    
-    <item>
-      <title>Data Science Interview Questions</title>
-      <link>/post/2020/02/07/data-science-interview-questions/</link>
-      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2020/02/07/data-science-interview-questions/</guid>
-      <description>IntroductionI’ve seen a number of articles/posts pop up around the internet with lists of data science interview questions. I thought it might be a good exercise in communication and data science knowledge to answer these questions. I am finding it harder than I would have expected to write good (and hopefully useful) answers!
-Question sources:
-HackerNoon - 160+ Data Science Interview QuestionsAdditional resources:
-Alexey Grigorev has put together a whole GitHub repo with data science interview questions and answers, available here.</description>
-    </item>
-    
-    <item>
-      <title>A Language for Survey Programming</title>
-      <link>/post/2020/01/05/a-language-for-survey-programming/</link>
-      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2020/01/05/a-language-for-survey-programming/</guid>
-      <description>What’s wrong with XLSForms?XLSForm defines a very accessible (other than reliance on Excel) standard for programming surveys compatible with OpenDataKit, SurveyCTO, and a myriad of other data collection tools used in low/no connectivity environments. XLSForm’s are dead easy to program, but can produce very complex surveys. However, in my ~5 years of programming XLSForm surveys I’ve encountered a few problems caused by the reliance on Excel for programming:</description>
-    </item>
-    
-    <item>
-      <title>Book Log</title>
-      <link>/book_log/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/book_log/</guid>
-      <description>This is some of the media I’ve interacted with, by year.
-2021BooksSword of Destiny - [In Progress]Dune - Dune pulled me in hard after the first few chapters. Herbert builds a very interesting world filled with mostly compelling characters. It also feels like much more modern sci-fi, though I am not particularly well-read, compared to it’s contemporaries. The ending is more ominous than triumphant.The Return of the King - It’s good!</description>
-    </item>
-    
-    <item>
-      <title>Friends on the Internet</title>
-      <link>/friends/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/friends/</guid>
-      <description>These are some of the people I like across the internet:
-BlogsGordon Shotwell’s Data Science Blog - I stumbled on Gordon’s blog because of a HackerNews post. I have so far found all of his posts to be very insightful and well thought out.Eric’s Movie Blog - This is a movie blog run by a friend from undergraduate. His movie reviews are extremely well written.Craig Gidney’s Algorithmic Assertions - This is a fantastic math/computer science blog.</description>
-    </item>
-    
-  </channel>
-</rss>
