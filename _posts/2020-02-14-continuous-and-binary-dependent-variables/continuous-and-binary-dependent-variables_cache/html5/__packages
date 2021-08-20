@@ -1,0 +1,15 @@
+base
+methods
+datasets
+utils
+grDevices
+graphics
+stats
+dplyr
+purrr
+tidyr
+broom
+ggplot2
+patchwork
+ggthemes
+knitr
