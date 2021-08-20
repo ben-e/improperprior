@@ -5,14 +5,14 @@
       "title": "Blog",
       "author": [],
       "contents": "\r\n\r\nNote: As of 2021-08-15 I’ve switched this site from {{blogdown}} to {{distill}}. I’ll be slowly updating and reintroducing some of the previous blog posts with redirects for the old URLs.\r\n\r\n\r\n\r\n",
-      "last_modified": "2021-08-20T08:28:16-07:00"
+      "last_modified": "2021-08-20T08:42:14-07:00"
     },
     {
       "path": "index.html",
       "title": "Ben Ewing",
       "author": [],
       "contents": "\r\n\r\n          \r\n          \r\n          \r\n          \r\n          Improper Prior | Ben Ewing\r\n          \r\n          \r\n          About\r\n          Blog\r\n          ☰\r\n          \r\n          \r\n      \r\n        \r\n          \r\n            Ben Ewing\r\n          \r\n          \r\n            \r\n              Hi! I am a data scientist, amateur economist, dabbling Bayesian, pretty mediocre cyclist, and an uninspired climber. My academic background includes computer science, economics, and mathematics; my B.A. is from UC Santa Cruz and my M.S. is from Duke University. I am currently interested in R, tidymodels, Bayesian statistics, Rust, and a bunch of other things. I am also a Data Scientist at Teladoc Health.\r\n            \r\n            \r\n              Hi! I am a data scientist, amateur economist, dabbling Bayesian, pretty mediocre cyclist, and an uninspired climber. My academic background includes computer science, economics, and mathematics; my B.A. is from UC Santa Cruz and my M.S. is from Duke University. I am currently interested in R, tidymodels, Bayesian statistics, Rust, and a bunch of other things. I am also a Data Scientist at Teladoc Health.\r\n            \r\n          \r\n\r\n          \r\n            \r\n              \r\n                  \r\n                    \r\n                      LinkedIn\r\n                    \r\n                  \r\n                \r\n                                \r\n                  \r\n                    \r\n                      GitHub\r\n                    \r\n                  \r\n                \r\n                              \r\n          \r\n\r\n          \r\n            \r\n              \r\n                                \r\n                  \r\n                    LinkedIn\r\n                  \r\n                \r\n                                \r\n                  \r\n                    GitHub\r\n                  \r\n                \r\n                              \r\n            \r\n          \r\n        \r\n      \r\n    \r\n\r\n    \r\n    \r\n    ",
-      "last_modified": "2021-08-20T08:28:16-07:00"
+      "last_modified": "2021-08-20T08:42:15-07:00"
     }
   ],
   "collections": ["posts/posts.json"]
