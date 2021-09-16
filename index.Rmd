@@ -12,4 +12,6 @@ output:
   postcards::jolla
 ---
 
-Hi! I am a data scientist, amateur economist, dabbling Bayesian, pretty mediocre cyclist, and an uninspired climber. My academic background includes computer science, economics, and mathematics; my B.A. is from UC Santa Cruz and my M.S. is from Duke University. I am currently interested in R, tidymodels, Bayesian statistics, Rust, and a bunch of other things. I am also a Data Scientist at Teladoc Health.
+Hi! I am a data scientist, amateur economist, and a dabbling Bayesian. My academic background includes computer science, economics, and mathematics; my B.A. is from UC Santa Cruz and my M.S. is from Duke University.
+
+I am currently a data scientist at [Modern Fertility](https://modernfertility.com/).

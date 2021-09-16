@@ -6,4 +6,4 @@ listing: posts
 
 <br>
 
-_Note_: As of 2021-08-15 I've switched this site from [{{blogdown}}](https://github.com/rstudio/blogdown) to [{{distill}}](https://github.com/rstudio/distill). I'll be slowly updating and reintroducing some of the previous blog posts with redirects for the old URLs.
+_Note_: As of 2021-08-15 I've switched this site from [{{blogdown}}](https://github.com/rstudio/blogdown) to [{{distill}}](https://github.com/rstudio/distill). I'll be _slowly_ updating and reintroducing some of the previous blog posts with redirects for the old URLs.
