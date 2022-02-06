@@ -12,7 +12,15 @@
       <link>https://improperprior.com/</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Mon, 16 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 31 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>XGBoost as an Interaction Explorer</title>
+      <dc:creator>Ben Ewing</dc:creator>
+      <link>https://improperprior.com/posts/2022-01-31-xgboost-as-a-feature-generator</link>
+      <description>This post explores one approach to transforming tree-based models, in this case XGBoost, into linear models. In this framework, XGBoost can be seen as a method for exploring interactions between features and regions of data.</description>
+      <guid>https://improperprior.com/posts/2022-01-31-xgboost-as-a-feature-generator</guid>
+      <pubDate>Mon, 31 Jan 2022 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>What is an improper prior?</title>
       <dc:creator>Ben Ewing</dc:creator>

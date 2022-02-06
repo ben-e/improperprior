@@ -1,0 +1,332 @@
+---
+title: "XGBoost as an Interaction Explorer"
+description: |
+  This post explores one approach to transforming tree-based models, in this case XGBoost, into linear models. In this framework, XGBoost can be seen as a method for exploring interactions between features and regions of data.
+author:
+  - name: Ben Ewing
+    url: https://improperprior.com/
+date: 01-31-2022
+output:
+  distill::distill_article:
+    self_contained: false
+bibliography: biblio.bib
+---
+
+# Introduction
+
+Tree-based models, like XGBoost and Random Forests, can be incredibly powerful tools for modeling structured data, however they are are not typically considered interpretable. While you can inspect the trees, look at feature importance, or use approaches like LIME and SHAP, but these approaches are not perfect [@slack2020fooling] and are often not sufficient for high-stakes decisions [@rudin2019stop]. In this post, I will one approach for using XGBoost to generate features and explore interactions between variables and regions of data that can then be used in an interpretable linear model.
+
+This post presumes some knowledge about decision trees, but not necessarily any specific tree-growing method.
+
+# Definitions
+
+I'll start by definining a few terms that I may be using in a non-standard way, or that may be unfamiliar.
+
+* Leaves: Leaves are the final nodes in a decision tree. Every data point gets sorted into the leaf of a decision tree. Leaves can be seen as representing the interaction between every variable used in the preceeding nodes.
+* Interactions: An interaction refers to relationship between two variables in relation to the outcome. These are often modeled explicitly in linear models [@wikiinteraction], but XGboost's tree building can be seen as discovering useful interactions between variables and crucially different values of those variables.
+* Regions of data: Decision trees make _decisions_ by choosing a splitting variable, and then a value at which to split. Sucessive splits can be seen as not just interactions between variables, but as interactions between regions of the data.
+* Embeddings: The leaves of a decision tree are sometimes called embeddings.
+
+# The Idea
+
+The general idea is that we can (1) fit XGBoost with a relatively shallow trees, (2) rather than get predictions from the model, we get the leaf (for each tree) that a data point is assigned to. Each leaf represents the interaction between variables and regions of data. Then (3) fit an elasticnet regression to regularize out leaves that are not informative. LASSO may also be fine, but it's very possible for the number of features (i.e. the number of leaves) to outnumber the number of data points. To prevent overfitting, we'll train XGBoost and the regularizing regression on separate datasets.
+
+This is not an original idea by any means! I first learned of this approach when reading about the Loft Data Science Team's XGBoost Survival Embeddings [@xgbse2021]. The Scikit-learn documentation also discusses a similar approach, and shows how it can be incorporated in a [pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline) [@scikit].
+
+
+# R Setup
+
+I'll be using R for this blog post, but the approaches described here are language agnostic.
+
+```{r r-setup, warning=F, message=F}
+# Data manipulation
+library(dplyr)
+library(tidyr)
+# I/O
+library(readr)
+# Modeling
+library(tidymodels)
+library(finetune)
+library(vip)
+# Parallel things
+library(doParallel)
+
+# Settings/misc things
+tidymodels_prefer()
+registerDoParallel(parallel::detectCores())
+```
+
+# Data Setup
+
+I'll be copying [Julia Silge](https://juliasilge.com/blog/austin-housing/) and using the [Sliced Semifinals dataset](https://www.kaggle.com/c/sliced-s01e11-semifinals/data). To make life simpler for this post, I'll reduce the classes of interest to just two: under/over $450,000.
+
+```{r data-setup, message=F, warning=F}
+# Read data
+df <- read_csv('data/train.csv') %>% 
+  mutate(y = factor(priceRange %in% c("450000-650000", "650000+"),
+                    c(T, F), c('above_450000', 'below_450000')))
+
+# Split into sets - for XGBoost, regression, and testing
+df_split <- initial_split(df, prop = 0.5, strata = y)
+df_train <- training(df_split)
+# df_train_xgb <- df_train
+# df_train_lr <- df_train
+df_train_split <- initial_split(df_train, prop = 0.5, strata = y)
+df_train_xgb <- training(df_train_split)
+df_train_lr <- testing(df_train_split)
+df_test <- testing(df_split)
+```
+
+I'll focus on ROC AUC.
+
+```{r data-metric-set}
+mc_metrics <- metric_set(roc_auc, accuracy)
+```
+
+Let's take a quick look at the data.
+
+```{r data-skim}
+skimr::skim(df_train) %>% 
+  select(-numeric.hist, -starts_with('numeric.p'))
+```
+
+While likely very useful, I'm going to ignore the `city`, `description`, and `homeType` columns. I just don't want to focus on text processing, and I don't want to worry about low frequency factor values.
+
+# Baseline Linear Model
+
+Let's set the baseline by fitting a logistic regression. I'm going to ignore `latitude` and `longitude` for this baseline model, as I don't think it's reasonable to assume that price should change _linearly_ with location alone, but maybe I don't know enough about Austin.
+
+Specify the recipe, model, and workflow. I don't like camel case variable names, and what's up with `MedianStudentsPerTeacher`?
+
+```{r base-mlr-setup}
+baseline_recipe <- recipe(y ~ hasSpa + garageSpaces + yearBuilt +
+                            numOfPatioAndPorchFeatures + lotSizeSqFt +
+                            avgSchoolRating + MedianStudentsPerTeacher + 
+                            numOfBathrooms + numOfBedrooms +
+                            latitude + longitude,
+                          data = df_train)
+
+lr_spec <- logistic_reg(mode = 'classification', engine = 'glmnet',
+                        mixture = 1, penalty = 0)
+
+lr_wf <- workflow() %>% 
+  add_recipe(baseline_recipe %>% 
+               remove_role(latitude, longitude, old_role = 'predictor')) %>% 
+  add_model(lr_spec)
+```
+
+The model here is using {glmnet}, setting `mixture = 1` gives a LASSO regression, but with `penalty = 0` this should be approximately the same model as a normal GLM.
+
+Get test performance.
+
+```{r baseline-valid}
+lr_wf %>% 
+  fit(df_train_lr) %>% 
+  augment(new_data = df_test) %>% 
+  mc_metrics(truth = y, 
+             .pred_above_450000,
+             estimate = .pred_class)
+```
+
+Not bad, actually.
+
+# XGboost
+
+Let's likewise get a baseline for XGBoost performance, this time using latitude and longitude. I will do some light hyperparameter tuning here, but I'll be keeping the number of trees to 300 for my laptop's sake, and the maximum depth to 4 so that the leaves are still interpretable (though this is certainly a subjective choice). This will naturally limit performance, but hopefully we can tune our way around it.
+
+```{r base-xgb-setup}
+xgb_spec <- boost_tree(mode = 'classification', engine = 'xgboost',
+                       trees = 300, tree_depth = 4,
+                       min_n = 9, mtry = 4,
+                       sample_size = 0.9846356, learn_rate = 3.971750e-02)
+
+                       # min_n = tune(), mtry = tune(),
+                       # sample_size = tune(), learn_rate = tune())
+
+xgb_wf <- workflow() %>% 
+  add_recipe(baseline_recipe) %>% 
+  add_model(xgb_spec)
+```
+
+Tune it and fit using the parameter set with the best loss. I'm going to steal Julia Silge's approach here as well; I'm typically a fan of `tune_bayes`, but I should probably branch out. Note that this will also give us cross-validation performance.
+
+```{r base-xgb-tune}
+# df_train_xgb_folds <- vfold_cv(df_train_xgb, strata = y)
+# 
+# xgb_hyperparam_grid <- grid_max_entropy(
+#   min_n(),
+#   mtry(c(1, 16)),
+#   sample_prop(),
+#   learn_rate(),
+#   size = 20
+# )
+# 
+# xgb_hyperparam_search <- tune_race_anova(
+#   xgb_wf,
+#   df_train_xgb_folds,
+#   grid = xgb_hyperparam_grid,
+#   metrics = mc_metrics,
+#   control = control_race(verbose_elim = TRUE)
+# )
+# 
+# xgb_hyperparam_search %>% 
+#   collect_metrics() %>% 
+#   filter(.metric == 'roc_auc') %>% 
+#   arrange(desc(mean))
+```
+
+With that done, get the final fit and performance estimates.
+
+```{r base-xgb-ff-test}
+xgb_fit <- xgb_wf %>%
+  # finalize_workflow(select_best(xgb_hyperparam_search, "roc_auc")) %>% 
+  fit(df_train_xgb)
+
+xgb_fit %>% 
+  augment(new_data = df_test) %>% 
+  mc_metrics(truth = y, 
+             .pred_above_450000,
+             estimate = .pred_class)
+```
+
+Alrighty, that's a bit better.
+
+# Extracting Leaves from XGBoost
+
+With an XGBoost model finalized, get predicted leaves for the regression training and test sets.
+
+```{r get-leaf-predictions}
+df_train_lr <- predict(xgb_fit, df_train_lr, type = 'raw',
+                       opts = list(predleaf = T)) %>% 
+  as_tibble(.name_repair = ~ paste0('tree_', 1:300)) %>% 
+  bind_cols(df_train_lr) %>% 
+  mutate(across(starts_with('tree_'), as.factor))
+
+df_test <- predict(xgb_fit, df_test, type = 'raw',
+                   opts = list(predleaf = T)) %>% 
+  as_tibble(.name_repair = ~ paste0('tree_', 1:300)) %>% 
+  bind_cols(df_test) %>% 
+  mutate(across(starts_with('tree_'), as.factor))
+```
+
+With our leaf-features generated, we can go ahead and fit a new {glmnet} model. This time I'll actually be using the penalty term to select leaves that are actually helpful. In fact, I'll go ahead and tune the mixture and penalty amounts.
+
+```{r leaf-rec-wf}
+leaf_rec <- recipe(df_train_lr) %>% 
+  update_role(y, new_role = 'outcome') %>% 
+  update_role(starts_with('tree_'), new_role = 'predictor') %>% 
+  update_role(hasSpa, garageSpaces, yearBuilt,
+              numOfPatioAndPorchFeatures, lotSizeSqFt,
+              avgSchoolRating, MedianStudentsPerTeacher, 
+              numOfBathrooms, numOfBedrooms,
+              new_role = 'predictor') %>% 
+  step_zv(all_predictors()) %>% 
+  step_dummy(starts_with('tree_'))
+
+lr_spec <- logistic_reg(mode = 'classification', engine = 'glmnet',
+                        mixture = 0.5, penalty = 0.15)
+                        # mixture = tune(), penalty = tune())
+
+lr_wf <- workflow() %>% 
+  add_recipe(leaf_rec) %>% 
+  add_model(lr_spec)
+```
+
+Set up the tuning grid and search it.
+
+```{r leaf-tune}
+# df_train_lr_folds <- vfold_cv(df_train_lr, strata = y)
+# 
+# lr_hyperparam_grid <- grid_max_entropy(mixture(), penalty(), size = 5)
+# 
+# lr_hyperparam_search <- tune_race_anova(
+#   lr_wf,
+#   df_train_lr_folds,
+#   grid = lr_hyperparam_grid,
+#   metrics = mc_metrics,
+#   control = control_race()
+# )
+# 
+# lr_hyperparam_search %>% 
+#   collect_metrics() %>% 
+#   filter(.metric == 'roc_auc') %>% 
+#   arrange(desc(mean))
+```
+
+The tuning performance looks promising, and the best fit metrics look reasonable. Let's take a look at the final fit and test performance.
+
+```{r leaf-ff-test}
+lr_fit <- lr_wf %>%
+  # finalize_workflow(select_best(lr_hyperparam_search, "roc_auc")) %>% 
+  fit(df_train_lr)
+
+lr_fit %>% 
+  augment(new_data = df_test) %>% 
+  mc_metrics(truth = y, 
+             .pred_above_450000,
+             estimate = .pred_class)
+```
+
+Pretty close to XGBoost! What does the model actually look like?
+
+```{r leaf-glm-look}
+lr_fit %>% 
+  tidy() %>% 
+  filter(estimate > 0) %>% 
+  arrange(desc(estimate))
+```
+
+This is perfect! The model started with `r lr_fit %>% tidy() %>% nrow() - 1` terms, and reduced it to 13 + an intercept without destroying model performance.
+
+Note, {glmnet} does some really cool things when fitting. I highly recommend reading the [introduction article](https://glmnet.stanford.edu/articles/glmnet.html) and [tidymodels overview](https://parsnip.tidymodels.org/reference/glmnet-details.html).
+
+# Interpreting Leaves
+
+There is one problem remaining: we don't actually know what these leaves mean. It's nice that `tree_XXX_YYY` is a great predictor, but what does it actually represent? We can get this by navigating the XGBoost tree!
+
+```{r wtf-are-trees}
+xgb_tree <- xgboost::xgb.model.dt.tree(model = xgb_fit %>% extract_fit_engine())
+xgb_tree
+```
+
+```{r summ-leaves}
+summarize_leaves <- function(tree, id, sofar) {
+  row <- tree %>% filter(ID == id)
+
+  if (row$Feature == 'Leaf') {
+    ret <- list()
+    ret[[row$ID]] <- sofar
+    return(ret)
+  } else {
+    left_sofar = c(sofar, glue("{row$Feature}<{row$Split}"))
+    left_tree = summarize_leaves(tree, row$Yes, left_sofar)
+      
+    right_sofar = c(sofar, glue("{row$Feature}>={row$Split}"))
+    right_tree = summarize_leaves(tree, row$No, right_sofar)
+    
+    return(c(left_tree, right_tree))
+  }
+}
+
+xgb_tree %>% 
+  filter(Tree == 0) %>% 
+  summarize_leaves('0-0', c())
+```
+
+
+
+# Test Performance
+
+# Some Neat Things
+
+## Fitting With Just Leaves Vs. Features
+
+## Missing Data
+
+## Random Forests
+
+## Tuning
+
+Rather than tuning the XGBoost hyperparameters and _then_ using the leaves in a subsequent model, we could choose hyperparameters bundle the whole thing into a hyperparameter tuning loop.
+
+## Boruta?
