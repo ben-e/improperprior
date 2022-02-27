@@ -20,6 +20,7 @@
       <description>This post explores one approach to transforming tree-based models, in this case XGBoost, into linear models. In this framework, XGBoost can be seen as a method for exploring interactions between features and regions of data.</description>
       <guid>https://improperprior.com/posts/2022-01-31-xgboost-as-a-feature-generator</guid>
       <pubDate>Mon, 31 Jan 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://improperprior.com/posts/2022-01-31-xgboost-as-a-feature-generator/xgboost-as-a-feature-generator_files/figure-html5/cool-plot-1.png" medium="image" type="image/png" width="2304" height="1536"/>
     </item>
     <item>
       <title>What is an improper prior?</title>
