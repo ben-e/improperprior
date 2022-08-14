@@ -1,0 +1,128 @@
+[
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code."
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "Since this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Improper Prior | Ben Ewing",
+    "section": "",
+    "text": "Hi! My name is Ben Ewing…"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "about.html#pages",
+    "href": "about.html#pages",
+    "title": "Improper Prior | Ben Ewing",
+    "section": "Pages",
+    "text": "Pages"
+  },
+  {
+    "objectID": "about.html#projects",
+    "href": "about.html#projects",
+    "title": "Improper Prior | Ben Ewing",
+    "section": "Projects",
+    "text": "Projects"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "deep learning\n\n\nR\n\n\nwand\n\n\n\n\n\n\n\n\n\n\n\nAug 14, 2022\n\n\nBen Ewing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nAug 14, 2022\n\n\nBen Ewing\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html#pages",
+    "href": "index.html#pages",
+    "title": "Improper Prior | Ben Ewing",
+    "section": "Pages",
+    "text": "Pages\n\nMy blog.\nWhat is an improper prior?"
+  },
+  {
+    "objectID": "index.html#projects",
+    "href": "index.html#projects",
+    "title": "Improper Prior | Ben Ewing",
+    "section": "Projects",
+    "text": "Projects\n\nwand\nwand is an R package which implements generalized additive models (GAMs) using torch as a backend, allowing users to fit semi-interpretable models using tools from the deep learning world. In addition to its GAM implementation, wand also provides tools for model interpretation. This package gets its name from the type of network it implements: wide and deep networks combine linear features (wide) with feature embeddings (deep)."
+  },
+  {
+    "objectID": "pages/what-is-an-improper-prior/index.html",
+    "href": "pages/what-is-an-improper-prior/index.html",
+    "title": "What is an improper prior?",
+    "section": "",
+    "text": "Tmp."
+  },
+  {
+    "objectID": "posts/wide-and-deep-neural-networks-are-just-gams/index.html",
+    "href": "posts/wide-and-deep-neural-networks-are-just-gams/index.html",
+    "title": "Wide&Deep Neural Networks are Just GAMs",
+    "section": "",
+    "text": "Using GAMs at work\nSimultaneously reading Hands on ML…\nmy tweet https://twitter.com/YellAnimal/status/1536081381259808769"
+  },
+  {
+    "objectID": "posts/wide-and-deep-neural-networks-are-just-gams/index.html#what-is-a-gam",
+    "href": "posts/wide-and-deep-neural-networks-are-just-gams/index.html#what-is-a-gam",
+    "title": "Wide&Deep Neural Networks are Just GAMs",
+    "section": "What is a GAM?",
+    "text": "What is a GAM?"
+  },
+  {
+    "objectID": "posts/wide-and-deep-neural-networks-are-just-gams/index.html#what-is-a-widedeep-neural-network",
+    "href": "posts/wide-and-deep-neural-networks-are-just-gams/index.html#what-is-a-widedeep-neural-network",
+    "title": "Wide&Deep Neural Networks are Just GAMs",
+    "section": "What is a Wide&Deep Neural Network?",
+    "text": "What is a Wide&Deep Neural Network?"
+  },
+  {
+    "objectID": "posts/wide-and-deep-neural-networks-are-just-gams/index.html#the-wand-package",
+    "href": "posts/wide-and-deep-neural-networks-are-just-gams/index.html#the-wand-package",
+    "title": "Wide&Deep Neural Networks are Just GAMs",
+    "section": "The wand Package",
+    "text": "The wand Package"
+  },
+  {
+    "objectID": "pages/what-is-an-improper-prior/index.html#what-is-a-proper-prior",
+    "href": "pages/what-is-an-improper-prior/index.html#what-is-a-proper-prior",
+    "title": "What is an improper prior?",
+    "section": "What is a Proper Prior?",
+    "text": "What is a Proper Prior?"
+  },
+  {
+    "objectID": "pages/what-is-an-improper-prior/index.html#limitations-of-proper-priors",
+    "href": "pages/what-is-an-improper-prior/index.html#limitations-of-proper-priors",
+    "title": "What is an improper prior?",
+    "section": "Limitations of Proper Priors",
+    "text": "Limitations of Proper Priors"
+  },
+  {
+    "objectID": "pages/what-is-an-improper-prior/index.html#improper-priors",
+    "href": "pages/what-is-an-improper-prior/index.html#improper-priors",
+    "title": "What is an improper prior?",
+    "section": "Improper Priors",
+    "text": "Improper Priors"
+  },
+  {
+    "objectID": "pages/what-is-an-improper-prior/index.html#further-resources",
+    "href": "pages/what-is-an-improper-prior/index.html#further-resources",
+    "title": "What is an improper prior?",
+    "section": "Further Resources",
+    "text": "Further Resources"
+  }
+]

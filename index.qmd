@@ -1,14 +1,34 @@
 ---
-title: "improperprior"
-listing:
-  contents: posts
-  sort: "date desc"
-  type: default
-  categories: true
-  sort-ui: false
-  filter-ui: false
-page-layout: full
-title-block-banner: true
+title: ""
+image: profile.jpg
+about:
+  template: trestles
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/YellAnimal
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/ben-e/
+    - icon: github
+      text: Github
+      href: https://github.com/ben-e
+
 ---
+
+## About
+
+Hi! My name is Ben Ewing...
+
+## Pages
+
+* My [blog](blog.qmd).
+* [What is an improper prior?](pages/what-is-an-improper-prior/index.qmd)
+
+## Projects
+
+### [`wand`](https://github.com/ben-e/wand)
+
+[`wand`](https://github.com/ben-e/wand) is an R package which implements generalized additive models (GAMs) using torch as a backend, allowing users to fit semi-interpretable models using tools from the deep learning world. In addition to its GAM implementation, wand also provides tools for model interpretation. This package gets its name from the type of network it implements: wide and deep networks combine linear features (wide) with feature embeddings (deep).
 
 

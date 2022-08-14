@@ -1,0 +1,16 @@
+---
+title: "What is an improper prior?"
+subtitle: "A brief introduction to an essential concept in Bayesian statistics."
+author: "Ben Ewing"
+date: "2020-03-16"
+---
+
+## Introduction
+
+## What is a Proper Prior?
+
+## Limitations of Proper Priors
+
+## Improper Priors
+
+## Further Resources
