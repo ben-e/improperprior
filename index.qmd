@@ -1,6 +1,6 @@
 ---
-title: ""
-image: profile.jpg
+text: "About"
+image: images/ben-e.jpg
 about:
   template: trestles
   links:
@@ -13,12 +13,15 @@ about:
     - icon: github
       text: Github
       href: https://github.com/ben-e
-
 ---
 
 ## About
 
-Hi! My name is Ben Ewing...
+Hi! My name is Ben Ewing, I'm a data scientist with an eye for creative solutions. While I've mastered no single skill, I like to draw from Bayesian statistics, economics, machine learning, and optimization when problem solving.
+
+I have a B.A. in Economics and Mathematics from UC Santa Cruz and a M.S. in Economics and Computation from Duke University.
+
+Away from computers, I'm interested in climbing, cycling, and running.
 
 ## Pages
 

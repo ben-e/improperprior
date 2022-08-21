@@ -1,16 +1,6 @@
 [
   {
-    "listing": "/index.html",
-    "items": [
-      "/posts/post-with-code/index.html",
-      "/posts/welcome/index.html"
-    ]
-  },
-  {
     "listing": "/blog.html",
-    "items": [
-      "/posts/wide-and-deep-neural-networks-are-just-gams/index.html",
-      "/posts/quarto-and-ggplot-theming-using-templates/index.html"
-    ]
+    "items": []
   }
 ]

@@ -1,0 +1,10 @@
+/*-- scss:defaults --*/
+
+// Define palette
+{% for item in palette -%}
+${{ item.name }}: {{ item.hex }};
+{% endfor %}
+// Define roles
+{% for item in palette -%}
+{% if not existsIn(item.role, "none") -%} ${{ item.role }}: ${{ item.name }};{% endif %}
+{% endfor -%}

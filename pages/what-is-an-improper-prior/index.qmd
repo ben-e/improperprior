@@ -3,14 +3,127 @@ title: "What is an improper prior?"
 subtitle: "A brief introduction to an essential concept in Bayesian statistics."
 author: "Ben Ewing"
 date: "2020-03-16"
+draft: true
 ---
+
+TODO
+
+-   Add aliases to old post titles
+
+```{ojs, include = F}
+//| echo: false
+
+// Imports
+import {Scrubber} from "@mbostock/scrubber"
+import {Plot} from "@observablehq/plot"
+stdlib = require( "https://unpkg.com/@stdlib/dist-flat@0.0.96/build/bundle.min.js" )
+
+// Settings
+scrubberOptions = ({
+  format: (d) => d.toFixed(2),
+  autoplay: true,
+  loopDelay: 500,
+  alternate: true
+})
+```
 
 ## Introduction
 
-## What is a Proper Prior?
+While [improperprior.com](improperprior.com) is meant to act as my personal website, it seems irresponsible not to include a page explaining the concept of improper priors.
 
-## Limitations of Proper Priors
+What follows is a basic overview of improper priors, while I start with an example using conjugate priors, I presume some basic knowledge of the Bayesian process. Additional resources are included at the bottom of this post.
 
-## Improper Priors
+## Using a Proper Prior
+
+To set the stage, let's suppose I am an avid reader, and I'd like to better understand the number of pages I read in a month. For the sake of simplicity[^1], let us assume that the number of pages I read is normally distributed, and even further, we can assume that the variance is known (I am a fairly consistent reader). Formally, let $\mu$ represent the average number of pages I read in a month, the quantity we'd like to estimate, and fix the variance to be $\sigma^2=250$.
+
+In a Bayesian framework, we assume that our data drawn from _some_ distribution (normal, in this case) that is specified by _some_ set of parameters (the unknown parameter $\mu$, and the known parameter $\sigma^2$. Further, we assume that the parameter of interest, $\mu$, is itself drawn from some distribution. TODO rewrite Before observing any data, we can only use the prior knowledge we have to guess what the distribution of $\mu$ is, this is the prior distribution. 
+
+Once I've collected data about my reading habits, denoted by $Y$, we can use [Bayes' theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem) to update our estimate of $\mu$.
+
+$$
+P(\mu|Y) = \frac{L(Y|\mu)P(\mu)}{P(Y)}.
+$$ {#eq-bayes}
+
+Where:
+
+- $P(\mu|Y)$ is the posterior probability, this is what we'd like to estimate.
+- $L(Y|\mu)$ is the [likelihood](https://en.wikipedia.org/wiki/Likelihood_function) of observing the data, given $\mu$.
+- $P(\mu)$ is a distribution representing a guess for $\mu$ prior to observing data.
+- $P(Y)$ is the unconditional likelihood of observing the data, also commonly called a normalizing constant. We will ignore this term as it is constant once the data has been observed, and only acts to make sure that the numerator integrates to 1, which is surprisingly unnecessary for posterior estimation.
+
+The canonical prior for data from a binomial distribution is the beta distribution. This is for good reason, the beta distribution has support between 0 and 1 (bounded or not!) and is very versatile with respect to it's potential shapes.
+
+##### [Beta Distribution](https://en.wikipedia.org/wiki/Beta_distribution)
+
+::::: columns
+::: column
+$\alpha$
+```{ojs}
+//| echo: false
+
+viewof alpha = Scrubber(d3.range(0.02, 4.98, 0.02), scrubberOptions)
+```
+
+:::
+
+::: column
+$\beta$
+```{ojs}
+//| echo: false
+
+viewof beta = Scrubber(d3.range(4.98, 0.02, -0.02), scrubberOptions)
+```
+
+:::
+:::::
+
+```{ojs}
+//| echo: false
+
+x = stdlib.linspace( 0.00001, 0.99999, 500 )
+y = x.map((y => stdlib.base.dists.beta.pdf( y, alpha, beta ) ))
+
+length = x.length
+objects = Array.from({length}, (_, i) => ({
+  x: x[i],
+  y: y[i]
+}))
+
+Plot.plot({
+  x: {
+    ticks: 2,
+    grid: false,
+    label: "",
+    domain: [0, 1]
+  },
+  y: {
+    ticks: 0,
+    grid: false,
+    label: "",
+    domain: [0, 3]
+  },
+  marks: [
+    Plot.line(objects, {x: "x", y: "y"})
+  ],
+  height: 200,
+  marginBottom: 20
+})
+```
+
+## Limitations
+
+## Using an Improper Prior
 
 ## Further Resources
+
+[Craig Gidney](https://algassert.com/post/1630) has a nice blog post walking through a slightly more technical example of improper priors. Likewise, [Andy Jones](https://andrewcharlesjones.github.io/journal/improper-priors.html) has a great podcast with a few additional examples. For a more general treatment [A First Course in Bayesian Statistical Methods](https://duckduckgo.com/?t=ffab&q=A+First+Course+in+Bayesian+Statistical+Methods&atb=v198-1&ia=shopping) by Hoff and [Bayesian Data Analysis](https://duckduckgo.com/?q=bayesian+data+analysis&t=ffab&atb=v198-1&ia=shopping) by Gelman et al are the standard introductory Bayesian statistics textbooks.
+
+As ever, Wikipedia has very detailed articles on priors, more suitable for reference than learning:
+
+* [Improper Priors](https://en.wikipedia.org/wiki/Prior_probability#Improper_priors)
+* [Jeffreys' prior](https://en.wikipedia.org/wiki/Jeffreys_prior)
+* [Conjugate Priors](https://en.wikipedia.org/wiki/Conjugate_prior)
+* [StatLect's Bayesian estimation of the parameters of the normal distribution](https://www.statlect.com/fundamentals-of-statistics/normal-distribution-Bayesian-estimation)
+
+[^1]: The normal distribution is not perfect for this problem as it includes all real valued numbers - I can't possibly have read a negative number of pages. The gamma distribution may be a more natural fit, however the normal distribution has easily interpretable parameters, and the known variance means that we only need to focus on a single parameter.

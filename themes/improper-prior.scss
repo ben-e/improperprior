@@ -1,0 +1,38 @@
+/*-- scss:defaults --*/
+
+// Define palette
+$mint: #78c2ad;
+$watermelon: #f3969a;
+$yellow: #ffce67;
+$red: #ff7851;
+$cyan: #6cc3d5;
+$green: #56cc9d;
+$gray-100: #f8f9fa;
+$gray-500: #aaaaaa;
+$gray-700: #5a5a5a;
+$gray-800: #343a40;
+$white: #ffffff;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$orange: #fd7e14;
+$teal: #20c997;
+
+// Define roles
+$primary: $mint;
+$secondary: $watermelon;
+$warning: $yellow;
+$danger: $red;
+$info: $cyan;
+$success: $green;
+$light: $gray-100;
+$gray: $gray-500;
+$text_color: $gray-700;
+$dark: $gray-800;
+$background: $white;
+$none: $indigo;
+$none: $purple;
+$none: $pink;
+$none: $orange;
+$none: $teal;
+
