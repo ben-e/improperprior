@@ -1,0 +1,23 @@
+---
+title: "Wide&Deep Neural Networks are Just GAMs"
+author: "Ben Ewing"
+date: "2022-08-14"
+categories: [deep learning, R, wand]
+draft: true
+---
+
+## Introduction
+
+-   Using GAMs at work
+
+-   Simultaneously reading Hands on ML...
+
+-   my tweet
+
+    -   https://twitter.com/YellAnimal/status/1536081381259808769
+
+## What is a GAM?
+
+## What is a Wide&Deep Neural Network?
+
+## The `wand` Package

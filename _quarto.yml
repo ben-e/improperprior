@@ -1,0 +1,17 @@
+project:
+  type: website
+  pre-render: 
+    - meta-R/build-theme.R
+    - meta-R/build-favicon.R
+website:
+  title: "Improper Prior | Ben Ewing"
+  favicon: images/favicon.png
+  navbar:
+    right:
+      - index.qmd
+      - blog.qmd
+format:
+  html:
+    theme: 
+      - themes/minty-alt.scss
+      - themes/improper-prior.scss

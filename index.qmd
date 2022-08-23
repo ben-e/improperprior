@@ -1,0 +1,37 @@
+---
+text: "About"
+image: images/ben-e.jpg
+about:
+  template: trestles
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/YellAnimal
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/ben-e/
+    - icon: github
+      text: Github
+      href: https://github.com/ben-e
+---
+
+## About
+
+Hi! My name is Ben Ewing, I'm a data scientist with an eye for creative solutions. While I've mastered no single skill, I like to draw from Bayesian statistics, economics, machine learning, and optimization when problem solving.
+
+I have a B.A. in Economics and Mathematics from UC Santa Cruz and a M.S. in Economics and Computation from Duke University.
+
+Away from computers, I'm interested in climbing, cycling, and running.
+
+## Pages
+
+* My [blog](blog.qmd).
+* [What is an improper prior?](pages/what-is-an-improper-prior/index.qmd)
+
+## Projects
+
+### [`wand`](https://github.com/ben-e/wand)
+
+[`wand`](https://github.com/ben-e/wand) is an R package which implements generalized additive models (GAMs) using torch as a backend, allowing users to fit semi-interpretable models using tools from the deep learning world. In addition to its GAM implementation, wand also provides tools for model interpretation. This package gets its name from the type of network it implements: wide and deep networks combine linear features (wide) with feature embeddings (deep).
+
+
