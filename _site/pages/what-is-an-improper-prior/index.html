@@ -195,8 +195,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>stdlib <span class="op">=</span> <span class="pp">require</span>( <span class="st">"https://unpkg.com/@stdlib/dist-flat@0.0.96/build/bundle.min.js"</span> )</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">// Color</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>theme_json <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"../../themes/improper-prior-observable.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>theme <span class="op">=</span> theme<span class="op">.</span><span class="at">scheme</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">// theme_json = FileAttachment("../../themes/improper-prior-observable.json").json()</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">// theme = theme.scheme</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">// Settings</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>scrubberOptions <span class="op">=</span> ({</span>
@@ -233,20 +233,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-5" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-6" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
 </div>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
@@ -259,12 +245,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="jgqdgecuxj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="iogxuworxp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#jgqdgecuxj .gt_table {
+#iogxuworxp .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -289,7 +275,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-left-color: #D3D3D3;
 }
 
-#jgqdgecuxj .gt_heading {
+#iogxuworxp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -301,7 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#jgqdgecuxj .gt_title {
+#iogxuworxp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -313,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-width: 0;
 }
 
-#jgqdgecuxj .gt_subtitle {
+#iogxuworxp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -325,13 +311,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-width: 0;
 }
 
-#jgqdgecuxj .gt_bottom_border {
+#iogxuworxp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jgqdgecuxj .gt_col_headings {
+#iogxuworxp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -346,7 +332,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#jgqdgecuxj .gt_col_heading {
+#iogxuworxp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -366,7 +352,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#jgqdgecuxj .gt_column_spanner_outer {
+#iogxuworxp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -378,15 +364,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 4px;
 }
 
-#jgqdgecuxj .gt_column_spanner_outer:first-child {
+#iogxuworxp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jgqdgecuxj .gt_column_spanner_outer:last-child {
+#iogxuworxp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jgqdgecuxj .gt_column_spanner {
+#iogxuworxp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -398,7 +384,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   width: 100%;
 }
 
-#jgqdgecuxj .gt_group_heading {
+#iogxuworxp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -423,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-#jgqdgecuxj .gt_empty_group_heading {
+#iogxuworxp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -438,15 +424,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-#jgqdgecuxj .gt_from_md > :first-child {
+#iogxuworxp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jgqdgecuxj .gt_from_md > :last-child {
+#iogxuworxp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jgqdgecuxj .gt_row {
+#iogxuworxp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -465,7 +451,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#jgqdgecuxj .gt_stub {
+#iogxuworxp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -478,7 +464,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#jgqdgecuxj .gt_stub_row_group {
+#iogxuworxp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -492,11 +478,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: top;
 }
 
-#jgqdgecuxj .gt_row_group_first td {
+#iogxuworxp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jgqdgecuxj .gt_summary_row {
+#iogxuworxp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -506,16 +492,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#jgqdgecuxj .gt_first_summary_row {
+#iogxuworxp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jgqdgecuxj .gt_first_summary_row.thick {
+#iogxuworxp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jgqdgecuxj .gt_last_summary_row {
+#iogxuworxp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -525,7 +511,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#jgqdgecuxj .gt_grand_summary_row {
+#iogxuworxp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -535,7 +521,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#jgqdgecuxj .gt_first_grand_summary_row {
+#iogxuworxp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -545,11 +531,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-color: #D3D3D3;
 }
 
-#jgqdgecuxj .gt_striped {
+#iogxuworxp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jgqdgecuxj .gt_table_body {
+#iogxuworxp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -558,7 +544,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#jgqdgecuxj .gt_footnotes {
+#iogxuworxp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -572,7 +558,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#jgqdgecuxj .gt_footnote {
+#iogxuworxp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -581,7 +567,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#jgqdgecuxj .gt_sourcenotes {
+#iogxuworxp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -595,7 +581,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#jgqdgecuxj .gt_sourcenote {
+#iogxuworxp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -603,36 +589,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#jgqdgecuxj .gt_left {
+#iogxuworxp .gt_left {
   text-align: left;
 }
 
-#jgqdgecuxj .gt_center {
+#iogxuworxp .gt_center {
   text-align: center;
 }
 
-#jgqdgecuxj .gt_right {
+#iogxuworxp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jgqdgecuxj .gt_font_normal {
+#iogxuworxp .gt_font_normal {
   font-weight: normal;
 }
 
-#jgqdgecuxj .gt_font_bold {
+#iogxuworxp .gt_font_bold {
   font-weight: bold;
 }
 
-#jgqdgecuxj .gt_font_italic {
+#iogxuworxp .gt_font_italic {
   font-style: italic;
 }
 
-#jgqdgecuxj .gt_super {
+#iogxuworxp .gt_super {
   font-size: 65%;
 }
 
-#jgqdgecuxj .gt_two_val_uncert {
+#iogxuworxp .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -641,31 +627,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   margin-left: 0.1em;
 }
 
-#jgqdgecuxj .gt_footnote_marks {
+#iogxuworxp .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#jgqdgecuxj .gt_asterisk {
+#iogxuworxp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jgqdgecuxj .gt_slash_mark {
+#iogxuworxp .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#jgqdgecuxj .gt_fraction_numerator {
+#iogxuworxp .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#jgqdgecuxj .gt_fraction_denominator {
+#iogxuworxp .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -903,7 +889,7 @@ P(\mu|Y) \propto N \left(
 <span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
 <span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {</span>
 <span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a>    <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a>    <span class="dt">range</span><span class="op">:</span> theme</span>
+<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a>    <span class="dt">range</span><span class="op">:</span> <span class="st">"blues"</span></span>
 <span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
 <span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
 <span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">line</span>(plot_data<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"y"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"type"</span>})<span class="op">,</span></span>
@@ -959,7 +945,7 @@ P(\mu|Y) &amp;\propto L(Y|\mu)P(\mu) \\
 </ol>
 </section></div></main> <!-- /main -->
 <script type="ojs-module-contents">
-{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"\n// Imports\nimport {Inputs} from \"@observablehq/inputs\"\nimport {Plot} from \"@observablehq/plot\"\nstdlib = require( \"https://unpkg.com/@stdlib/dist-flat@0.0.96/build/bundle.min.js\" )\n\n// Color\ntheme_json = FileAttachment(\"../../themes/improper-prior-observable.json\").json()\ntheme = theme.scheme\n\n// Settings\nscrubberOptions = ({\n  format: (d) => d.toFixed(2),\n  autoplay: true,\n  loopDelay: 500,\n  alternate: true\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"\nviewof prior_µ = Inputs.range([100, 200], {value: 160, step: 1, label: \"Prior µ:\"})\nviewof prior_σ_sq = Inputs.range([1, 50], {value: 20, step: 1, label: \"Prior σ^2:\"})\n\nviewof observed_hr_input = Inputs.text({label: \"Observed Recovery Heart Rates: \", \n                                        value: \"165, 169\"})\nobserved_hr = observed_hr_input.split`,`\n  .map(x => +x)\n  .filter( value => !Number.isNaN(value) && value != 0)\n\nobserved_µ = observed_hr.reduce((a, b) => a + b) / observed_hr.length\nobserved_n = observed_hr.length\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"\nposterior_µ = (1/(1/prior_σ_sq + observed_n/12)) * (prior_µ/prior_σ_sq + observed_µ*(observed_n/12))\nposterior_σ_sq = 1/(1/prior_σ_sq + observed_n/12)\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"\nx = stdlib.linspace( 80, 240, 1000 )\ny_prior = x.map((y => stdlib.base.dists.normal.pdf( y, prior_µ, Math.sqrt(prior_σ_sq) ) ))\ny_posterior = x.map((y => stdlib.base.dists.normal.pdf( y, posterior_µ, Math.sqrt(posterior_σ_sq) ) ))\n"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"\nlength = x.length\n\nprior_data = Array.from({length}, (_, i) => ({\n  x: x[i],\n  y: y_prior[i],\n  type: \"prior\"\n}))\n\nposterior_data = Array.from({length}, (_, i) => ({\n  x: x[i],\n  y: y_posterior[i],\n  type: \"posterior\"\n}))\n\nplot_data = prior_data.concat(posterior_data)\n"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"\nPlot.plot({\n  x: {\n    label: \"x\",\n    domain: [100, 200]\n  },\n  y: {\n    label: \"p(x)\"\n  },\n  color: {\n    legend: true,\n    range: theme\n  },\n  marks: [\n    Plot.line(plot_data, {x: \"x\", y: \"y\", stroke: \"type\"}),\n    Plot.tickX(observed_hr, {strokeOpacity: 0.2})\n  ],\n  height: 300\n})\n"},{"methodName":"interpretQuiet","source":"shinyInput('prior_µ')"},{"methodName":"interpretQuiet","source":"shinyInput('prior_σ_sq')"},{"methodName":"interpretQuiet","source":"shinyInput('observed_hr_input')"}]}
+{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"\n// Imports\nimport {Inputs} from \"@observablehq/inputs\"\nimport {Plot} from \"@observablehq/plot\"\nstdlib = require( \"https://unpkg.com/@stdlib/dist-flat@0.0.96/build/bundle.min.js\" )\n\n// Color\n// theme_json = FileAttachment(\"../../themes/improper-prior-observable.json\").json()\n// theme = theme.scheme\n\n// Settings\nscrubberOptions = ({\n  format: (d) => d.toFixed(2),\n  autoplay: true,\n  loopDelay: 500,\n  alternate: true\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"\nviewof prior_µ = Inputs.range([100, 200], {value: 160, step: 1, label: \"Prior µ:\"})\nviewof prior_σ_sq = Inputs.range([1, 50], {value: 20, step: 1, label: \"Prior σ^2:\"})\n\nviewof observed_hr_input = Inputs.text({label: \"Observed Recovery Heart Rates: \", \n                                        value: \"165, 169\"})\nobserved_hr = observed_hr_input.split`,`\n  .map(x => +x)\n  .filter( value => !Number.isNaN(value) && value != 0)\n\nobserved_µ = observed_hr.reduce((a, b) => a + b) / observed_hr.length\nobserved_n = observed_hr.length\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"\nposterior_µ = (1/(1/prior_σ_sq + observed_n/12)) * (prior_µ/prior_σ_sq + observed_µ*(observed_n/12))\nposterior_σ_sq = 1/(1/prior_σ_sq + observed_n/12)\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"\nx = stdlib.linspace( 80, 240, 1000 )\ny_prior = x.map((y => stdlib.base.dists.normal.pdf( y, prior_µ, Math.sqrt(prior_σ_sq) ) ))\ny_posterior = x.map((y => stdlib.base.dists.normal.pdf( y, posterior_µ, Math.sqrt(posterior_σ_sq) ) ))\n"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"\nlength = x.length\n\nprior_data = Array.from({length}, (_, i) => ({\n  x: x[i],\n  y: y_prior[i],\n  type: \"prior\"\n}))\n\nposterior_data = Array.from({length}, (_, i) => ({\n  x: x[i],\n  y: y_posterior[i],\n  type: \"posterior\"\n}))\n\nplot_data = prior_data.concat(posterior_data)\n"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"\nPlot.plot({\n  x: {\n    label: \"x\",\n    domain: [100, 200]\n  },\n  y: {\n    label: \"p(x)\"\n  },\n  color: {\n    legend: true,\n    range: \"blues\"\n  },\n  marks: [\n    Plot.line(plot_data, {x: \"x\", y: \"y\", stroke: \"type\"}),\n    Plot.tickX(observed_hr, {strokeOpacity: 0.2})\n  ],\n  height: 300\n})\n"},{"methodName":"interpretQuiet","source":"shinyInput('prior_µ')"},{"methodName":"interpretQuiet","source":"shinyInput('prior_σ_sq')"},{"methodName":"interpretQuiet","source":"shinyInput('observed_hr_input')"}]}
 </script>
 <script type="module">
 window._ojs.paths.runtimeToDoc = "../../pages/what-is-an-improper-prior";

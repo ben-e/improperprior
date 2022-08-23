@@ -16,8 +16,8 @@ import {Plot} from "@observablehq/plot"
 stdlib = require( "https://unpkg.com/@stdlib/dist-flat@0.0.96/build/bundle.min.js" )
 
 // Color
-theme_json = FileAttachment("../../themes/improper-prior-observable.json").json()
-theme = theme.scheme
+// theme_json = FileAttachment("../../themes/improper-prior-observable.json").json()
+// theme = theme.scheme
 
 // Settings
 scrubberOptions = ({
@@ -158,7 +158,7 @@ Plot.plot({
   },
   color: {
     legend: true,
-    range: theme
+    range: "blues"
   },
   marks: [
     Plot.line(plot_data, {x: "x", y: "y", stroke: "type"}),
