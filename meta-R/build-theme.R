@@ -9,7 +9,6 @@
 suppressPackageStartupMessages({
   # Data manipulation
   library(dplyr)
-  library(glue)
   library(tidyr)
   # FileIO
   library(fs)
@@ -23,13 +22,19 @@ suppressPackageStartupMessages({
 minty <- read_csv("meta-R/color-themes//minty.csv", show_col_types = F)
 
 # Build ggplot2 theme ------------------------------------------------------------------------------
-read_lines("meta-R/templates/ggplot2-template.R") %>% 
-  glue_collapse("\n") %>% 
+read_lines("meta-R/templates/ggplot2-template.R") |> 
+  paste0(collapse = "\n") |> 
   render(palette = minty) |> 
   write_lines("themes/improper-prior-ggtheme.R")
 
+# Build observable theme ---------------------------------------------------------------------------
+paste0('"', {minty$hex}, '"') |> 
+  paste0(collapse = ",") %>% 
+  paste0('{"scheme": [', ., ']}') |> 
+  write_lines("themes/improper-prior-observable.json")
+
 # Build quarto theme -------------------------------------------------------------------------------
-read_lines("meta-R/templates/quarto-template.scss") %>% 
-  glue_collapse("\n") %>% 
-  render(palette = minty) %>% 
+read_lines("meta-R/templates/quarto-template.scss") |> 
+  paste0(collapse = "\n") |> 
+  render(palette = minty) |> 
   write_lines("themes/improper-prior.scss")

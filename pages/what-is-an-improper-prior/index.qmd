@@ -2,21 +2,22 @@
 title: "What is an improper prior?"
 subtitle: "A brief introduction to an essential concept in Bayesian statistics."
 author: "Ben Ewing"
-date: "2020-03-16"
-draft: true
+date: "2022-08-23"
+aliases: 
+  - /post/2020/03/16/what-is-an-improper-prior/
 ---
 
-TODO
-
--   Add aliases to old post titles
-
-```{ojs, include = F}
+```{ojs}
 //| echo: false
 
 // Imports
-import {Scrubber} from "@mbostock/scrubber"
+import {Inputs} from "@observablehq/inputs"
 import {Plot} from "@observablehq/plot"
 stdlib = require( "https://unpkg.com/@stdlib/dist-flat@0.0.96/build/bundle.min.js" )
+
+// Color
+theme_json = FileAttachment("../../themes/improper-prior-observable.json").json()
+theme = theme.scheme
 
 // Settings
 scrubberOptions = ({
@@ -31,15 +32,36 @@ scrubberOptions = ({
 
 While [improperprior.com](improperprior.com) is meant to act as my personal website, it seems irresponsible not to include a page explaining the concept of improper priors.
 
-What follows is a basic overview of improper priors, while I start with an example using conjugate priors, I presume some basic knowledge of the Bayesian process. Additional resources are included at the bottom of this post.
+What follows is a basic overview of improper priors, while I start with an example using a proper conjugate prior, I presume some basic knowledge of the Bayesian process. Additional resources are included at the bottom of this post.
 
 ## Using a Proper Prior
 
-To set the stage, let's suppose I am an avid reader, and I'd like to better understand the number of pages I read in a month. For the sake of simplicity[^1], let us assume that the number of pages I read is normally distributed, and even further, we can assume that the variance is known (I am a fairly consistent reader). Formally, let $\mu$ represent the average number of pages I read in a month, the quantity we'd like to estimate, and fix the variance to be $\sigma^2=250$.
+To set the stage, let's suppose I am an avid runner, and I'd like to better understand how quickly my heart rate recovers after running a hard (for me) mile. The data from my runs might look something like this.
 
-In a Bayesian framework, we assume that our data drawn from _some_ distribution (normal, in this case) that is specified by _some_ set of parameters (the unknown parameter $\mu$, and the known parameter $\sigma^2$. Further, we assume that the parameter of interest, $\mu$, is itself drawn from some distribution. TODO rewrite Before observing any data, we can only use the prior knowledge we have to guess what the distribution of $\mu$ is, this is the prior distribution. 
+```{r}
+#| echo: false
+ 
+tibble::tribble(
+  ~ `Day of Month`, ~ `Mile Time (Seconds)`, ~ `Recovery Heart Rate (Beats per Minute)`,
+  1,                489,                     165,
+  5,                465,                     169,
+  7,                470,                     177,
+  18,               491,                     175,
+  27,               477,                     180,
+  30,               455,                     167,
+) |> 
+  gt::gt() |> 
+  gt::tab_header("Table 1: Sample Heart Rate Data") |> 
+  gt::tab_footnote("Note: heart rate is measured one minute after a hard one mile effort.")
+```
 
-Once I've collected data about my reading habits, denoted by $Y$, we can use [Bayes' theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem) to update our estimate of $\mu$.
+For the sake of simplicity[^1], let us assume that my recovery heart rate is normally distributed, and that the variance is fixed to some known population value. Formally, let $\mu$ represent my heart rate, the quantity we'd like to estimate, and let $\sigma^2$ be the known variance. We'll fix $\sigma^2=12$.
+
+In a Bayesian framework, we assume that our data drawn from _some_ distribution (normal, in this case) that is specified by _some_ set of parameters (the unknown parameter $\mu$, and the known parameter $\sigma^2$). Without looking at the data, we don't know what $\mu$ should be, but we can specify a distribution of possible values. For this example we'll hypothesize that $\mu$ is also normally distributed, $\mu \sim N(160, 20)$ where the high variance expresses our uncertainty. This is our prior distribution.
+
+With normally distributed data and a normal prior for $\mu$, we've specified a [normal-normal model](https://www.statlect.com/fundamentals-of-statistics/normal-distribution-Bayesian-estimation) with known variance.
+
+Once I've collected data, denoted by $Y$, we can use [Bayes' theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem) to update our estimate of $\mu$.
 
 $$
 P(\mu|Y) = \frac{L(Y|\mu)P(\mu)}{P(Y)}.
@@ -47,73 +69,125 @@ $$ {#eq-bayes}
 
 Where:
 
-- $P(\mu|Y)$ is the posterior probability, this is what we'd like to estimate.
-- $L(Y|\mu)$ is the [likelihood](https://en.wikipedia.org/wiki/Likelihood_function) of observing the data, given $\mu$.
-- $P(\mu)$ is a distribution representing a guess for $\mu$ prior to observing data.
-- $P(Y)$ is the unconditional likelihood of observing the data, also commonly called a normalizing constant. We will ignore this term as it is constant once the data has been observed, and only acts to make sure that the numerator integrates to 1, which is surprisingly unnecessary for posterior estimation.
+- $P(\mu|Y)$ is the distribution of possible values of $\mu$, now informed by data. This is what we'd like to estimate.
+- $L(Y|\mu)$ is the [likelihood](https://en.wikipedia.org/wiki/Likelihood_function) of observing the data that was collected, given the true value of $\mu$.
+- $P(\mu)$ is the prior distribution.
+- $P(Y)$ is the unconditional likelihood of observing the data. We will ignore this term, as it is constant once the data has been observed.
 
-The canonical prior for data from a binomial distribution is the beta distribution. This is for good reason, the beta distribution has support between 0 and 1 (bounded or not!) and is very versatile with respect to it's potential shapes.
+If we evaluate this, we end up with[^2]:
 
-##### [Beta Distribution](https://en.wikipedia.org/wiki/Beta_distribution)
+$$
+P(\mu|Y) \propto N \left(
+  \frac{1}{\frac{1}{20} + \frac{n}{12}} \left( \frac{160}{20} + \overline Y \frac{n}{12} \right),
+  \frac{1}{\frac{1}{20} + \frac{n}{12}}
+  \right).
+$$ {#eq-posterior}
 
-::::: columns
-::: column
-$\alpha$
+Where:
+
+- $n$ is the number of observations.
+- $\overline Y$ is the mean observed recovery heart rate.
+- $12$ is the known population variance of recovery heart rate recordings.
+- $160$ is the prior mean recovery heart rate.
+- $20$ is the variance we've put on the prior.
+
+This is our posterior distribution, the distribution of possible values for my recovery heart rate taking into account both the observed data and the prior. Because we've used a [conjugate prior](https://en.wikipedia.org/wiki/Conjugate_prior) we've ended up with a normal distribution, which is obviously very convenient.
+
 ```{ojs}
 //| echo: false
+//| panel: sidebar
 
-viewof alpha = Scrubber(d3.range(0.02, 4.98, 0.02), scrubberOptions)
+viewof prior_µ = Inputs.range([100, 200], {value: 160, step: 1, label: "Prior µ:"})
+viewof prior_σ_sq = Inputs.range([1, 50], {value: 20, step: 1, label: "Prior σ^2:"})
+
+viewof observed_hr_input = Inputs.text({label: "Observed Recovery Heart Rates: ", 
+                                        value: "165, 169"})
+observed_hr = observed_hr_input.split`,`
+  .map(x => +x)
+  .filter( value => !Number.isNaN(value) && value != 0)
+
+observed_µ = observed_hr.reduce((a, b) => a + b) / observed_hr.length
+observed_n = observed_hr.length
 ```
 
-:::
-
-::: column
-$\beta$
 ```{ojs}
 //| echo: false
 
-viewof beta = Scrubber(d3.range(4.98, 0.02, -0.02), scrubberOptions)
+posterior_µ = (1/(1/prior_σ_sq + observed_n/12)) * (prior_µ/prior_σ_sq + observed_µ*(observed_n/12))
+posterior_σ_sq = 1/(1/prior_σ_sq + observed_n/12)
 ```
 
-:::
-:::::
-
 ```{ojs}
 //| echo: false
 
-x = stdlib.linspace( 0.00001, 0.99999, 500 )
-y = x.map((y => stdlib.base.dists.beta.pdf( y, alpha, beta ) ))
+x = stdlib.linspace( 80, 240, 1000 )
+y_prior = x.map((y => stdlib.base.dists.normal.pdf( y, prior_µ, Math.sqrt(prior_σ_sq) ) ))
+y_posterior = x.map((y => stdlib.base.dists.normal.pdf( y, posterior_µ, Math.sqrt(posterior_σ_sq) ) ))
+```
+
+```{ojs}
+//| echo: false
 
 length = x.length
-objects = Array.from({length}, (_, i) => ({
+
+prior_data = Array.from({length}, (_, i) => ({
   x: x[i],
-  y: y[i]
+  y: y_prior[i],
+  type: "prior"
 }))
+
+posterior_data = Array.from({length}, (_, i) => ({
+  x: x[i],
+  y: y_posterior[i],
+  type: "posterior"
+}))
+
+plot_data = prior_data.concat(posterior_data)
+```
+
+```{ojs}
+//| echo: false
 
 Plot.plot({
   x: {
-    ticks: 2,
-    grid: false,
-    label: "",
-    domain: [0, 1]
+    label: "x",
+    domain: [100, 200]
   },
   y: {
-    ticks: 0,
-    grid: false,
-    label: "",
-    domain: [0, 3]
+    label: "p(x)"
+  },
+  color: {
+    legend: true,
+    range: theme
   },
   marks: [
-    Plot.line(objects, {x: "x", y: "y"})
+    Plot.line(plot_data, {x: "x", y: "y", stroke: "type"}),
+    Plot.tickX(observed_hr, {strokeOpacity: 0.2})
   ],
-  height: 200,
-  marginBottom: 20
+  height: 300
 })
 ```
 
-## Limitations
-
 ## Using an Improper Prior
+
+While this seems like a good estimate, a skeptic may reasonably argue that the choice of a $\mu \sim N(160, 20)$ prior is biasing the estimate. It's a best guess, when the reality is that we don't really know what $\mu$ should be before observing any data. As a naive alternative, what would happen if we just set the prior probability of each possible value of $\mu$ to 1? 
+
+Well it turns out that we can do exactly this - we can use any prior, even an improper prior as long as the posterior comes out to be a proper distribution. In other words, the prior need not be a proper distribution so long as the posterior is. In this particular case we end up with up with a posterior that is informed entirely by observed data. 
+
+<aside>
+A proper distribution integrates to 1.
+</aside>
+
+$$
+\begin{align*} 
+P(\mu|Y) &\propto L(Y|\mu)P(\mu) \\
+         &\propto L(Y|1)\times1 \\
+         &\propto L(Y)
+\end{align*} 
+$$ {#eq-improper-posterior}
+
+Choosing an improper prior that generates a valid posterior can be tricky, but [Jeffreys prior](https://en.wikipedia.org/wiki/Jeffreys_prior) is a generally good place to start.
+
 
 ## Further Resources
 
@@ -126,4 +200,5 @@ As ever, Wikipedia has very detailed articles on priors, more suitable for refer
 * [Conjugate Priors](https://en.wikipedia.org/wiki/Conjugate_prior)
 * [StatLect's Bayesian estimation of the parameters of the normal distribution](https://www.statlect.com/fundamentals-of-statistics/normal-distribution-Bayesian-estimation)
 
-[^1]: The normal distribution is not perfect for this problem as it includes all real valued numbers - I can't possibly have read a negative number of pages. The gamma distribution may be a more natural fit, however the normal distribution has easily interpretable parameters, and the known variance means that we only need to focus on a single parameter.
+[^1]: The normal distribution is not perfect for this problem as it includes all real valued numbers - I can't possibly have a negative heart rate. The gamma distribution may be a more natural fit, however the normal distribution has easily interpretable parameters, and the known variance means that we only need to focus on a single parameter.
+[^2]: See [this Statlect page](https://www.statlect.com/fundamentals-of-statistics/normal-distribution-Bayesian-estimation) for the actual derivation of the posterior.
