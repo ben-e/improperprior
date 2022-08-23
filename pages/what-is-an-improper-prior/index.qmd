@@ -14,10 +14,10 @@ aliases:
 import {Inputs} from "@observablehq/inputs"
 import {Plot} from "@observablehq/plot"
 stdlib = require( "https://unpkg.com/@stdlib/dist-flat@0.0.96/build/bundle.min.js" )
+```
 
-// Color
-// theme_json = FileAttachment("../../themes/improper-prior-observable.json").json()
-// theme = theme.scheme
+```{ojs}
+//| echo: false
 
 // Settings
 scrubberOptions = ({
@@ -26,6 +26,14 @@ scrubberOptions = ({
   loopDelay: 500,
   alternate: true
 })
+```
+
+```{ojs}
+//| echo: false
+
+// Color
+theme_obj = await FileAttachment("../../themes/improper-prior-observable.json").json()
+theme = theme_obj.scheme
 ```
 
 ## Introduction
@@ -158,7 +166,7 @@ Plot.plot({
   },
   color: {
     legend: true,
-    range: "blues"
+    range: theme
   },
   marks: [
     Plot.line(plot_data, {x: "x", y: "y", stroke: "type"}),
