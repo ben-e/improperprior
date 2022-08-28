@@ -72,7 +72,8 @@ Create a similar plot in Observable.
 ```{ojs}
 import {Plot} from "@observablehq/plot"
 
-theme_obj = await FileAttachment("../../themes/improper-prior-observable.json").json()
+theme_obj = await 
+  FileAttachment("../../themes/improper-prior-observable.json").json()
 theme = theme_obj.scheme
 
 Plot.plot({
@@ -81,7 +82,8 @@ Plot.plot({
     range: theme
   },
   marks: [
-    Plot.dot(transpose(iris), {x: "Sepal.Length", y: "Sepal.Width", stroke: "Species"}),
+    Plot.dot(transpose(iris), {x: "Sepal.Length", y: "Sepal.Width", 
+                               stroke: "Species"}),
   ]
 })
 ```
