@@ -4,7 +4,7 @@
     "href": "posts/quarto-and-ggplot-theming-using-templates/index.html",
     "title": "Consistent Theming Across Quarto, ggplot2 and Observable",
     "section": "",
-    "text": "When Quarto was formally released earlier this year, I knew it’d only be a matter of time until I felt the incessant need to transition my oft-neglected blog to this new framework.\nAnd so I have! While the migration itself was straightforward, I struggled to commit to a single color theme. This was compounded by my preference for using a consistent color theme across the website and any blog post plots, meaning that any change in website theme would require a change to each post. Ideally, I would be able to change both the blog color theme and plot theming across all blog posts with a single switch."
+    "text": "When Quarto was formally released earlier this year, I knew it’d only be a matter of time until I felt the incessant need to transition my oft-neglected blog to this new framework. And so I have!\nWhile the migration itself was straightforward, I struggled to commit to a single color theme. This was compounded by my preference for using a consistent color theme across the website and any blog post plots, meaning that any change in website theme would require a change to each post. Ideally, I would be able to change both the blog color theme and plot theming across all blog posts with a single switch."
   },
   {
     "objectID": "posts/quarto-and-ggplot-theming-using-templates/index.html#the-solution",
