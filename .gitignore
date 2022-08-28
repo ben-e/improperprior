@@ -5,3 +5,4 @@
 *.csv
 
 /.quarto/
+*.DS_Store

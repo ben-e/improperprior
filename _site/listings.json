@@ -1,6 +1,8 @@
 [
   {
     "listing": "/blog.html",
-    "items": []
+    "items": [
+      "/posts/quarto-and-ggplot-theming-using-templates/index.html"
+    ]
   }
 ]

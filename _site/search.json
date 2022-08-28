@@ -1,5 +1,26 @@
 [
   {
+    "objectID": "posts/quarto-and-ggplot-theming-using-templates/index.html",
+    "href": "posts/quarto-and-ggplot-theming-using-templates/index.html",
+    "title": "Consistent Theming Across Quarto, ggplot2 and Observable",
+    "section": "",
+    "text": "When Quarto was formally released earlier this year, I knew it’d only be a matter of time until I felt the incessant need to transition my oft-neglected blog to this new framework.\nAnd so I have! While the migration itself was straightforward, I struggled to commit to a single color theme. This was compounded by my preference for using a consistent color theme across the website and any blog post plots, meaning that any change in website theme would require a change to each post. Ideally, I would be able to change both the blog color theme and plot theming across all blog posts with a single switch."
+  },
+  {
+    "objectID": "posts/quarto-and-ggplot-theming-using-templates/index.html#the-solution",
+    "href": "posts/quarto-and-ggplot-theming-using-templates/index.html#the-solution",
+    "title": "Consistent Theming Across Quarto, ggplot2 and Observable",
+    "section": "The Solution",
+    "text": "The Solution\nAfter some tinkering, I came up with the following solution:\n\nI gathered a few themes into .csv files, where each row is a color, and columns give the color’s name, hex, and role.\nI slightly modified the Minty bootswatch theme to use variables which define the role of a color (e.g. background, text, primary, etc. color). Note that not every color in a theme needs a role.\nI created jinjar compatible template files for ggplot2 and Quarto; I don’t use a template file for Observable, instead colors are saved in a simple .json file.\nI wrote a build script which reads in the theme .csv files, builds the templates, and writes them to a directory where Quarto and any blog posts know to look for themes.\nI modified the site _quarto.yml to run the theme build script every time the website is rendered.\n\nNow any time I want to try a new theme, I just need to drop it into a .csv file, and make a small change to my theme building script! As a bonus, I also wrote a small script that takes the built ggplot2 template and creates a new themed favicon.\nI’d love to hear any suggested improvements, feel free to tweet me!"
+  },
+  {
+    "objectID": "posts/quarto-and-ggplot-theming-using-templates/index.html#demo",
+    "href": "posts/quarto-and-ggplot-theming-using-templates/index.html#demo",
+    "title": "Consistent Theming Across Quarto, ggplot2 and Observable",
+    "section": "Demo",
+    "text": "Demo\nHere are some examples showing consistency across each tool.\n\nQuarto\nThemed badges.\n\nPrimary Secondary Success Danger Warning Info Light Dark\n\n\n\nggplot2\nA simple iris plot.\n\nlibrary(ggplot2)\nsource(\"../../themes/improper-prior-ggtheme.R\")\n\niris |> \n  ggplot(aes(Sepal.Length, Sepal.Width, color = Species)) +\n  geom_point() +\n  scale_color_ip() +\n  theme_ip()\n\n\n\n\n\n\nObservable\nPass the iris data to Observable.\n\nojs_define(iris = iris)\n\nCreate a similar plot in Observable.\n\nimport {Plot} from \"@observablehq/plot\"\n\ntheme_obj = await \n  FileAttachment(\"../../themes/improper-prior-observable.json\").json()\ntheme = theme_obj.scheme\n\nPlot.plot({\n  color: {\n    legend: true,\n    range: theme\n  },\n  marks: [\n    Plot.dot(transpose(iris), {x: \"Sepal.Length\", y: \"Sepal.Width\", \n                               stroke: \"Species\"}),\n  ]\n})"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Improper Prior | Ben Ewing",
@@ -60,6 +81,6 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "No matching items"
+    "text": "Consistent Theming Across Quarto, ggplot2 and Observable\n\n\n\n\n\n\n\nquarto\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nAug 14, 2022\n\n\nBen Ewing\n\n\n\n\n\n\nNo matching items"
   }
 ]
