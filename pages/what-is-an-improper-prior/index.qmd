@@ -32,7 +32,7 @@ scrubberOptions = ({
 //| echo: false
 
 // Color
-theme_obj = await FileAttachment("../../themes/improper-prior-observable.json").json()
+theme_obj = FileAttachment("../../themes/improper-prior-observable.json").json()
 theme = theme_obj.scheme
 ```
 

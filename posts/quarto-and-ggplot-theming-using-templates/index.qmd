@@ -2,7 +2,7 @@
 title: "Consistent Theming Across Quarto, `ggplot2` and Observable"
 author: "Ben Ewing"
 date: "2022-08-14"
-categories: [quarto, R]
+categories: [observable, quarto, R]
 ---
 
 ## The Problem
@@ -15,7 +15,7 @@ While the migration itself was straightforward, I struggled to commit to a singl
 
 After some tinkering, I came up with the following solution:
 
-1.  I gathered a few themes into .csv files, where each row is a color, and columns give the color's name, hex, and role.
+1.  I gathered a [few themes into .csv files](https://github.com/ben-e/improperprior/tree/master/meta-R/color-themes), where each row is a color, and columns give the color's name, hex, and role.
 2.  I slightly modified the [Minty bootswatch theme](https://bootswatch.com/minty/) to use variables which [define the role of a color](https://github.com/ben-e/improperprior/blob/master/themes/minty-alt.scss#L35) (e.g. background, text, primary, etc. color). Note that not every color in a theme needs a role.
 3.  I created [`jinjar`](https://github.com/davidchall/jinjar) compatible [template](https://github.com/ben-e/improperprior/tree/master/meta-R/templates) files for `ggplot2` and Quarto; I don't use a template file for Observable, instead colors are saved in a simple .json file.
 4.  I wrote a [build script](https://github.com/ben-e/improperprior/blob/master/meta-R/build-theme.R) which reads in the theme .csv files, builds the templates, and writes them to a directory where Quarto and any blog posts know to look for themes.
@@ -72,8 +72,7 @@ Create a similar plot in Observable.
 ```{ojs}
 import {Plot} from "@observablehq/plot"
 
-theme_obj = await 
-  FileAttachment("../../themes/improper-prior-observable.json").json()
+theme_obj = FileAttachment("../../themes/improper-prior-observable.json").json()
 theme = theme_obj.scheme
 
 Plot.plot({
