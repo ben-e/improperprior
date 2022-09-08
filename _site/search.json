@@ -18,7 +18,7 @@
     "href": "posts/quarto-and-ggplot-theming-using-templates/index.html#demo",
     "title": "Consistent Theming Across Quarto, ggplot2 and Observable",
     "section": "Demo",
-    "text": "Demo\nHere are some examples showing consistency across each tool.\n\nQuarto\nThemed badges.\n\nPrimary Secondary Success Danger Warning Info Light Dark\n\n\n\nggplot2\nA simple iris plot.\n\nlibrary(ggplot2)\nsource(\"../../themes/improper-prior-ggtheme.R\")\n\niris |> \n  ggplot(aes(Sepal.Length, Sepal.Width, color = Species)) +\n  geom_point() +\n  scale_color_ip() +\n  theme_ip()\n\n\n\n\n\n\nObservable\nPass the iris data to Observable.\n\nojs_define(iris = iris)\n\nCreate a similar plot in Observable.\n\nimport {Plot} from \"@observablehq/plot\"\n\ntheme_obj = FileAttachment(\"../../themes/improper-prior-observable.json\").json()\ntheme = theme_obj.scheme\n\nPlot.plot({\n  color: {\n    legend: true,\n    range: theme\n  },\n  marks: [\n    Plot.dot(transpose(iris), {x: \"Sepal.Length\", y: \"Sepal.Width\", \n                               stroke: \"Species\"}),\n  ]\n})"
+    "text": "Demo\nHere are some examples showing consistency across each tool.\n\nQuarto\nThemed badges.\n\nPrimary Secondary Success Danger Warning Info Light Dark\n\n\n\nggplot2\nA simple iris plot.\n\nlibrary(ggplot2)\nsource(\"../../themes/improper-prior-ggtheme.R\")\n\niris |> \n  ggplot(aes(Sepal.Length, Sepal.Width, color = Species)) +\n  geom_point() +\n  scale_color_ip() +\n  theme_ip()\n\n\n\n\n\n\nObservable\nPass the iris data to Observable.\n\nojs_define(iris = iris)\n\nCreate a similar plot in Observable.\n\ntheme_obj = FileAttachment(\"../../themes/improper-prior-observable.json\").json()\ntheme = theme_obj.scheme\n\nPlot.plot({\n  color: {\n    legend: true,\n    range: theme\n  },\n  marks: [\n    Plot.dot(transpose(iris), {x: \"Sepal.Length\", y: \"Sepal.Width\", \n                               stroke: \"Species\"}),\n  ]\n})"
   },
   {
     "objectID": "index.html",
@@ -39,7 +39,7 @@
     "href": "index.html#pages",
     "title": "Improper Prior | Ben Ewing",
     "section": "Pages",
-    "text": "Pages\n\nMy blog.\nWhat is an improper prior?"
+    "text": "Pages\n\nWhat is an improper prior?\nMy blog.\nSome books I’ve read."
   },
   {
     "objectID": "index.html#projects",
@@ -49,11 +49,39 @@
     "text": "Projects\n\nwand\nwand is an R package which implements generalized additive models (GAMs) using torch as a backend, allowing users to fit semi-interpretable models using tools from the deep learning world. In addition to its GAM implementation, wand also provides tools for model interpretation. This package gets its name from the type of network it implements: wide and deep networks combine linear features (wide) with feature embeddings (deep)."
   },
   {
+    "objectID": "pages/books-ive-read/books.html",
+    "href": "pages/books-ive-read/books.html",
+    "title": "Books I’ve Read",
+    "section": "",
+    "text": "Here are some books I’ve read."
+  },
+  {
+    "objectID": "pages/books-ive-read/books.html#summary",
+    "href": "pages/books-ive-read/books.html#summary",
+    "title": "Books I’ve Read",
+    "section": "Summary",
+    "text": "Summary\n\nPages ReadHours ListenedRating Distribution\n\n\n\n\n// TODO Would be nice to get both formats faceted, but I can't figure out how to\n// plot different facets at different scales.\n\nPlot.plot({\n  height: reading_timeline.length * 18,\n  marginLeft: 120,\n  x: {\n    axis: \"top\",\n    grid: true,\n    domain: [new Date(\"2021-01-01\"), new Date(\"2023-01-01\")],\n    label: \"Date Finished\"\n  },\n  y: {\n    label: \"Pages Read\"\n  },\n  marks: [\n    Plot.line(reading_timeline.filter(d => d.length_units == \"pages\"), {\n      x: \"date_finished\",\n      y: \"total_pages_read_hours_listened\",\n      stroke: theme[0]\n    })\n  ]\n})\n\n\n\n\n\n\n\n\n\n\nPlot.plot({\n  height: reading_timeline.length * 18,\n  marginLeft: 120,\n  x: {\n    axis: \"top\",\n    grid: true,\n    domain: [new Date(\"2021-01-01\"), new Date(\"2023-01-01\")],\n    label: \"Date Finished\"\n  },\n  y: {\n    label: \"Hours Listened\"\n  },\n  marks: [\n    Plot.line(reading_timeline.filter(d => d.length_units == \"hours\"), {\n      x: \"date_finished\",\n      y: \"total_pages_read_hours_listened\",\n      stroke: theme[0]\n    })\n  ]\n})\n\n\n\n\n\n\n\n\n\n\nPlot.plot({\n  height: reading_timeline.length * 18,\n  marginLeft: 120,\n  x: {\n    label: \"Rating\",\n    domain: [0, 5]\n  },\n  y: {\n    label: \"Count\"\n  },\n  marks: [\n    Plot.rectY(reading_timeline, \n               Plot.binX({y: \"count\"}, \n                         {x: \"rating\", thresholds: [0, 0.5, 1, 1.5, \n                                                    2, 2.5, 3, 3.5, \n                                                    4, 4.5, 5]})\n    )\n  ]\n})"
+  },
+  {
+    "objectID": "pages/books-ive-read/books.html#full-table",
+    "href": "pages/books-ive-read/books.html#full-table",
+    "title": "Books I’ve Read",
+    "section": "Full Table",
+    "text": "Full Table\n\n\nInputs.table(pretty_books, {\n  rows: 30,\n  layout: \"fixed\"\n})"
+  },
+  {
+    "objectID": "pages/books-ive-read/books.html#about-this-page",
+    "href": "pages/books-ive-read/books.html#about-this-page",
+    "title": "Books I’ve Read",
+    "section": "About This Page",
+    "text": "About This Page\nThis page serves two purposes. First, I want somewhere to track the books I’ve read and my incredibly subjective ratings. Second, I want a sandbox where I can play with Javascript tools like D3 and Observable."
+  },
+  {
     "objectID": "pages/what-is-an-improper-prior/index.html",
     "href": "pages/what-is-an-improper-prior/index.html",
     "title": "What is an improper prior?",
     "section": "",
-    "text": "import {Inputs} from \"@observablehq/inputs\"\nimport {Plot} from \"@observablehq/plot\"\nstdlib = require( \"https://unpkg.com/@stdlib/dist-flat@0.0.96/build/bundle.min.js\" )"
+    "text": "// Imports\nstdlib = require( \"https://unpkg.com/@stdlib/dist-flat@0.0.96/build/bundle.min.js\" )"
   },
   {
     "objectID": "pages/what-is-an-improper-prior/index.html#introduction",

@@ -70,8 +70,6 @@ ojs_define(iris = iris)
 Create a similar plot in Observable.
 
 ```{ojs}
-import {Plot} from "@observablehq/plot"
-
 theme_obj = FileAttachment("../../themes/improper-prior-observable.json").json()
 theme = theme_obj.scheme
 

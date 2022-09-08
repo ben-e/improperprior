@@ -11,8 +11,6 @@ aliases:
 //| echo: false
 
 // Imports
-import {Inputs} from "@observablehq/inputs"
-import {Plot} from "@observablehq/plot"
 stdlib = require( "https://unpkg.com/@stdlib/dist-flat@0.0.96/build/bundle.min.js" )
 ```
 

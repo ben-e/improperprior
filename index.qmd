@@ -27,8 +27,9 @@ Away from computers, I'm interested in climbing, cycling, and running.
 
 ## Pages
 
-* My [blog](blog.qmd).
 * [What is an improper prior?](pages/what-is-an-improper-prior/index.qmd)
+* My [blog](blog.qmd).
+* Some [books I've read](pages/books-ive-read/books.qmd).
 
 ## Projects
 

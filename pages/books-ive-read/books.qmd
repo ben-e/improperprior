@@ -1,0 +1,160 @@
+---
+title: "Books I've Read"
+author: "Ben Ewing"
+---
+
+<!-- For anyone looking at this code: it's super hacky, I'm using it as a testbed to explore Observable + JS :) -->
+
+Here are some books I've read.
+
+```{r}
+#| echo: false
+#| message: false
+
+# Reading data in R to get nice date parsing automatically
+books <- readr::read_csv("books.csv")
+
+# Data manipulation in R because..
+# I should learn some more JS
+pretty_books <- books |> 
+  dplyr::arrange(dplyr::desc(date_finished)) |> 
+  dplyr::transmute(Title = title, 
+                   Author = author,
+                   Length = paste(length, length_units),
+                   `Date Finished`= date_finished, 
+                   Rating = rating)
+
+reading_timeline <- books |> 
+  dplyr::arrange(date_finished) |> 
+  dplyr::mutate(total_pages_read_hours_listened = cumsum(length),
+                order = 1:dplyr::n())
+
+# Pass to observable
+ojs_define(books_t = books,
+           pretty_books_t = pretty_books,
+           reading_timeline_t = reading_timeline)
+```
+
+```{ojs}
+//| echo: false
+
+// Imports
+
+// Color
+theme_obj = FileAttachment("../../themes/improper-prior-observable.json").json()
+theme = theme_obj.scheme
+
+// Data
+books = transpose(books_t)
+pretty_books = transpose(pretty_books_t)
+reading_timeline = transpose(reading_timeline_t)
+
+// Helpers
+parser = d3.timeParse("%Y-%m-%d")
+```
+
+## Summary
+
+::: {.panel-tabset}
+
+### Pages Read
+
+```{ojs}
+//| echo: false
+
+// TODO Would be nice to get both formats faceted, but I can't figure out how to
+// plot different facets at different scales.
+
+Plot.plot({
+  height: reading_timeline.length * 18,
+  marginLeft: 120,
+  x: {
+    axis: "top",
+    grid: true,
+    domain: [new Date("2021-01-01"), new Date("2023-01-01")],
+    label: "Date Finished"
+  },
+  y: {
+    label: "Pages Read"
+  },
+  marks: [
+    Plot.line(reading_timeline.filter(d => d.length_units == "pages"), {
+      x: "date_finished",
+      y: "total_pages_read_hours_listened",
+      stroke: theme[0]
+    })
+  ]
+})
+```
+
+### Hours Listened
+
+```{ojs}
+//| echo: false
+
+Plot.plot({
+  height: reading_timeline.length * 18,
+  marginLeft: 120,
+  x: {
+    axis: "top",
+    grid: true,
+    domain: [new Date("2021-01-01"), new Date("2023-01-01")],
+    label: "Date Finished"
+  },
+  y: {
+    label: "Hours Listened"
+  },
+  marks: [
+    Plot.line(reading_timeline.filter(d => d.length_units == "hours"), {
+      x: "date_finished",
+      y: "total_pages_read_hours_listened",
+      stroke: theme[0]
+    })
+  ]
+})
+```
+
+### Rating Distribution
+
+```{ojs}
+//| echo: false
+
+Plot.plot({
+  height: reading_timeline.length * 18,
+  marginLeft: 120,
+  x: {
+    label: "Rating",
+    domain: [0, 5]
+  },
+  y: {
+    label: "Count"
+  },
+  marks: [
+    Plot.rectY(reading_timeline, 
+               Plot.binX({y: "count"}, 
+                         {x: "rating", thresholds: [0, 0.5, 1, 1.5, 
+                                                    2, 2.5, 3, 3.5, 
+                                                    4, 4.5, 5]})
+    )
+  ]
+})
+```
+
+:::
+
+## Full Table
+
+```{ojs}
+//| echo: false
+
+Inputs.table(pretty_books, {
+  rows: 30,
+  layout: "fixed"
+})
+```
+
+## About This Page
+
+This page serves two purposes. First, I want somewhere to track the books I've read and my incredibly subjective ratings. Second, I want a sandbox where I can play with Javascript tools like D3 and Observable.
+
+
