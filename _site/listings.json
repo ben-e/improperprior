@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/cozy-coding/index.html",
       "/posts/quarto-and-ggplot-theming-using-templates/index.html"
     ]
   }

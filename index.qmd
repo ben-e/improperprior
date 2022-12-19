@@ -15,7 +15,7 @@ about:
       href: https://github.com/ben-e
 ---
 
-<---- Placeholder portrait 🐈
+🐈
 
 ## About
 

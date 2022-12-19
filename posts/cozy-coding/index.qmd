@@ -1,0 +1,48 @@
+---
+title: "Cozy Coding"
+editor: visual
+author: "Ben Ewing"
+date: "2022-12-19"
+categories: [programming]
+---
+
+## Cozy Coding Season
+
+I realized recently that I've been slowly accumulating books and projects that could easily be described as "cozy." Every resource listed here has a distinct oddball personality, and should be readable in a week or two. As a bonus, many of these are available for free (though, you should support the authors if possible).
+
+### Books
+
+-   Want to build your own programming language? Check out [*Crafting Interpreters*](https://www.craftinginterpreters.com)
+
+```{=html}
+<!-- -->
+```
+-   Want to learn a lisp? Dare to read [*Clojure for the Brave and True*](https://www.braveclojure.com/foreword/)
+
+-   Like elephants and functional programming? [*Learn You a Haskell for Great Good*](http://learnyouahaskell.com)
+
+-   Wnat to learn a lisp, and Lear You a Haskell for Great Good wasn't weird enough? Tour the [*Land of Lisp*](http://landoflisp.com)
+
+-   Have no idea what Apache Kafka does? Take a float [*Gently Down the Stream*](https://www.gentlydownthe.stream)
+
+-   Want to write the next Doom? You'll need a ray tracer, and you'll need it quick, read [*Ray Tracing in One Weekend*](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
+
+### Coding Challenges
+
+-   What can I say? It starts cozy, but it usually doesn't end that way, it's the [*Advent of Code*](https://adventofcode.com)
+
+-   Interested in neo-vintage coding and want a more tangible product than Advent of Code provides? Have yourself a [*Tiny Code Christmas*](https://tcc.lovebyte.party)
+
+### Projects
+
+I don't have any specific resources for these, but with a spare Arduino or Raspberry Pi it might be fun to build one of these things.
+
+-   Build a MIDI controller.
+
+-   Build a sequencer, [for example](https://github.com/todbot/picostepseq).
+
+-   Find an old roomba in the trash, build a trash robot!
+
+### Have a recommendation?
+
+Feel free to file an issue with your recommendation [here](https://github.com/ben-e/improperprior/issues)!
