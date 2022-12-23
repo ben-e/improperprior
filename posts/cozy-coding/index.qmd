@@ -20,7 +20,7 @@ I realized recently that I've been slowly accumulating books and projects that c
 
 -   Like elephants and functional programming? [*Learn You a Haskell for Great Good*](http://learnyouahaskell.com)
 
--   Wnat to learn a lisp, and *Learn You a Haskell for Great Good* wasn't weird enough? Tour the [*Land of Lisp*](http://landoflisp.com)
+-   Want to learn a lisp, and *Learn You a Haskell for Great Good* wasn't weird enough? Tour the [*Land of Lisp*](http://landoflisp.com)
 
 -   Have no idea what Apache Kafka does? Take a float [*Gently Down the Stream*](https://www.gentlydownthe.stream)
 
