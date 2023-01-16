@@ -3,6 +3,6 @@
 .RData
 .Ruserdata
 *.csv
-
 /.quarto/
 *.DS_Store
+.DS_Store
