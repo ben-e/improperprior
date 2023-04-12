@@ -25,9 +25,10 @@ pretty_books <- books |>
                    Rating = rating)
 
 reading_timeline <- books |> 
-  dplyr::arrange(date_finished) |> 
+  dplyr::arrange(date_finished) |>
   dplyr::mutate(total_pages_read_hours_listened = cumsum(length),
-                order = 1:dplyr::n())
+                order = 1:dplyr::n(),
+                .by = length_units)
 
 # Pass to observable
 ojs_define(books_t = books,
